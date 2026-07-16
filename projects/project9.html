@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Macroalgae Aquaculture · Andrea Calocero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ================================================================ */
+        /* RESET & BASE */
+        /* ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ================================================================ */
+        /* NAVBAR */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        /* ================================================================ */
+        /* HERO */
+        /* ================================================================ */
+        .project-hero {
+            position: relative;
+            height: 85vh;
+            min-height: 550px;
+            background: #0e2f44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .project-hero .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('../images/gallery/alg.jpg') center center / cover no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project-hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,47,68,0.8) 0%, rgba(26,82,118,0.5) 100%);
+            z-index: 1;
+        }
+
+        .project-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .project-hero .hero-content .badge {
+            display: inline-block;
+            background: rgba(26, 188, 156, 0.2);
+            border: 1px solid rgba(26, 188, 156, 0.3);
+            color: #76d7c4;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 20px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-hero .hero-content h1 i {
+            color: #76d7c4;
+        }
+
+        .project-hero .hero-content .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #76d7c4;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .project-hero .hero-content .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .project-hero .hero-content .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-hero .hero-content .hero-meta i {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+            .project-hero .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .project-hero .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            .project-hero .hero-content .hero-meta {
+                gap: 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* BREADCRUMB */
+        /* ================================================================ */
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #d5dfe8;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+
+        /* ================================================================ */
+        /* DISCLAIMER BOX */
+        /* ================================================================ */
+        .disclaimer-box {
+            background: linear-gradient(135deg, #d4eaf7, #eaf2f8);
+            border-radius: 16px;
+            padding: 1.8rem 2.2rem;
+            margin: 2rem 0;
+            border-left: 5px solid #1abc9c;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .disclaimer-box .icon {
+            font-size: 2rem;
+            color: #1abc9c;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .disclaimer-box .content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #1a5276;
+            margin-bottom: 0.3rem;
+        }
+
+        .disclaimer-box .content p {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            line-height: 1.7;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .disclaimer-box {
+                flex-direction: column;
+                padding: 1.2rem 1.2rem;
+                gap: 0.8rem;
+            }
+            .disclaimer-box .icon {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* SECTION STYLES */
+        /* ================================================================ */
+        .section-wrapper {
+            padding: 4rem 2rem;
+        }
+
+        .section-wrapper.light {
+            background: #ffffff;
+        }
+
+        .section-wrapper.grey {
+            background: #f7fafc;
+        }
+
+        .section-wrapper.dark {
+            background: #0e2f44;
+            color: #ffffff;
+        }
+
+        .section-wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper .inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+
+        .section-wrapper .inner h2.centered {
+            text-align: center;
+        }
+
+        .section-wrapper .inner h2.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-wrapper .inner p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section-wrapper .inner p strong {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .section-wrapper.dark .inner h2 {
+            color: #d4eaf7;
+        }
+
+        .section-wrapper.dark .inner h2::after {
+            background: linear-gradient(90deg, #1abc9c, #76d7c4);
+        }
+
+        .section-wrapper.dark .inner p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ================================================================ */
+        /* FADE-IN ANIMATION */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================ */
+        /* INFO CARDS */
+        /* ================================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #eaf2f8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #1abc9c;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* TOPICS CARDS */
+        /* ================================================================ */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .topic-card {
+            background: #ffffff;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .topic-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.8rem;
+        }
+
+        .topic-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #1a5276;
+            margin-bottom: 0.5rem;
+        }
+
+        .topic-card p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ================================================================ */
+        /* SLIDESHOW PER IMMAGINI */
+        /* ================================================================ */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background: #1a5276;
+        }
+
+        .slideshow-container .slide-img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #0e2f44;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-container .slide-img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slideshow-container .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(14, 47, 68, 0.6);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .slideshow-container .slideshow-btn:hover {
+            background: rgba(14, 47, 68, 0.8);
+            color: #ffffff;
+        }
+
+        .slideshow-container .slideshow-btn.prev {
+            left: 12px;
+        }
+
+        .slideshow-container .slideshow-btn.next {
+            right: 12px;
+        }
+
+        .slideshow-container .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slideshow-container .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slideshow-container .dots .dot.active {
+            background: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .slideshow-container .slide-img {
+                height: 300px;
+            }
+            .slideshow-container .slideshow-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slideshow-container .slide-img {
+                height: 220px;
+            }
+        }
+
+        /* ================================================================ */
+        /* SKILLS GRID */
+        /* ================================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .skill-item .icon {
+            font-size: 1.8rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .skill-item h5 {
+            font-size: 0.82rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* EUROPEAN INITIATIVES */
+        /* ================================================================ */
+        .initiative-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .initiative-card {
+            background: #ffffff;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .initiative-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .initiative-card .icon {
+            font-size: 2rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .initiative-card h5 {
+            font-size: 0.9rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .initiative-card p {
+            font-size: 0.8rem;
+            color: #5d6d7e;
+            margin: 0.2rem 0 0 0;
+        }
+
+        /* ================================================================ */
+        /* KEY TAKEAWAYS */
+        /* ================================================================ */
+        .takeaway-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .takeaway-item {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .takeaway-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .takeaway-item .icon {
+            font-size: 1.8rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .takeaway-item h5 {
+            font-size: 0.82rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* BUTTONS */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+            gap: 0.6rem;
+        }
+
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+
+        .button.accent {
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .button.accent:hover {
+            background: #16a085;
+        }
+
+        .button.outline-light {
+            background: transparent;
+            box-shadow: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+        }
+
+        .button.outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .button .icon {
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .actions li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .actions .button {
+            margin: 0 auto;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================================ */
+        /* HIGHLIGHT BOX */
+        /* ================================================================ */
+        .highlight-box {
+            background: linear-gradient(135deg, #d4eaf7, #eaf2f8);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            border-left: 5px solid #1abc9c;
+            margin: 2rem 0;
+        }
+
+        .highlight-box .icon {
+            font-size: 2rem;
+            color: #1abc9c;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #1a5276;
+            line-height: 1.7;
+        }
+
+        .highlight-box blockquote .highlight {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .highlight-box {
+                padding: 1.5rem 1.5rem;
+            }
+            .highlight-box blockquote {
+                font-size: 1rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* TIMELINE */
+        /* ================================================================ */
+        .project-timeline {
+            position: relative;
+            padding: 0;
+            margin: 2rem 0;
+            padding-left: 50px;
+        }
+
+        .project-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #2e86c1, #1abc9c);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.2rem 1.5rem 1.2rem 2rem;
+            margin-bottom: 1.2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 1.5rem;
+            width: 14px;
+            height: 14px;
+            background: #2e86c1;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #2e86c1;
+            z-index: 0;
+        }
+
+        .timeline-item .icon {
+            position: absolute;
+            left: -36px;
+            top: 1.2rem;
+            font-size: 1.2rem;
+            color: #2e86c1;
+            background: #eaf2f8;
+            padding: 0.2rem;
+            border-radius: 50%;
+            z-index: 2;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 4px #eaf2f8;
+        }
+
+        .timeline-item h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .project-timeline {
+                padding-left: 40px;
+            }
+            .timeline-item {
+                padding: 1rem 1rem 1rem 1.2rem;
+            }
+            .timeline-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+            .timeline-item .icon {
+                left: -28px;
+                font-size: 1rem;
+                width: 24px;
+                height: 24px;
+            }
+            .project-timeline::before {
+                left: 12px;
+            }
+        }
+
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .section-wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .section-wrapper .inner h2 {
+                font-size: 1.8rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .topics-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .section-wrapper .inner h2 {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-card {
+                padding: 0.8rem 1rem;
+            }
+            .info-card .value {
+                font-size: 0.85rem;
+            }
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .takeaway-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .initiative-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- NAVBAR -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="project-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge">Aquaculture</span>
+            <h1>Macroalgae Aquaculture</h1>
+            <p class="subtitle">Sustainable Cultivation, Blue Bioeconomy and Future Perspectives</p>
+            <div class="hero-meta">
+                <span><i class="fas fa-university"></i> UNIVPM</span>
+                <span><i class="fas fa-calendar-alt"></i> 2024/2025</span>
+                <span><i class="fas fa-water"></i> Aquaculture</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BREADCRUMB -->
+    <!-- ================================================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">🏠 Home</a> &nbsp;›&nbsp;
+            <a href="../index.html#portfolio">Portfolio</a> &nbsp;›&nbsp;
+            <span>Macroalgae Aquaculture</span>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- DISCLAIMER -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light" style="padding-top: 2rem; padding-bottom: 1rem;">
+        <div class="inner">
+            <div class="disclaimer-box">
+                <div class="icon"><i class="fas fa-info-circle"></i></div>
+                <div class="content">
+                    <h4>Academic Context</h4>
+                    <p>
+                        This is an <strong>educational scientific project</strong> developed during the Master's Degree course in <strong>Aquaculture</strong>. The work consisted of preparing a complete university lecture on macroalgae aquaculture, based on <strong>published scientific literature</strong>, review papers, technical reports, European projects and information collected from companies operating in the sector. The scientific analyses presented were <strong>not</strong> carried out by me; my contribution was to <strong>critically analyse, synthesise and communicate</strong> current scientific knowledge on the topic.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- INTRODUCTION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Introduction</h2>
+            <p>
+                During the Master's Degree course in <strong>Aquaculture</strong>, each student group was assigned a major aquaculture topic and had to prepare a complete university lecture for the rest of the class. Our group focused on <strong>macroalgae aquaculture</strong>, one of the most promising and rapidly expanding sectors of the blue bioeconomy.
+            </p>
+            <p>
+                The work required an <strong>extensive literature review</strong>, comparison of scientific publications, analysis of industrial case studies, consultation of European initiatives, investigation of commercial applications, and preparation of a scientific presentation aimed at knowledge dissemination. The final lecture covered the current status of global macroalgae aquaculture, cultivation techniques, species currently farmed, production systems, ecosystem services, industrial applications, current limitations and future opportunities.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OVERVIEW - con immagine a1.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Project Overview</h2>
+            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+                <img src="../images/gallery/a1.jpg" alt="Macroalgae aquaculture overview" style="width:100%; display:block;" />
+            </div>
+            <p>
+                The presentation explored the <strong>current status of global macroalgae aquaculture</strong>, examining production trends, cultivation techniques, species currently farmed, production systems, ecosystem services, industrial applications, current limitations and future opportunities. The work was structured to provide a comprehensive overview of the sector, from basic biology to commercial applications and European policy frameworks.
+            </p>
+            <p>
+                The lecture covered the three main phyla of macroalgae — <strong>Chlorophyta</strong> (green algae), <strong>Rhodophyta</strong> (red algae) and <strong>Phaeophyta</strong> (brown algae) — with a focus on commercially important species such as <em>Saccharina latissima</em>, <em>Palmaria palmata</em> and <em>Ulva</em> spp.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MAIN TOPICS COVERED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Main Topics Covered</h2>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="icon"><i class="fas fa-globe-americas"></i></div>
+                    <h4>Global Seaweed Production</h4>
+                    <p>Worldwide production trends, Asian leadership, and the emerging European sector. From 2.2 million tonnes (1969) to 35 million tonnes (2019).</p>
+                </div>
+                <div class="topic-card">
+                    <div class="icon"><i class="fas fa-cogs"></i></div>
+                    <h4>Cultivation Systems</h4>
+                    <p>Offshore cultivation, longline systems, land-based cultivation, Integrated Multi-Trophic Aquaculture (IMTA), and hatchery production.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h4>Cultivated Species</h4>
+                    <p><em>Saccharina latissima</em>, <em>Palmaria palmata</em>, <em>Ulva</em> spp., <em>Porphyra</em>/<em>Pyropia</em>, <em>Gracilaria</em> and other commercially important species.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="icon"><i class="fas fa-ecosystem"></i></div>
+                    <h4>Ecosystem Services</h4>
+                    <p>Carbon sequestration, nutrient removal, water purification, habitat creation, circular economy and climate mitigation.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="icon"><i class="fas fa-flask"></i></div>
+                    <h4>Commercial Applications</h4>
+                    <p>Food, animal feed, cosmetics, bioplastics, biofertilisers, pharmaceuticals, bioactive compounds, bioremediation and bioenergy.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h4>Challenges</h4>
+                    <p>Public acceptance, production costs, biosecurity, Marine Spatial Planning, legislation, upscaling, genetic diversity and climate change.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <h4>Future Perspectives</h4>
+                    <p>Expansion of European industry, Blue Bioeconomy, Integrated Multi-Trophic Aquaculture, carbon credits, European initiatives and innovation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- CULTIVATED SPECIES - con immagini a2.jpg, a3.jpg, a4.jpg, a5.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Cultivated Species</h2>
+            <p>
+                The presentation examined several commercially important macroalgae species, each with unique characteristics, cultivation requirements and applications.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <img src="../images/gallery/a2.jpg" alt="Macroalgae species overview" style="width:100%; display:block; height:250px; object-fit:cover;" />
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <img src="../images/gallery/a3.jpg" alt="Ulva spp." style="width:100%; display:block; height:250px; object-fit:cover;" />
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <img src="../images/gallery/a4.jpg" alt="Saccharina latissima" style="width:100%; display:block; height:250px; object-fit:cover;" />
+                </div>
+                <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    <img src="../images/gallery/a5.jpg" alt="Palmaria palmata" style="width:100%; display:block; height:250px; object-fit:cover;" />
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem;">
+                <div class="topic-card" style="border-left: 4px solid #2e86c1; padding: 1rem;">
+                    <h4 style="font-size: 0.95rem;"><em>Saccharina latissima</em></h4>
+                    <p style="font-size: 0.8rem;">Brown algae, kelp species, high biomass production, alginate content, food and feed applications.</p>
+                </div>
+                <div class="topic-card" style="border-left: 4px solid #e74c3c; padding: 1rem;">
+                    <h4 style="font-size: 0.95rem;"><em>Palmaria palmata</em></h4>
+                    <p style="font-size: 0.8rem;">Red algae (Dulse), protein-rich, food and supplement applications, Atlantic distribution.</p>
+                </div>
+                <div class="topic-card" style="border-left: 4px solid #27ae60; padding: 1rem;">
+                    <h4 style="font-size: 0.95rem;"><em>Ulva</em> spp.</h4>
+                    <p style="font-size: 0.8rem;">Green algae, rapid growth, bioindicator, bioremediation, food and pharmaceutical applications.</p>
+                </div>
+                <div class="topic-card" style="border-left: 4px solid #e67e22; padding: 1rem;">
+                    <h4 style="font-size: 0.95rem;"><em>Porphyra</em>/<em>Pyropia</em></h4>
+                    <p style="font-size: 0.8rem;">Red algae (Nori), high-value food product, Asian aquaculture dominance.</p>
+                </div>
+                <div class="topic-card" style="border-left: 4px solid #8e44ad; padding: 1rem;">
+                    <h4 style="font-size: 0.95rem;"><em>Gracilaria</em></h4>
+                    <p style="font-size: 0.8rem;">Red algae, agar production, tropical and subtropical cultivation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- UPSCALING - con immagine a6.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Upscaling the Industry</h2>
+            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+                <img src="../images/gallery/a6.jpg" alt="Upscaling macroalgae aquaculture" style="width:100%; display:block;" />
+            </div>
+            <p>
+                Expanding macroalgae aquaculture to industrial scales requires addressing several challenges simultaneously. The presentation examined <strong>upscaling strategies</strong> including increased farm numbers, technological innovation, cooperative networking, and incentives for cultivators.
+            </p>
+            <p>
+                Key drivers for upscaling include <strong>public acceptance</strong> of algae-based products, <strong>market diversification</strong>, development of new products and derivatives, and integration of algae cultivation into the <strong>circular economy</strong>. European initiatives such as EU4Algae, GENIALG and PHYCOMORPH are actively working to accelerate the industry's growth.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC SKILLS DEVELOPED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Scientific Skills Developed</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-book-open"></i></div>
+                    <h5>Scientific Literature Review</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-microscope"></i></div>
+                    <h5>Critical Analysis</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <h5>Science Communication</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h5>Aquaculture</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-ecosystem"></i></div>
+                    <h5>Marine Ecology</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-globe-europe"></i></div>
+                    <h5>Blue Economy</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-gavel"></i></div>
+                    <h5>European Policies</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h5>Presentation Skills</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Teamwork</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-recycle"></i></div>
+                    <h5>Sustainability</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- EUROPEAN INITIATIVES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>European Initiatives Discussed</h2>
+            <p>
+                Several European projects and initiatives are actively supporting the development of macroalgae aquaculture:
+            </p>
+            <div class="initiative-grid">
+                <div class="initiative-card">
+                    <div class="icon"><i class="fas fa-flag-eu"></i></div>
+                    <h5>EU4Algae</h5>
+                    <p>Accelerating the algae industry, promoting new uses in different sectors, supporting market development.</p>
+                </div>
+                <div class="initiative-card">
+                    <div class="icon"><i class="fas fa-dna"></i></div>
+                    <h5>GENIALG</h5>
+                    <p>Improving aquaculture and biorefinery techniques for species of interest, promoting large-scale algaculture.</p>
+                </div>
+                <div class="initiative-card">
+                    <div class="icon"><i class="fas fa-microscope"></i></div>
+                    <h5>PHYCOMORPH</h5>
+                    <p>Increasing basic knowledge on laboratory culture and aquaculture of seaweeds.</p>
+                </div>
+                <div class="initiative-card">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>GRASS</h5>
+                    <p>Growing Algae Sustainably in the Baltic Sea — favouring the development of a legislative framework.</p>
+                </div>
+                <div class="initiative-card">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <h5>Seaweed for Europe</h5>
+                    <p>Promoting seaweed as a growth engine for a sustainable European future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- KEY TAKEAWAYS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Key Takeaways</h2>
+            <div class="takeaway-grid">
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-utensils"></i></div>
+                    <h5>Sustainable Food Production</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-cloud"></i></div>
+                    <h5>Climate Change Mitigation</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-recycle"></i></div>
+                    <h5>Circular Economy</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h5>Blue Economy</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h5>Ecosystem Restoration</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-box"></i></div>
+                    <h5>New Biomaterials</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h5>Carbon Sequestration</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                    <h5>Innovation</h5>
+                </div>
+                <div class="takeaway-item">
+                    <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
+                    <h5>Nature-Based Solutions</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FULL PRESENTATION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" id="presentation">
+        <div class="inner" style="text-align: center;">
+            <h2 class="centered">Full Presentation</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem auto;">
+                Download the complete presentation on macroalgae aquaculture, including detailed information on cultivation techniques, species, applications and future perspectives.
+            </p>
+            <ul class="actions">
+                <li>
+                    <a href="../documents/macroalgae-aquaculture-presentation.pdf" class="button accent" target="_blank">
+                        <i class="fas fa-file-pdf icon"></i> View Presentation
+                    </a>
+                </li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">
+                PDF document · Academic Lecture · 4.5 MB
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC REFERENCES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Scientific References</h2>
+            <p>
+                The presentation was developed through the <strong>critical analysis of a large number of peer-reviewed publications</strong>, European reports and technical documents. Key references included works on macroalgae production, cultivation techniques, species-specific biology (including <em>Saccharina latissima</em>, <em>Palmaria palmata</em> and <em>Ulva</em> spp.), ecosystem services, commercial applications, European initiatives and future perspectives.
+            </p>
+            <p>
+                Major sources included the <strong>FAO</strong>, <strong>European Commission</strong>, <strong>Seaweed for Europe</strong>, and numerous scientific journals covering aquaculture, marine biology and applied phycology.
+            </p>
+            <p style="font-style: italic; color: #5d6d7e;">
+                <i class="fas fa-info-circle" style="color: #1abc9c;"></i>
+                The complete bibliography is available within the presentation document.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- TIMELINE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Timeline</h2>
+            <div class="project-timeline">
+                <div class="timeline-item">
+                    <span class="icon">🌿</span>
+                    <h4>Master's Degree in Marine Biology</h4>
+                    <p>Enrolment in the MSc programme at Università Politecnica delle Marche</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌿</span>
+                    <h4>Aquaculture Course</h4>
+                    <p>Selection of macroalgae aquaculture as the topic for the group lecture</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌿</span>
+                    <h4>University Project</h4>
+                    <p>Definition of project scope and objectives for the educational lecture</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌿</span>
+                    <h4>Scientific Literature Review</h4>
+                    <p>Extensive review of peer-reviewed publications, technical reports and European documents</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌿</span>
+                    <h4>Preparation of Educational Lecture</h4>
+                    <p>Synthesis and organisation of scientific content into a coherent presentation</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌿</span>
+                    <h4>Presentation to Classmates</h4>
+                    <p>Delivery of the complete lecture to the Aquaculture course class</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FINAL HIGHLIGHT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper dark fade-in-section" style="padding: 4rem 2rem;">
+        <div class="inner">
+            <div class="highlight-box" style="background: rgba(255,255,255,0.05); border-left-color: #1abc9c; padding: 2.5rem 3rem;">
+                <div class="icon" style="color: #1abc9c;"><i class="fas fa-quote-left"></i></div>
+                <blockquote style="color: #d4eaf7;">
+                    "This project strengthened my ability to <span class="highlight">critically analyse scientific literature</span>, integrate information from multiple sources and <span class="highlight">communicate complex aquaculture topics</span> through a clear and evidence-based scientific presentation."
+                </blockquote>
+            </div>
+            <div class="actions-row" style="margin-top: 2rem;">
+                <a href="../index.html#portfolio" class="button outline-light">
+                    <i class="fas fa-arrow-left icon"></i> Back to Portfolio
+                </a>
+                <a href="project10.html" class="button accent">
+                    Next Project <i class="fas fa-arrow-right icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

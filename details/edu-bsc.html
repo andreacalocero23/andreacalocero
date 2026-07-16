@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Andrea Calocero - Bachelor of Biological Sciences</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background: #eaf2f8; color: #2c3e50; padding-top: 60px; font-size: 14px; }
+        
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(14, 47, 68, 0.92); backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+        #navbar .nav-left { display: flex; align-items: center; }
+        #navbar .nav-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; opacity: 0.85; }
+        #navbar .nav-links { display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; justify-content: flex-end; align-items: center; }
+        #navbar a { color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.3rem 0.6rem; border-radius: 15px; transition: all 0.3s ease; opacity: 0.6; }
+        #navbar a:hover { opacity: 1; background: rgba(46, 134, 193, 0.25); }
+        #navbar a.active { opacity: 1; background: rgba(46, 134, 193, 0.35); }
+        @media screen and (max-width: 768px) {
+            #navbar { padding: 0.3rem 1rem; flex-direction: column; gap: 0.2rem; }
+            #navbar .nav-left { width: 100%; justify-content: center; }
+            #navbar .nav-links { justify-content: center; gap: 0.1rem 0.5rem; }
+            #navbar a { font-size: 0.55rem; padding: 0.2rem 0.5rem; }
+            body { padding-top: 80px; }
+        }
+        
+        .wrapper { padding: 3.5rem 2rem; }
+        .wrapper.style1 { background: #eaf2f8; }
+        .wrapper .inner { max-width: 1000px; margin: 0 auto; }
+        .wrapper .inner h2 { font-size: 2.6rem; font-weight: 900; color: #1a5276; text-align: center; margin-bottom: 0.3rem; }
+        .wrapper .inner .subtitle { text-align: center; font-size: 1.1rem; font-weight: 400; color: #5d6d7e; margin-bottom: 0.2rem; }
+        .wrapper .inner .thesis { text-align: center; font-size: 0.95rem; font-weight: 400; color: #5d6d7e; margin-bottom: 1.5rem; font-style: italic; }
+        .wrapper .inner .description { text-align: justify; font-weight: 700; line-height: 1.8; color: #2c3e50; max-width: 850px; margin: 0 auto; font-size: 0.95rem; }
+        .wrapper .inner .description p { margin-bottom: 1rem; }
+        .wrapper .inner .description ul { margin: 0.5rem 0 1rem 1.5rem; }
+        .wrapper .inner .description ul li { margin-bottom: 0.2rem; }
+        .wrapper .inner .description a { color: #2e86c1; text-decoration: none; font-weight: 700; }
+        .wrapper .inner .description a:hover { color: #1a5276; text-decoration: underline; }
+        
+        .download-area { text-align: center; margin: 2rem 0; }
+        .download-area .button { 
+            max-width: 400px; 
+            width: auto;
+            padding: 0.8rem 3rem;
+            background: #1abc9c; 
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        .download-area .button:hover { background: #16a085; }
+        .download-area .download-note { font-size: 0.75rem; color: #5d6d7e; margin-top: 0.3rem; font-style: italic; }
+        
+        .fan-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem auto 2rem auto;
+            max-width: 420px;
+            position: relative;
+        }
+        .fan-container .fan-photo {
+            width: 180px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            border: 3px solid #ffffff;
+            overflow: hidden;
+        }
+        .fan-container .fan-photo:first-child {
+            transform: rotate(-8deg) translateY(5px);
+            z-index: 1;
+        }
+        .fan-container .fan-photo:last-child {
+            transform: rotate(8deg) translateY(-5px);
+            z-index: 2;
+        }
+        .fan-container .fan-photo:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 3;
+        }
+        .fan-container .fan-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .fan-label {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5d6d7e;
+            font-style: italic;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Due immagini affiancate - MODIFICATE PER NON TAGLIARE */
+        .side-by-side {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            flex-wrap: wrap;
+        }
+        .side-by-side .side-photo {
+            flex: 1;
+            min-width: 200px;
+            max-width: 320px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            border: 3px solid #ffffff;
+            background: #f0f4f8;
+        }
+        .side-by-side .side-photo:hover {
+            transform: scale(1.03);
+        }
+        .side-by-side .side-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        .side-label {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5d6d7e;
+            font-style: italic;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #2e86c1; color: #ffffff !important;
+            padding: 0.7rem 2.2rem; border-radius: 30px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; border: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer; text-align: center; min-height: 42px; line-height: 1.2;
+            font-size: 0.8rem;
+        }
+        .button:hover { background: #1a5276; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5); }
+        .actions { list-style: none; padding: 0; margin: 2rem 0 0 0; text-align: center; }
+        .actions li { margin-bottom: 0.5rem; display: flex; justify-content: center; }
+        
+        footer {
+            background: #0e2f44; color: #ffffff; padding: 1.5rem 2rem; text-align: center;
+        }
+        footer .inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        footer .footer-left { text-align: left; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-left .footer-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; }
+        footer .footer-left .footer-tagline { font-size: 0.7rem; opacity: 0.6; font-weight: 300; letter-spacing: 0.5px; }
+        footer .footer-right { text-align: right; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-right .get-in-touch { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #aed6f1; }
+        footer .footer-right .footer-email { font-size: 0.75rem; color: #2e86c1; text-decoration: none; transition: color 0.3s ease; }
+        footer .footer-right .footer-email:hover { color: #ffffff; }
+        footer .footer-right .footer-open { font-size: 0.65rem; opacity: 0.5; font-style: italic; }
+        footer .footer-icons { display: flex; gap: 0.8rem; margin-top: 0.2rem; justify-content: flex-end; }
+        footer .footer-icons a { color: #2e86c1 !important; font-size: 1.2rem; transition: all 0.3s ease; text-decoration: none; }
+        footer .footer-icons a:hover { color: #ffffff !important; transform: scale(1.1); }
+        @media screen and (max-width: 768px) {
+            footer .inner { flex-direction: column; text-align: center; gap: 0.8rem; }
+            footer .footer-left { text-align: center; align-items: center; }
+            footer .footer-right { text-align: center; align-items: center; }
+            footer .footer-icons { justify-content: center; }
+            .download-area .button { 
+                max-width: 100%; 
+                padding: 0.6rem 1.5rem;
+                font-size: 0.8rem;
+                white-space: normal;
+            }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .wrapper { padding: 2rem 1rem; }
+            .wrapper .inner h2 { font-size: 2rem; }
+            .fan-container .fan-photo { width: 120px; }
+            .side-by-side .side-photo { min-width: 150px; max-width: 100%; }
+            .download-area .button { 
+                max-width: 100%; 
+                padding: 0.6rem 1rem;
+                font-size: 0.75rem;
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-left"><span class="nav-name">Andrea Calocero</span></div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#resume">Resume</a>
+            <a href="../index.html#education">Education</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#certifications">Certifications</a>
+            <a href="../index.html#awards">Awards</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#photography">Photography</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="wrapper style1 align-center">
+        <div class="inner">
+            <h2>Bachelor's degree in Biological Sciences (L-13)</h2>
+            <div class="subtitle"><a href="https://www.unisa.it/" target="_blank">UNISA</a>, Fisciano-Salerno, Italy · 110/110</div>
+            <div class="thesis">Thesis: "Staphylococcus aureus, the threat of antibiotic resistance and the potential solution from the sea"<br />Supervisor: Prof. Pierpaolo Cavallo</div>
+
+            <!-- Descrizione -->
+            <div class="description">
+                <p>
+                    I completed my Bachelor of Biological Sciences at the <a href="https://www.unisa.it/" target="_blank">University of Salerno</a>, graduating with top marks (110/110) in February 2023. The programme provided me with a solid, interdisciplinary foundation in the biological sciences, covering key areas such as molecular biology, genetics, microbiology, physiology, ecology, and biochemistry, alongside supporting disciplines like chemistry and physics.
+                </p>
+                <p>
+                    During my academic path I completed a Microbiology Internship within the UNISA's microbiology laboratory.
+                </p>
+                <p>
+                    My thesis explored the growing threat of antimicrobial resistance and the potential of marine-derived compounds as alternative therapeutic strategies against <em>Staphylococcus aureus</em>. This research sparked my interest in marine biotechnology and strengthened my laboratory skills.
+                </p>
+                <p>
+                    Overall, the Bachelor programme equipped me with the theoretical knowledge and practical skills essential for scientific research, laying the groundwork for my subsequent specialisation in marine biology.
+                </p>
+            </div>
+
+            <!-- DOWNLOAD ACADEMIC TRANSCRIPT -->
+            <div class="download-area">
+                <a href="../files/BSc_Transcript.pdf" class="button" target="_blank">
+                    📄 Download Academic Transcript
+                </a>
+                <p class="download-note">Full academic record of the Bachelor's programme</p>
+            </div>
+
+            <!-- Foto a ventaglio (UNISA, Fisciano, Salerno) -->
+            <div class="fan-container">
+                <div class="fan-photo">
+                    <img src="../images/details/unisa1.jpg" alt="UNISA Campus" />
+                </div>
+                <div class="fan-photo">
+                    <img src="../images/details/unisa2.jpg" alt="Fisciano" />
+                </div>
+                <div class="fan-photo">
+                    <img src="../images/details/unisa3.jpg" alt="Salerno" />
+                </div>
+            </div>
+            <div class="fan-label">UNISA Campus · Fisciano · Salerno</div>
+
+            <!-- Due immagini affiancate (esperienze triennale) - MODIFICATE -->
+            <div class="side-by-side">
+                <div class="side-photo">
+                    <img src="../images/details/unisa4.jpg" alt="Bachelor Experience 1" />
+                </div>
+                <div class="side-photo">
+                    <img src="../images/details/unisa5.jpg" alt="Bachelor Experience 2" />
+                </div>
+            </div>
+            <div class="side-label">Laboratory and field experiences during the Bachelor programme</div>
+
+            <!-- Torna indietro -->
+            <ul class="actions">
+                <li><a href="../index.html#education" class="button">← Back to Education</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

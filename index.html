@@ -1,0 +1,2063 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Andrea Calocero - Marine Biologist</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+    
+    <style>
+        /* ================================================================ */
+        /* STILE COMPLETO PER BIOLOGO MARINO */
+        /* ================================================================ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+        
+        /* ================================================================ */
+        /* MENU */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+        
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+        
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+        
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+        
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+        
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+        
+        /* ================================================================ */
+        /* BANNER - 1/3 TESTO A SINISTRA, 2/3 IMMAGINI A DESTRA */
+        /* ================================================================ */
+        .banner {
+            display: flex;
+            min-height: calc(100vh - 60px);
+            background: linear-gradient(135deg, #0e2f44 0%, #1a5276 50%, #2e86c1 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner .content {
+            flex: 0 0 33.333%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 3rem 2rem 3rem;
+            z-index: 2;
+            background: rgba(0,0,0,0.25);
+            backdrop-filter: blur(3px);
+            text-align: center;
+            position: relative;
+            min-height: 400px;
+            order: 0;
+        }
+        
+        .banner .content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: none;
+            letter-spacing: 2px;
+            color: #d4eaf7;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            display: inline-block;
+            line-height: 1.1;
+        }
+        
+        .banner .content .major {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #ffffff;
+            background: rgba(0,0,0,0.3);
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+        
+        .banner .content .button {
+            font-size: 0.8rem;
+            padding: 0.5rem 1.8rem;
+            min-height: 36px;
+            max-width: 200px;
+        }
+        
+        .banner .image {
+            flex: 0 0 66.666%;
+            background: linear-gradient(135deg, #1a5276, #2e86c1);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            order: 1;
+        }
+        
+        /* Slideshow container */
+        .slideshow-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            min-height: 400px;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        /* Frecce di navigazione */
+        .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Arial', sans-serif;
+            line-height: 1;
+            padding: 0;
+        }
+        
+        .slideshow-btn:hover {
+            background: rgba(255,255,255,0.25);
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.4);
+        }
+        
+        .slideshow-btn.prev {
+            left: 12px;
+        }
+        
+        .slideshow-btn.next {
+            right: 12px;
+        }
+        
+        /* ================================================================ */
+        /* BOTTONI */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            width: 100%;
+            max-width: 260px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+        }
+        
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+        
+        .button.small {
+            padding: 0.4rem 1.2rem;
+            font-size: 0.7rem;
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3);
+            min-height: 32px;
+            max-width: 180px;
+        }
+        
+        .button.small:hover {
+            background: #16a085;
+        }
+        
+        .button.big {
+            padding: 0.9rem 2.8rem;
+            font-size: 1rem;
+            min-height: 50px;
+            max-width: 320px;
+        }
+        
+        .button.wide {
+            display: flex;
+            text-align: center;
+            width: 100%;
+            justify-content: center;
+            max-width: 100%;
+        }
+        
+        .button-camera {
+            background: #1abc9c !important;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4) !important;
+            padding: 0.9rem 2.5rem !important;
+            font-size: 0.85rem !important;
+            min-height: 52px !important;
+            max-width: 480px !important;
+            gap: 0.8rem;
+            border-radius: 50px !important;
+            white-space: nowrap;
+        }
+        .button-camera:hover {
+            background: #16a085 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 188, 156, 0.5) !important;
+        }
+        .button-camera .camera-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+        
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0 0;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .actions li {
+            margin-bottom: 0.3rem;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .actions.stacked li {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .actions.stacked {
+            text-align: center;
+        }
+        
+        .actions .button {
+            margin: 0 auto;
+        }
+        
+        /* ================================================================ */
+        /* ANIMAZIONE COMPARSA AL SCROLL */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ================================================================ */
+        /* SEZIONI */
+        /* ================================================================ */
+        .wrapper {
+            padding: 3.5rem 2rem;
+        }
+        
+        .wrapper.style1 {
+            background: #eaf2f8;
+        }
+        
+        .wrapper.style1.alternate {
+            background: #ffffff;
+        }
+        
+        .wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .wrapper .inner h2 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: #1a5276;
+            text-align: center;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+        
+        .wrapper .inner > p {
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 1.8rem auto;
+            color: #2c3e50;
+            text-align: justify;
+            font-weight: 700;
+        }
+        
+        /* ================================================================ */
+        /* PHOTOGRAPHY BOX */
+        /* ================================================================ */
+        .photography-box {
+            background: linear-gradient(135deg, #0e2f44 0%, #1a5276 50%, #2e86c1 100%);
+            border-radius: 16px;
+            padding: 2.5rem 3rem;
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            box-shadow: 0 8px 35px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .photography-box .box-text {
+            color: #ffffff;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-style: italic;
+            flex: 1;
+            min-width: 200px;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+        .photography-box .box-text span {
+            color: #aed6f1;
+        }
+        .photography-box .box-button {
+            flex-shrink: 0;
+        }
+        .photography-box .box-button .button-camera {
+            margin: 0;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .photography-box {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+            .photography-box .box-text {
+                font-size: 1.3rem;
+            }
+            .button-camera {
+                padding: 0.7rem 1.5rem !important;
+                font-size: 0.75rem !important;
+                max-width: 100% !important;
+                white-space: normal !important;
+                min-height: 48px !important;
+            }
+        }
+        
+        /* ================================================================ */
+        /* SPOTLIGHT (About Me) */
+        /* ================================================================ */
+        .spotlight {
+            display: flex;
+            align-items: center;
+            gap: 3.5rem;
+            padding: 3.5rem 5rem;
+            background: #ffffff;
+            min-height: 450px;
+        }
+        
+        .spotlight .content {
+            flex: 1.3;
+            max-width: 700px;
+        }
+        
+        .spotlight .content h2 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .spotlight .content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+        
+        .spotlight .content p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #2c3e50;
+            margin-bottom: 1.3rem;
+            text-align: justify;
+            font-weight: 700;
+        }
+        
+        .spotlight .image {
+            flex: 0.8;
+            min-height: 320px;
+            background: #d4e6f1;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 380px;
+            margin-left: auto;
+        }
+        
+        .spotlight .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 320px;
+        }
+        
+        /* About Box */
+        .about-box {
+            background: rgba(255,255,255,0.9);
+            padding: 1.8rem 2.2rem;
+            border-radius: 12px;
+            margin: 1.3rem 0;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            border-left: 5px solid #1abc9c;
+            width: 100%;
+            min-width: 100%;
+        }
+        
+        .about-box h4 {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        
+        .about-box ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem 2rem;
+        }
+        
+        .about-box ul li {
+            padding: 0.35rem 0;
+            color: #2c3e50;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-weight: 700;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        
+        .about-box ul li .category {
+            font-weight: 900;
+            color: #1a5276;
+            min-width: 100px;
+            font-style: normal;
+            flex-shrink: 0;
+        }
+        
+        .about-box ul li .answer {
+            font-weight: 400;
+            font-style: italic;
+            color: #2c3e50;
+            white-space: nowrap;
+        }
+        
+        /* Lingue */
+        .about-box ul li.lang-item {
+            flex-direction: column;
+            align-items: center;
+            border-bottom: none;
+            padding-bottom: 0.2rem;
+            white-space: normal;
+            grid-column: 1 / -1;
+        }
+        
+        .lang-text {
+            font-size: 0.9rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #2c3e50;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .lang-text .asterisk {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1rem;
+        }
+        
+        .lang-note {
+            font-size: 0.75rem;
+            font-weight: 300;
+            font-style: italic;
+            color: #2c3e50;
+            text-align: center;
+            width: 100%;
+            margin-top: 0.1rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 0.3rem;
+        }
+        
+        .lang-note .asterisk {
+            color: #1a5276;
+            font-weight: 900;
+        }
+        
+        /* ================================================================ */
+        /* TIMELINE */
+        /* ================================================================ */
+        .timeline {
+            position: relative;
+            padding: 0;
+            margin: 2rem 0;
+            padding-left: 50px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #2e86c1, #1abc9c);
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem 1.5rem 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+            text-align: center;
+        }
+        
+        .timeline-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 1.8rem;
+            width: 14px;
+            height: 14px;
+            background: #2e86c1;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #2e86c1;
+            z-index: 0;
+        }
+        
+        .timeline-item .icon {
+            position: absolute;
+            left: -36px;
+            top: 1.5rem;
+            font-size: 1.3rem;
+            color: #2e86c1;
+            background: #eaf2f8;
+            padding: 0.2rem;
+            border-radius: 50%;
+            z-index: 2;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 4px #eaf2f8;
+        }
+        
+        .timeline-item h3 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .timeline-item h3 a {
+            color: #1a5276;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .timeline-item h3 a:hover {
+            color: #1abc9c;
+        }
+        
+        .timeline-item p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            text-align: justify;
+            font-weight: 700;
+        }
+        
+        .timeline-item p strong {
+            color: #1a5276;
+            font-weight: 900;
+        }
+        
+        .timeline-item .actions {
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+        
+        .timeline-item .actions li {
+            display: flex;
+            justify-content: center;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .timeline {
+                padding-left: 40px;
+            }
+            .timeline-item {
+                padding: 1rem 1rem 1rem 1.2rem;
+            }
+            .timeline-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+            .timeline-item .icon {
+                left: -28px;
+                font-size: 1.1rem;
+                width: 26px;
+                height: 26px;
+            }
+            .timeline::before {
+                left: 12px;
+            }
+        }
+        
+        /* ================================================================ */
+        /* CERTIFICAZIONI - GRIGLIA CON LOGHI (SINGOLI E GRUPPI) */
+        /* ================================================================ */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .cert-item {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem 1.2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cert-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.12);
+        }
+        
+        .cert-item a {
+            text-decoration: none;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cert-item .cert-logo {
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 0.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .cert-item .cert-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .cert-item h3 {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .cert-item h3 a {
+            color: #1a5276;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .cert-item h3 a:hover {
+            color: #1abc9c;
+        }
+        
+        .cert-item .cert-subtitle {
+            color: #5d6d7e;
+            font-size: 0.75rem;
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cert-item .actions {
+            margin-top: auto;
+            width: 100%;
+            padding-top: 0.3rem;
+        }
+        
+        .cert-item .actions li {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .cert-item .actions .button {
+            max-width: 180px;
+            font-size: 0.65rem;
+            padding: 0.4rem 1.2rem;
+            min-height: 32px;
+            width: 100%;
+        }
+        
+        /* ================================================================ */
+        /* FILTRI PORTFOLIO */
+        /* ================================================================ */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin: 1.8rem 0;
+        }
+        
+        .filter-bar .button {
+            background: transparent !important;
+            color: #1a5276 !important;
+            border: 2px solid #1a5276 !important;
+            box-shadow: none !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.7rem;
+            padding: 0.5rem 1.8rem;
+            min-height: 36px;
+            max-width: 200px;
+            margin: 0;
+            white-space: nowrap;
+        }
+        
+        .filter-bar .button:hover {
+            background: #1a5276 !important;
+            color: #ffffff !important;
+        }
+        
+        .filter-bar .button.active {
+            background: #1a5276 !important;
+            color: #ffffff !important;
+        }
+        
+        .filter-bar .actions li {
+            display: inline-flex;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .filter-bar .button {
+                padding: 0.4rem 1rem;
+                font-size: 0.65rem;
+                max-width: 140px;
+                white-space: normal;
+            }
+        }
+        
+        /* ================================================================ */
+        /* GALLERY PROGETTI */
+        /* ================================================================ */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery article {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gallery article:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.12);
+        }
+        
+        .gallery article .image {
+            width: 100%;
+            height: 200px;
+            background: #d4e6f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .gallery article .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery article .caption {
+            padding: 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .gallery article .caption h3 {
+            color: #1a5276;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery article .caption p {
+            color: #2c3e50;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+            text-align: justify;
+            font-weight: 700;
+            flex: 1;
+        }
+        
+        .gallery article .caption .actions {
+            margin: 0;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .gallery article .caption .actions li {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .gallery article .caption .actions .button {
+            max-width: 160px;
+            font-size: 0.65rem;
+            padding: 0.35rem 1rem;
+            min-height: 30px;
+        }
+        
+        /* ================================================================ */
+        /* CONTACT E ICONS */
+        /* ================================================================ */
+        .icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            padding: 0;
+            list-style: none;
+            margin: 1rem 0;
+        }
+        
+        .icons a {
+            font-size: 1.8rem;
+            color: #2e86c1;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .icons a:hover {
+            color: #1a5276;
+            transform: scale(1.1);
+        }
+        
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+        
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+        
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+        
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+        
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+        
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+        
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .banner {
+                flex-direction: column;
+            }
+            .banner .content {
+                flex: 0 0 auto;
+                padding: 2.5rem 2rem;
+                min-height: auto;
+                order: 0;
+            }
+            .banner .content h1 {
+                font-size: 3rem;
+            }
+            .banner .image {
+                flex: 0 0 auto;
+                min-height: 300px;
+                order: 1;
+                width: 100%;
+            }
+            .spotlight {
+                flex-direction: column;
+                padding: 2.5rem 2rem;
+                gap: 1.5rem;
+            }
+            .spotlight .content {
+                max-width: 100%;
+            }
+            .spotlight .image {
+                max-width: 100%;
+                margin-left: 0;
+                min-height: 220px;
+            }
+            .spotlight .image img {
+                min-height: 220px;
+            }
+            .about-box ul {
+                grid-template-columns: 1fr;
+            }
+            .wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .wrapper .inner h2 {
+                font-size: 2rem;
+            }
+            .slideshow-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .banner .content h1 {
+                font-size: 2.2rem;
+            }
+            .banner .content .major {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.8rem;
+            }
+            .banner .content {
+                padding: 1.5rem 1rem;
+            }
+            .banner .image {
+                min-height: 200px;
+            }
+            .spotlight {
+                padding: 1.5rem 1rem;
+            }
+            .about-box {
+                padding: 0.8rem;
+            }
+            .about-box ul li {
+                flex-direction: column;
+                gap: 0;
+                white-space: normal;
+            }
+            .about-box ul li .category {
+                min-width: auto;
+            }
+            .about-box ul li .answer {
+                white-space: normal;
+            }
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .timeline {
+                padding-left: 40px;
+            }
+            .slideshow-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 0.7rem;
+            }
+            .slideshow-btn.prev {
+                left: 6px;
+            }
+            .slideshow-btn.next {
+                right: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- MENU -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="#banner">Home</a>
+            <a href="#about">About</a>
+            <a href="#resume">Resume</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#awards">Awards</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#photography">Photography</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- BANNER -->
+    <!-- ================================================================ -->
+    <section class="banner" id="banner">
+        <div class="content">
+            <h1>Andrea Calocero</h1>
+            <p class="major">Marine Biologist and Ecologist passionate about Marine Conservation, Biodiversity and Research</p>
+            <ul class="actions stacked">
+                <li><a href="#about" class="button big wide">Discover My Work</a></li>
+            </ul>
+        </div>
+        <div class="image">
+            <div class="slideshow-container" id="slideshow">
+                <img src="images/banner1.jpg" class="slide active" alt="Andrea Calocero - 1" />
+                <img src="images/banner2.jpg" class="slide" alt="Andrea Calocero - 2" />
+                <img src="images/banner3.jpg" class="slide" alt="Andrea Calocero - 3" />
+                <img src="images/banner4.jpg" class="slide" alt="Andrea Calocero - 4" />
+                <img src="images/banner5.jpg" class="slide" alt="Andrea Calocero - 5" />
+                <img src="images/banner6.jpg" class="slide" alt="Andrea Calocero - 6" />
+                <img src="images/banner7.jpg" class="slide" alt="Andrea Calocero - 7" />
+                <img src="images/banner8.jpg" class="slide" alt="Andrea Calocero - 8" />
+                <img src="images/banner9.jpg" class="slide" alt="Andrea Calocero - 9" />
+                <img src="images/banner10.jpg" class="slide" alt="Andrea Calocero - 10" />
+                <img src="images/banner11.jpg" class="slide" alt="Andrea Calocero - 11" />
+                
+                <button class="slideshow-btn prev" id="prevBtn" aria-label="Previous">‹</button>
+                <button class="slideshow-btn next" id="nextBtn" aria-label="Next">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- ABOUT ME -->
+    <!-- ================================================================ -->
+    <section class="spotlight fade-in-section" id="about">
+        <div class="content">
+            <h2>About Me</h2>
+            <p>
+                I am a recent MSc graduate in Marine Biology with a strong interest in marine conservation, biodiversity research, and ecosystem management. I have hands-on experience in wildlife conservation, biodiversity monitoring, environmental education, and field-based research through academic and conservation projects. My background combines ecological research, fieldwork, scientific data analysis, and public engagement. I am seeking opportunities in marine conservation and research where I can contribute to biodiversity protection while continuing to develop my scientific and field skills.
+            </p>
+            
+            <div class="about-box">
+                <h4>About Me</h4>
+                <ul>
+                    <li><span class="category">Name</span> <span class="answer">Andrea Calocero</span></li>
+                    <li><span class="category">Email</span> <span class="answer">andreacalocero23@gmail.com</span></li>
+                    <li><span class="category">Nationality</span> <span class="answer">Italian</span></li>
+                    <li><span class="category">Date of Birth</span> <span class="answer">17 November 2000</span></li>
+                    <li><span class="category">Occupation</span> <span class="answer">MSc Graduate</span></li>
+                    <li class="lang-item">
+                        <span class="category">Languages</span>
+                        <span class="lang-text">Italian, English, Spanish<span class="asterisk">*</span></span>
+                        <span class="lang-note"><span class="asterisk">*</span> Basic comprehension</span>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="actions stacked">
+                <li><a href="cv.pdf" class="button">Download CV</a></li>
+            </ul>
+        </div>
+        <div class="image">
+            <img src="images/profile.jpg" alt="Andrea Calocero - Marine Biologist" />
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- RESUME -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 align-center fade-in-section" id="resume">
+        <div class="inner">
+            <h2>Resume</h2>
+            <p>
+                Early-career Marine Biologist with a strong passion for marine conservation and biodiversity research. My experience spans ecological fieldwork, scientific research, wildlife conservation, and environmental education, with a particular interest in translating science into practical conservation outcomes.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- EDUCATION (TIMELINE) -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 alternate align-center fade-in-section" id="education">
+        <div class="inner">
+            <h2>Education</h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <span class="icon solid fa-university"></span>
+                    <h3>EUREMAP Summer School on Marine Bioprospecting</h3>
+                    <p><strong>Ghent University, Belgium</strong> (29th June - 3rd July 2026)<br />
+                    Theoretical and practical training across the marine bioprospecting pipeline</p>
+                    <ul class="actions">
+                        <li><a href="details/edu-euremap.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="icon solid fa-graduation-cap"></span>
+                    <h3>Master Degree in Marine Biology (LM6)</h3>
+                    <p><strong>UNIVPM, Ancona, Italy</strong> (2023 - 2026)<br />
+                    110/110 cum laude. Thesis: "Meiofauna biodiversity in seagrass meadows of the Central Adriatic Sea (Gabicce Mare)"<br />
+                    Supervisor: Prof. Roberto Danovaro; Co-supervisor: Prof.ssa Cristina Gambi</p>
+                    <ul class="actions">
+                        <li><a href="details/edu-msc.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="icon solid fa-graduation-cap"></span>
+                    <h3>Bachelor's degree in Biological Sciences (L-13)</h3>
+                    <p><strong>UNISA, Fisciano-Salerno, Italy</strong> (2019 - 2023)<br />
+                    110/110. Thesis: "Staphylococcus aureus, the threat of antibiotic resistance and the potential solution from the sea"<br />
+                    Supervisor: Prof. Pierpaolo Cavallo</p>
+                    <ul class="actions">
+                        <li><a href="details/edu-bsc.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PRACTICAL & WORK EXPERIENCE (TIMELINE) -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 align-center fade-in-section" id="experience">
+        <div class="inner">
+            <h2>Practical &amp; Work Experience</h2>
+            <div class="timeline">
+
+                <div class="timeline-item">
+                    <span class="icon solid" style="font-size: 1.5rem;">🪱</span>
+                    <h3>Postgraduate Marine Benthic Ecology Research Intern</h3>
+                    <p><strong>UNIVPM, Ancona, Italy</strong> (Feb 2026 - August 2026)<br />
+                    Taxonomic identification of marine nematodes from seagrass ecosystems. Assessment of trophic diversity, Maturity Index (MI), Index of Trophic Diversity (ITD).</p>
+                    <ul class="actions">
+                        <li><a href="details/exp-research.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="icon solid" style="font-size: 1.5rem;">🌿</span>
+                    <h3>Master's Thesis Benthic Ecology Research</h3>
+                    <p><strong>UNIVPM, Ancona, Italy</strong> (2025 - 2026)<br />
+                    Meiofauna biodiversity and its environmental pattern and drivers in seagrass meadows of the Central Adriatic Sea (Gabicce Mare)</p>
+                    <ul class="actions">
+                        <li><a href="details/exp-thesis.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="icon solid" style="font-size: 1.5rem;">🐢</span>
+                    <h3>Sea Turtle Conservation Intern</h3>
+                    <p><strong>Blue Conservancy - CRTM, Brancaleone, Italy</strong> (Jul - Sep 2024)<br />
+                    Animal husbandry, veterinary assistance, rescue and release operations. BRUV surveys, environmental education, volunteer coordination.</p>
+                    <ul class="actions">
+                        <li><a href="details/exp-turtle.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="icon solid" style="font-size: 1.5rem;">🌍</span>
+                    <h3>Youth Lead Local Development (YLLD)</h3>
+                    <p><strong>International Youth Mobility Project</strong> (2023)<br />
+                    Youthpass certification (ID: SV75-5S7B-RDJN-V7PC). Leadership, intercultural exchange, community development.</p>
+                    <ul class="actions">
+                        <li><a href="details/exp-erasmus.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="icon solid" style="font-size: 1.5rem;">🔬</span>
+                    <h3>Microbiology Laboratory Intern</h3>
+                    <p><strong>UNISA, Fisciano, Italy</strong> (Apr - Jun 2022)<br />
+                    Sample processing, laboratory procedures, scientific data collection, microbiological techniques.</p>
+                    <ul class="actions">
+                        <li><a href="details/exp-microbiology.html" class="button small">More details</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- CERTIFICATIONS (GRIGLIA CON LOGHI - SINGOLI E GRUPPI) -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 alternate align-center fade-in-section" id="certifications">
+        <div class="inner">
+            <h2>Certifications</h2>
+            <div class="cert-grid">
+
+                <!-- SINGOLO: PADI -->
+                <div class="cert-item">
+                    <a href="certificates/cert-padi.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/padi-logo.png" alt="PADI Open Water Diver" />
+                        </div>
+                        <h3>PADI Open Water Diving Licence</h3>
+                        <div class="cert-subtitle">Certified scuba diver</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-padi.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+                <!-- SINGOLO: Cambridge B2 -->
+                <div class="cert-item">
+                    <a href="certificates/cert-cambridge.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/cambridge-logo.png" alt="B2 Level English Certificate" />
+                        </div>
+                        <h3>B2 Level English Certificate</h3>
+                        <div class="cert-subtitle">University of Cambridge</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-cambridge.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+                <!-- GRUPPO: WildTeam UK -->
+                <div class="cert-item">
+                    <a href="certificates/cert-wildteam.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/wildteam-logo.png" alt="WildTeam UK" />
+                        </div>
+                        <h3>WildTeam UK</h3>
+                        <div class="cert-subtitle">Wildlife Conservation Training</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-wildteam.html" class="button small">View Certifications</a></li>
+                    </ul>
+                </div>
+
+                <!-- GRUPPO: IOC UNESCO -->
+                <div class="cert-item">
+                    <a href="certificates/cert-iocunesco.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/iocunesco.png" alt="IOC UNESCO" />
+                        </div>
+                        <h3>IOC UNESCO</h3>
+                        <div class="cert-subtitle">Marine Biological Data Management and Spatial Planning Training</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-iocunesco.html" class="button small">View Certifications</a></li>
+                    </ul>
+                </div>
+
+                <!-- GRUPPO: The Nature Conservancy -->
+                <div class="cert-item">
+                    <a href="certificates/cert-natureconservancy.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/thenatureconservancy.png" alt="The Nature Conservancy" />
+                        </div>
+                        <h3>The Nature Conservancy</h3>
+                        <div class="cert-subtitle">Coral Reef Management and Restoration Training</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-natureconservancy.html" class="button small">View Certifications</a></li>
+                    </ul>
+                </div>
+
+                <!-- SINGOLO: Olive Ridley Project -->
+                <div class="cert-item">
+                    <a href="certificates/cert-orp.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/orp-logo.png" alt="Olive Ridley Project" />
+                        </div>
+                        <h3>Olive Ridley Project</h3>
+                        <div class="cert-subtitle">Sea Turtle Science & Conservation Training</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-orp.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+                <!-- SINGOLO: Reefera Academy -->
+                <div class="cert-item">
+                    <a href="certificates/cert-reefera.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/reefera-logo.png" alt="Reefera Academy" />
+                        </div>
+                        <h3>Reefera Academy</h3>
+                        <div class="cert-subtitle">Marine Survey for Environmental Impact Assessment</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-reefera.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+                <!-- GRUPPO: ORCA -->
+                <div class="cert-item">
+                    <a href="certificates/cert-orca.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/orca-logo.png" alt="ORCA" />
+                        </div>
+                        <h3>ORCA</h3>
+                        <div class="cert-subtitle">Introduction to Whale & Dolphin Identification</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-orca.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+                <!-- SINGOLO: ORCA OceanWatchers -->
+                <div class="cert-item">
+                    <a href="certificates/cert-orca-oceanwatchers.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/orca-logo.png" alt="ORCA OceanWatchers" />
+                        </div>
+                        <h3>ORCA OceanWatchers</h3>
+                        <div class="cert-subtitle">Marine Mammal Observation</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-orca-oceanwatchers.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+                <!-- SINGOLO: IMO -->
+                <div class="cert-item">
+                    <a href="certificates/cert-imo.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/imo-logo.png" alt="International Maritime Organization" />
+                        </div>
+                        <h3>International Maritime Organization</h3>
+                        <div class="cert-subtitle">Introductory Course on Energy Efficient Ship Operation</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-imo.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+                <!-- SINGOLO: FAO -->
+                <div class="cert-item">
+                    <a href="certificates/cert-fao.html">
+                        <div class="cert-logo">
+                            <img src="images/cert-logos/fao-logo.png" alt="FAO" />
+                        </div>
+                        <h3>FAO</h3>
+                        <div class="cert-subtitle">Strengthening deep-sea fisheries management in areas beyond national jurisdiction</div>
+                    </a>
+                    <ul class="actions">
+                        <li><a href="certificates/cert-fao.html" class="button small">View Certification</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- AWARDS -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 align-center fade-in-section" id="awards">
+        <div class="inner">
+            <h2>Awards</h2>
+            <div class="cert-grid">
+
+                <div class="cert-item">
+                    <!-- LOGO WWF -->
+                    <div style="max-width: 80px; margin: 0 auto 0.8rem auto;">
+                        <img src="images/wwf.jpg" alt="WWF" style="width: 100%; display: block;" />
+                    </div>
+                    <h3>6th WWF Underwater Photography Competition</h3>
+                    <p><strong>Winner</strong> - "Un Mare di Posidonia" (December 2025)</p>
+                    <ul class="actions">
+                        <li><a href="images/wwf-winning-photo.jpg" class="button small" target="_blank">View Photo</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PORTFOLIO -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 alternate align-center fade-in-section" id="portfolio">
+        <div class="inner">
+            <h2>Portfolio</h2>
+            <p>
+                A selection of my academic, research, and conservation experiences in marine biology. These projects reflect my practical involvement in marine biodiversity assessment, field sampling, laboratory analyses, ecological data interpretation, and conservation activities, with a particular focus on marine ecosystems and protected species.
+            </p>
+            
+            <div class="filter-bar">
+                <ul class="actions stacked" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">
+                    <li><a href="#" class="button small active" data-filter="all">All</a></li>
+                    <li><a href="#" class="button small" data-filter="masters">Master's Research</a></li>
+                    <li><a href="#" class="button small" data-filter="university">University Projects</a></li>
+                </ul>
+            </div>
+
+            <div class="gallery" id="project-gallery">
+
+                <!-- PROGETTO 1: Master's Thesis - Meiofaunal Biodiversity -->
+                <article class="masters">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/m6.jpg" alt="Meiofaunal biodiversity in seagrass ecosystems" />
+                    </div>
+                    <div class="caption">
+                        <h3>Spatial Patterns of Meiofaunal Biodiversity in Mediterranean Seagrass Ecosystems</h3>
+                        <p>Master's Thesis Research</p>
+                        <ul class="actions">
+                            <li><a href="details/exp-thesis.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 2: Postgraduate Research - Nematode Assemblages -->
+                <article class="masters">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/n7.jpg" alt="Nematode assemblages in seagrass ecosystems" />
+                    </div>
+                    <div class="caption">
+                        <h3>Diversity and trophic structure of nematode assemblages in Gabicce Mare seagrass meadows</h3>
+                        <p>Postgraduate research intern project</p>
+                        <ul class="actions">
+                            <li><a href="details/exp-research.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 3: Marine Monitoring -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/hero.monitoring.jpg" alt="Marine monitoring" />
+                    </div>
+                    <div class="caption">
+                        <h3>Water Current Impact on the Civitanova Coast</h3>
+                        <p>Field Practice: Marine Monitoring Case Study</p>
+                        <ul class="actions">
+                            <li><a href="projects/project3.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 4: Life After Gorgonian's Forest -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/eunicella.jpg" alt="Life After Gorgonian's Forest" />
+                    </div>
+                    <div class="caption">
+                        <h3>Life After Gorgonian's Forest</h3>
+                        <p>Field Practice Project - Designing a Long-Term Ecological Monitoring Programme for Mediterranean Gorgonian Forests</p>
+                        <ul class="actions">
+                            <li><a href="projects/project4.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 5: Parthenogenesis in Sphyrna tiburo -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/tiburo.jpg" alt="Parthenogenesis in Sphyrna tiburo" />
+                    </div>
+                    <div class="caption">
+                        <h3><i>Parthenogenesis in Sphyrna tiburo</i></h3>
+                        <p><i>The first genetically demonstrated case of parthenogenesis in chondrichthyans</i></p>
+                        <ul class="actions">
+                            <li><a href="projects/project5.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 6: Oyster Restoration -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/orbita.jpg" alt="Oyster Reef Restoration in the Adriatic Sea" />
+                    </div>
+                    <div class="caption">
+                        <h3>OysteRestoration: An <i>Ostrea edulis</i> restoration project in North Adriatic Sea</h3>
+                        <p>Oyster Reef Restoration Proposal developed during the Marine Ecosystem Restoration course</p>
+                        <ul class="actions">
+                            <li><a href="projects/project6.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 7: GIS Mapping - Loggerhead Turtle Bycatch -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/bycatch.jpg" alt="GIS-Based Spatial Analysis of Loggerhead Turtle Bycatch Risk" />
+                    </div>
+                    <div class="caption">
+                        <h3>GIS-Based Spatial Analysis of Loggerhead Turtle Bycatch Risk in the Northern Adriatic Sea</h3>
+                        <p>MSP &amp; GIS Project</p>
+                        <ul class="actions">
+                            <li><a href="projects/project7.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 8: White Shark Café -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/squalo.jpg" alt="The White Shark Café" />
+                    </div>
+                    <div class="caption">
+                        <h3>A Tag to Save the Sharks of the White Shark Café</h3>
+                        <p>Fishery Biology Presentation</p>
+                        <ul class="actions">
+                            <li><a href="projects/project8.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 9: Algae Aquaculture -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/alg.jpg" alt="Macroalgae Aquaculture" />
+                    </div>
+                    <div class="caption">
+                        <h3>Macroalgae Aquaculture: Sustainable Cultivation, Blue Bioeconomy and Future Perspectives</h3>
+                        <p>Educational scientific project developed during the Master's Degree course in Aquaculture</p>
+                        <ul class="actions">
+                            <li><a href="projects/project9.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 10: Marine Policy - Maratea MPA -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/maratea.jpg" alt="Design Proposal for a Marine Protected Area Along the Coast of Maratea" />
+                    </div>
+                    <div class="caption">
+                        <h3>Design Proposal for a Marine Protected Area (MPA) Along the Coast of Maratea (Southern Italy)</h3>
+                        <p>Marine Policy Project</p>
+                        <ul class="actions">
+                            <li><a href="projects/project10.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- PROGETTO 11: Cerbère-Banyuls Marine Reserve -->
+                <article class="university">
+                    <div class="image">
+                        <img src="images/gallery/thumbs/mpa.jpg" alt="Cerbère-Banyuls Marine Reserve" />
+                    </div>
+                    <div class="caption">
+                        <h3>Cerbère-Banyuls Marine Reserve</h3>
+                        <p>MPA Overview</p>
+                        <ul class="actions">
+                            <li><a href="projects/project11.html" class="button small">View Project</a></li>
+                        </ul>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PHOTOGRAPHY BOX -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 align-center fade-in-section" id="photography">
+        <div class="inner">
+            <div class="photography-box">
+                <div class="box-text">
+                    📸 I'm passionate about <span>underwater photography</span>
+                </div>
+                <div class="box-button">
+                    <a href="photography/index.html" class="button button-camera">
+                        <span class="camera-icon">📷</span> Click here to see my best UW pictures
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- CONTACT -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 align-center fade-in-section" id="contact">
+        <div class="inner medium">
+            <h2>Contact</h2>
+            <p>
+                Below you can find my base location and contacts. Feel free to send me emails with suggestions, concerns, requests, advice and so on. I will be happy to hear from you.
+            </p>
+
+            <ul class="icons">
+                <li><a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+                <li><a href="mailto:andreacalocero23@gmail.com" class="icon fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+
+            <ul class="actions stacked">
+                <li><a href="cv.pdf" class="button big wide">Download CV</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+            
+            // ============================================================
+            // SLIDESHOW CON FRECCE
+            // ============================================================
+            var slides = document.querySelectorAll('.slide');
+            var currentSlide = 0;
+            var totalSlides = slides.length;
+            var slideInterval;
+            
+            function goToSlide(index) {
+                slides.forEach(function(slide) {
+                    slide.classList.remove('active');
+                });
+                slides[index].classList.add('active');
+                currentSlide = index;
+                resetInterval();
+            }
+            
+            function nextSlide() {
+                var next = (currentSlide + 1) % totalSlides;
+                goToSlide(next);
+            }
+            
+            function prevSlide() {
+                var prev = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSlide(prev);
+            }
+            
+            function resetInterval() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                }
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            document.getElementById('prevBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                prevSlide();
+            });
+            
+            document.getElementById('nextBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                nextSlide();
+            });
+            
+            resetInterval();
+            
+            // ============================================================
+            // FILTRI PORTFOLIO
+            // ============================================================
+            var filterButtons = document.querySelectorAll('.filter-bar .button');
+            var projects = document.querySelectorAll('#project-gallery article');
+            
+            filterButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    filterButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    var filter = this.getAttribute('data-filter');
+                    
+                    projects.forEach(function(project) {
+                        if (filter === 'all') {
+                            project.style.display = 'block';
+                        } else if (project.classList.contains(filter)) {
+                            project.style.display = 'block';
+                        } else {
+                            project.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // ============================================================
+            // MENU SMOOTH SCROLL
+            // ============================================================
+            document.querySelectorAll('#navbar a').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var targetId = this.getAttribute('href');
+                    var targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        var offsetTop = targetElement.offsetTop - 60;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // ============================================================
+            // MENU ACTIVE ON SCROLL
+            // ============================================================
+            var sections = document.querySelectorAll('section[id]');
+            window.addEventListener('scroll', function() {
+                var scrollPos = window.scrollY + 70;
+                sections.forEach(function(section) {
+                    var sectionTop = section.offsetTop;
+                    var sectionHeight = section.offsetHeight;
+                    var sectionId = section.getAttribute('id');
+                    var navLink = document.querySelector('#navbar a[href="#' + sectionId + '"]');
+                    if (navLink) {
+                        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                            navLink.classList.add('active');
+                        } else {
+                            navLink.classList.remove('active');
+                        }
+                    }
+                });
+            });
+            
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+            
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

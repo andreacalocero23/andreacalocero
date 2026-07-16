@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Parthenogenesis in Sphyrna tiburo · Andrea Calocero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ================================================================ */
+        /* RESET & BASE */
+        /* ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ================================================================ */
+        /* NAVBAR */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        /* ================================================================ */
+        /* HERO */
+        /* ================================================================ */
+        .project-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            background: #0e2f44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .project-hero .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('../images/gallery/tiburo.jpg') center center / cover no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project-hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,47,68,0.75) 0%, rgba(26,82,118,0.5) 100%);
+            z-index: 1;
+        }
+
+        .project-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .project-hero .hero-content .category-tag {
+            display: inline-block;
+            background: #1abc9c;
+            color: #0e2f44;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 18px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-hero .hero-content h1 i {
+            color: #76d7c4;
+        }
+
+        .project-hero .hero-content .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #76d7c4;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .project-hero .hero-content .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .project-hero .hero-content .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-hero .hero-content .hero-meta i {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-hero {
+                height: 55vh;
+                min-height: 380px;
+            }
+            .project-hero .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .project-hero .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            .project-hero .hero-content .hero-meta {
+                gap: 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* BREADCRUMB */
+        /* ================================================================ */
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #d5dfe8;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+
+        /* ================================================================ */
+        /* DISCLAIMER BOX */
+        /* ================================================================ */
+        .disclaimer-box {
+            background: linear-gradient(135deg, #d4eaf7, #eaf2f8);
+            border-radius: 16px;
+            padding: 1.8rem 2.2rem;
+            margin: 2rem 0;
+            border-left: 5px solid #1abc9c;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .disclaimer-box .icon {
+            font-size: 2rem;
+            color: #1abc9c;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .disclaimer-box .content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #1a5276;
+            margin-bottom: 0.3rem;
+        }
+
+        .disclaimer-box .content p {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            line-height: 1.7;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .disclaimer-box {
+                flex-direction: column;
+                padding: 1.2rem 1.2rem;
+                gap: 0.8rem;
+            }
+            .disclaimer-box .icon {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* SLIDESHOW PER IMMAGINI */
+        /* ================================================================ */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background: #1a5276;
+        }
+
+        .slideshow-container .slide-img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #0e2f44;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-container .slide-img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slideshow-container .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(14, 47, 68, 0.6);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .slideshow-container .slideshow-btn:hover {
+            background: rgba(14, 47, 68, 0.8);
+            color: #ffffff;
+        }
+
+        .slideshow-container .slideshow-btn.prev {
+            left: 12px;
+        }
+
+        .slideshow-container .slideshow-btn.next {
+            right: 12px;
+        }
+
+        .slideshow-container .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slideshow-container .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slideshow-container .dots .dot.active {
+            background: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .slideshow-container .slide-img {
+                height: 300px;
+            }
+            .slideshow-container .slideshow-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slideshow-container .slide-img {
+                height: 220px;
+            }
+        }
+
+        /* ================================================================ */
+        /* SECTION STYLES */
+        /* ================================================================ */
+        .section-wrapper {
+            padding: 4rem 2rem;
+        }
+
+        .section-wrapper.light {
+            background: #ffffff;
+        }
+
+        .section-wrapper.grey {
+            background: #f7fafc;
+        }
+
+        .section-wrapper.dark {
+            background: #0e2f44;
+            color: #ffffff;
+        }
+
+        .section-wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper .inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+
+        .section-wrapper .inner h2.centered {
+            text-align: center;
+        }
+
+        .section-wrapper .inner h2.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-wrapper .inner p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section-wrapper .inner p strong {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .section-wrapper.dark .inner h2 {
+            color: #d4eaf7;
+        }
+
+        .section-wrapper.dark .inner h2::after {
+            background: linear-gradient(90deg, #1abc9c, #76d7c4);
+        }
+
+        .section-wrapper.dark .inner p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ================================================================ */
+        /* INFO CARDS */
+        /* ================================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #eaf2f8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #1abc9c;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* FADE-IN ANIMATION */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================ */
+        /* TWO COLUMN LAYOUT */
+        /* ================================================================ */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .two-column .col p {
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* OBJECTIVE CARDS */
+        /* ================================================================ */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .objective-card {
+            background: #ffffff;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .objective-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.8rem;
+        }
+
+        .objective-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #1a5276;
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-card p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ================================================================ */
+        /* HIGHLIGHT CARDS (Project Highlights) */
+        /* ================================================================ */
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-card {
+            background: #ffffff;
+            padding: 1.2rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .highlight-card .icon {
+            font-size: 1.6rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .highlight-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+        }
+
+        .highlight-card .value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1a5276;
+            margin-top: 0.1rem;
+        }
+
+        /* ================================================================ */
+        /* BUTTONS */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+            gap: 0.6rem;
+        }
+
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+
+        .button.accent {
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .button.accent:hover {
+            background: #16a085;
+        }
+
+        .button.outline-light {
+            background: transparent;
+            box-shadow: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+        }
+
+        .button.outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .button .icon {
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .actions li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .actions .button {
+            margin: 0 auto;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================================ */
+        /* REFERENCES */
+        /* ================================================================ */
+        .ref-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .ref-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 0.85rem;
+            color: #34495e;
+            line-height: 1.6;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .ref-list li::before {
+            content: '📄';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+        }
+
+        .ref-list li:last-child {
+            border-bottom: none;
+        }
+
+        .ref-list li strong {
+            color: #1a5276;
+        }
+
+        .ref-list li a {
+            color: #1a5276;
+            text-decoration: none;
+        }
+
+        .ref-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .section-wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .section-wrapper .inner h2 {
+                font-size: 1.8rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .objectives-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .section-wrapper .inner h2 {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-card {
+                padding: 0.8rem 1rem;
+            }
+            .info-card .value {
+                font-size: 0.85rem;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .highlight-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- NAVBAR -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="project-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="category-tag">Evolutionary Biology</span>
+            <h1>Parthenogenesis in <i>Sphyrna tiburo</i></h1>
+            <p class="subtitle">Academic Scientific Literature Review &amp; Presentation</p>
+            <div class="hero-meta">
+                <span><i class="fas fa-university"></i> UNIVPM</span>
+                <span><i class="fas fa-calendar-alt"></i> 2024</span>
+                <span><i class="fas fa-dna"></i> Evolutionary Biology</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BREADCRUMB -->
+    <!-- ================================================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">🏠 Home</a> &nbsp;›&nbsp;
+            <a href="../index.html#portfolio">Portfolio</a> &nbsp;›&nbsp;
+            <span>Parthenogenesis in <i>Sphyrna tiburo</i></span>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- DISCLAIMER -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light" style="padding-top: 2rem; padding-bottom: 1rem;">
+        <div class="inner">
+            <div class="disclaimer-box">
+                <div class="icon"><i class="fas fa-info-circle"></i></div>
+                <div class="content">
+                    <h4>Academic Context</h4>
+                    <p>
+                        This page describes an academic presentation developed during my Master Degree in Marine Biology.
+                        The work consisted of <strong>critically reviewing and presenting published scientific literature</strong>
+                        rather than conducting original research. The objective was to analyze experimental evidence,
+                        understand the methodologies employed by the authors, and communicate the scientific findings effectively.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OVERVIEW -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Overview</h2>
+            <p>
+                This academic project focused on the <strong>first documented case of facultative parthenogenesis</strong>
+                in a cartilaginous fish, described in the seminal paper by Chapman et al. (2007) published in
+                <em>Biology Letters</em>. The study reported a virgin birth in a captive female bonnethead shark
+                (<i>Sphyrna tiburo</i>), providing the first genetically confirmed evidence of parthenogenesis
+                in Chondrichthyes.
+            </p>
+            <p>
+                As part of my Master's coursework in Marine Evolutionary Biology, I critically analyzed the original
+                publication, examined the experimental design, interpreted the molecular data, and presented the
+                findings and their broader implications to the class. This exercise developed my ability to
+                <strong>evaluate primary scientific literature</strong>, understand <strong>molecular genetics techniques</strong>,
+                and <strong>communicate complex evolutionary concepts</strong> effectively.
+            </p>
+            <p>
+                The presentation covered the reproductive biology of sharks, the mechanisms of parthenogenesis,
+                the molecular approaches used to confirm the event, and the evolutionary and conservation implications
+                of this discovery.
+            </p>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="label">Topic</div>
+                    <div class="value">Evolutionary Biology</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Focus</div>
+                    <div class="value">Facultative Parthenogenesis</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Study Type</div>
+                    <div class="value">Scientific Literature Review</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Primary Paper</div>
+                    <div class="value">Chapman et al. (2007)</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Techniques Studied</div>
+                    <div class="value">Microsatellite Genotyping · AFLP</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Output</div>
+                    <div class="value">Academic Oral Presentation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC BACKGROUND -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Scientific Background</h2>
+            <div class="two-column">
+                <div class="col">
+                    <p>
+                        <i><strong>Sphyrna tiburo</strong></i>, commonly known as the bonnethead shark, is a small hammerhead
+                        species belonging to the family Sphyrnidae, order Carcharhiniformes. Its geographic distribution
+                        extends from the western Atlantic to the eastern Pacific, inhabiting shallow coastal waters
+                        from 0 to 90 metres depth, including sandy bottoms, seagrass meadows, coral reefs and estuaries.
+                    </p>
+                    <p>
+                        This species exhibits <strong>placental viviparity</strong>, with litters of 4 to 12 pups
+                        and a gestation period of approximately 5 months. Sexual maturity is reached at 2 years
+                        for males and 2-3 years for females. The bonnethead is primarily <strong>durophagous</strong>,
+                        feeding mainly on crustaceans such as crabs, with a dentition adapted to crush hard prey
+                        (Wilga & Motta, 2000).
+                    </p>
+                    <p>
+                        The study by Chapman et al. (2007) investigated an unexpected birth in a captive female
+                        bonnethead shark that had been isolated from males for over three years, raising questions
+                        about the reproductive mechanism involved.
+                    </p>
+                </div>
+                <div class="col">
+                    <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1);">
+                        <img src="../images/gallery/st1.jpg" alt="Sphyrna tiburo - Bonnethead shark" style="width:100%; display:block;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STUDY OBJECTIVES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Study Objectives</h2>
+            <p>
+                The original study by Chapman et al. (2007) aimed to determine the reproductive mechanism behind
+                the birth of a viable female pup in a captive bonnethead shark maintained in the absence of males.
+                Specifically, the authors tested three alternative hypotheses:
+            </p>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-tint"></i></div>
+                    <h4>Sperm Storage</h4>
+                    <p>Evaluate whether the female had stored sperm from a previous mating event, potentially lasting several years.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-venus"></i></div>
+                    <h4>Self-Fertilization</h4>
+                    <p>Assess the possibility of hermaphroditism or self-fertilization in the captive female.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-dna"></i></div>
+                    <h4>Parthenogenesis</h4>
+                    <p>Test whether the offspring resulted from automictic parthenogenesis, a form of asexual reproduction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- METHODOLOGICAL APPROACH -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Methodological Approach</h2>
+            <p>
+                In my review of the original study, I analyzed the molecular techniques employed by Chapman et al. (2007)
+                to determine the origin of the offspring. The methodological approach I examined included:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-syringe"></i></div>
+                    <h4>Tissue Sampling</h4>
+                    <p>Collection of tissue samples from the three candidate mothers and the offspring for DNA extraction.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                    <h4>Microsatellite Genotyping</h4>
+                    <p>Analysis of four highly polymorphic microsatellite loci to genotype individuals and identify the mother.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-database"></i></div>
+                    <h4>Population Comparison</h4>
+                    <p>Comparison with genotypes from 119 wild <i>S. tiburo</i> to assess natural genetic diversity.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-dna"></i></div>
+                    <h4>AFLP Fingerprinting</h4>
+                    <p>Multi-locus AFLP analysis to search for paternal-specific DNA fragments in the offspring's genome.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MAIN RESULTS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Main Results</h2>
+            <p>
+                The analysis of the published data revealed three key lines of evidence supporting parthenogenesis:
+            </p>
+            <div class="objectives-grid">
+                <div class="objective-card" style="border-left: 4px solid #1abc9c;">
+                    <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                    <h4>Microsatellite Analysis</h4>
+                    <p>
+                        The offspring was <strong>completely homozygous</strong> at all four microsatellite loci,
+                        carrying only maternal alleles. The probability of observing this level of homozygosity
+                        through sexual reproduction was <strong>p &lt; 1 × 10⁻⁷</strong>.
+                    </p>
+                </div>
+                <div class="objective-card" style="border-left: 4px solid #2e86c1;">
+                    <div class="icon"><i class="fas fa-dna"></i></div>
+                    <h4>AFLP Fingerprinting</h4>
+                    <p>
+                        Multi-locus AFLP analysis confirmed the absence of <strong>paternal-specific DNA fragments</strong>
+                        in the offspring, excluding the possibility of paternal contribution.
+                    </p>
+                </div>
+                <div class="objective-card" style="border-left: 4px solid #1abc9c;">
+                    <div class="icon"><i class="fas fa-venus"></i></div>
+                    <h4>Sex Determination</h4>
+                    <p>
+                        The offspring was female, consistent with <strong>automictic parthenogenesis</strong>
+                        in a species with female homogamety (XX sex determination system).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW (st2.jpg, st3.jpg, st4.jpg, st5.jpg) -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="gallerySlideshow">
+                <img src="../images/gallery/st2.jpg" class="slide-img active" alt="Genetic analysis - 1" />
+                <img src="../images/gallery/st3.jpg" class="slide-img" alt="Genetic analysis - 2" />
+                <img src="../images/gallery/st4.jpg" class="slide-img" alt="Genetic analysis - 3" />
+                <img src="../images/gallery/st5.jpg" class="slide-img" alt="Genetic analysis - 4" />
+                
+                <button class="slideshow-btn prev" id="galleryPrevBtn">‹</button>
+                <button class="slideshow-btn next" id="galleryNextBtn">›</button>
+                
+                <div class="dots" id="galleryDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC SIGNIFICANCE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Scientific Significance</h2>
+            <p>
+                This study represented a <strong>milestone in evolutionary biology</strong> by providing the first
+                genetically confirmed evidence of parthenogenesis in Chondrichthyes. The findings demonstrated that
+                <strong>facultative parthenogenesis</strong> occurs not only in reptiles, birds and fish, but also
+                in cartilaginous fishes, expanding our understanding of reproductive plasticity in vertebrates.
+            </p>
+            <p>
+                The results have important <strong>evolutionary and conservation implications</strong>:
+            </p>
+            <ul style="list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0 1.5rem 0; font-size: 0.95rem; color: #2c3e50; line-height: 1.8;">
+                <li><strong>Reproductive plasticity</strong> — demonstrates that sharks, like other vertebrates, can switch between sexual and asexual reproduction when mates are unavailable.</li>
+                <li><strong>Low-density populations</strong> — parthenogenesis may serve as a reproductive "safety net" in overexploited or fragmented populations where finding mates is challenging.</li>
+                <li><strong>Conservation biology</strong> — highlights the need to consider asexual reproduction in conservation strategies for endangered shark species.</li>
+                <li><strong>Automictic mechanism</strong> — the study confirmed automictic parthenogenesis, where offspring are not perfect clones but show reduced genetic diversity due to increased homozygosity.</li>
+            </ul>
+            <p>
+                The discovery also raised important questions about the frequency and adaptive significance of
+                parthenogenesis in wild shark populations, particularly in the context of overfishing and habitat
+                degradation (Fields et al., 2015; Van der Kooi &amp; Schwander, 2015).
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- KNOWLEDGE AND SKILLS DEVELOPED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Knowledge and Skills Developed</h2>
+            <p>
+                Through the preparation and delivery of this academic presentation, I developed the following competencies:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="text-align: left; padding: 1.2rem 1.5rem;">
+                    <div class="icon" style="font-size: 1.4rem; text-align: left;"><i class="fas fa-book-open"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Scientific Literature Analysis</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Critical interpretation of published research</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem 1.5rem;">
+                    <div class="icon" style="font-size: 1.4rem; text-align: left;"><i class="fas fa-dna"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Molecular Genetics Techniques</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Microsatellite markers and AFLP analysis</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem 1.5rem;">
+                    <div class="icon" style="font-size: 1.4rem; text-align: left;"><i class="fas fa-ecosystem"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Evolutionary Biology</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Understanding reproductive strategies and plasticity</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem 1.5rem;">
+                    <div class="icon" style="font-size: 1.4rem; text-align: left;"><i class="fas fa-comments"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Scientific Communication</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Presentation of complex data to an academic audience</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem 1.5rem;">
+                    <div class="icon" style="font-size: 1.4rem; text-align: left;"><i class="fas fa-microscope"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Experimental Design Analysis</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Understanding molecular experimental approaches</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem 1.5rem;">
+                    <div class="icon" style="font-size: 1.4rem; text-align: left;"><i class="fas fa-fish"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Shark Reproductive Biology</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Specialized knowledge of chondrichthyan reproduction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- DOWNLOAD PRESENTATION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner" style="text-align: center;">
+            <h2 class="centered">Download Presentation</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem auto;">
+                Download the complete academic presentation on parthenogenesis in <i>Sphyrna tiburo</i>,
+                including detailed methodology, results and scientific discussion.
+            </p>
+            <ul class="actions">
+                <li>
+                    <a href="../documents/parthenogenesis-sphyrna-tiburo-presentation.pdf" class="button accent" download>
+                        <i class="fas fa-file-pdf icon"></i> Download PDF
+                    </a>
+                </li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">
+                PDF document · Academic Presentation · 2.1 MB
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- REFERENCES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>References</h2>
+            <ul class="ref-list">
+                <li>
+                    <strong>Chapman, D. D., Shivji, M. S., Louis, E., Sommer, J., Fletcher, H., &amp; Prodòhl, P. A. (2007).</strong>
+                    Virgin birth in a hammerhead shark.
+                    <em>Biology Letters</em>, 3(4), 425-427.
+                    <a href="https://doi.org/10.1098/rsbl.2007.0189" target="_blank">doi:10.1098/rsbl.2007.0189</a>
+                </li>
+                <li>
+                    <strong>Cortes, E., Manire, C. A., &amp; Hueter, R. E. (1996).</strong>
+                    Diet, feeding habits, and diet feeding chronology of the bonnethead shark, <i>Sphyrna tiburo</i>, in southwest Florida.
+                    <em>Bulletin of Marine Science</em>, 58(2), 353-367.
+                </li>
+                <li>
+                    <strong>Fields, A. T., Feldheim, K. A., Poulakis, G. R., &amp; Chapman, D. D. (2015).</strong>
+                    Facultative parthenogenesis in a critically endangered wild vertebrate.
+                    <em>Current Biology</em>, 25(11), R446-R447.
+                    <a href="https://doi.org/10.1016/j.cub.2015.04.018" target="_blank">doi:10.1016/j.cub.2015.04.018</a>
+                </li>
+                <li>
+                    <strong>Van der Kooi, C. J., &amp; Schwander, T. (2015).</strong>
+                    Parthenogenesis: birth of a new lineage or reproductive accident?
+                    <em>Current Biology</em>, 25(15), R659-R661.
+                    <a href="https://doi.org/10.1016/j.cub.2015.06.055" target="_blank">doi:10.1016/j.cub.2015.06.055</a>
+                </li>
+                <li>
+                    <strong>Wilga, C. D., &amp; Motta, P. J. (2000).</strong>
+                    Durophagy in sharks: feeding mechanics of the hammerhead <i>Sphyrna tiburo</i>.
+                    <em>Journal of Experimental Biology</em>, 203(18), 2781-2796.
+                    <a href="https://doi.org/10.1242/jeb.203.18.2781" target="_blank">doi:10.1242/jeb.203.18.2781</a>
+                </li>
+                <li>
+                    <strong>Pollom, R., et al. (2021).</strong>
+                    <i>Sphyrna tiburo</i> (amended version of 2020 assessment).
+                    <em>The IUCN Red List of Threatened Species</em> 2021: e.T39387A205765567.
+                    <a href="https://www.iucnredlist.org/species/39387/205765567" target="_blank">iucnredlist.org</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT HIGHLIGHTS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Highlights</h2>
+            <div class="highlight-grid">
+                <div class="highlight-card">
+                    <div class="icon"><i class="fas fa-tag"></i></div>
+                    <div class="label">Topic</div>
+                    <div class="value">Evolutionary Biology</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon"><i class="fas fa-dna"></i></div>
+                    <div class="label">Focus</div>
+                    <div class="value">Facultative Parthenogenesis</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon"><i class="fas fa-book"></i></div>
+                    <div class="label">Study Type</div>
+                    <div class="value">Scientific Literature Review</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon"><i class="fas fa-file-alt"></i></div>
+                    <div class="label">Primary Paper</div>
+                    <div class="value">Chapman et al. (2007)</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon"><i class="fas fa-microscope"></i></div>
+                    <div class="label">Techniques Studied</div>
+                    <div class="value">Microsatellite Genotyping · AFLP</div>
+                </div>
+                <div class="highlight-card">
+                    <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div class="label">Scientific Output</div>
+                    <div class="value">Academic Oral Presentation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FINAL SECTION - BACK TO PORTFOLIO -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper dark fade-in-section" style="padding: 5rem 2rem;">
+        <div class="inner">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <div style="font-size: 3rem; color: rgba(255,255,255,0.15); margin-bottom: 0.5rem;">
+                    <i class="fas fa-dna"></i>
+                </div>
+                <h2 class="centered" style="color: #d4eaf7; margin-bottom: 1rem;">A Milestone in Shark Reproductive Biology</h2>
+                <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; text-align: center; max-width: 600px; margin: 0 auto;">
+                    The first genetically confirmed case of parthenogenesis in Chondrichthyes —
+                    a discovery that expanded our understanding of reproductive plasticity in vertebrates.
+                </p>
+            </div>
+            <div class="actions-row" style="margin-top: 2.5rem;">
+                <a href="../index.html#portfolio" class="button outline-light">
+                    <i class="fas fa-arrow-left icon"></i> Back to Portfolio
+                </a>
+                <a href="project6.html" class="button accent">
+                    Next Project <i class="fas fa-arrow-right icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+
+            // ============================================================
+            // SLIDESHOW
+            // ============================================================
+            function createSlideshow(containerId, prevBtnId, nextBtnId, dotsId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                const slides = container.querySelectorAll('.slide-img');
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const dotsContainer = document.getElementById(dotsId);
+                const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+                let currentIndex = 0;
+                let interval;
+
+                function goTo(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                    currentIndex = index;
+                    resetInterval();
+                }
+
+                function next() {
+                    goTo((currentIndex + 1) % slides.length);
+                }
+
+                function prev() {
+                    goTo((currentIndex - 1 + slides.length) % slides.length);
+                }
+
+                function resetInterval() {
+                    if (interval) clearInterval(interval);
+                    interval = setInterval(next, 4000);
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        prev();
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        next();
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', function() {
+                        goTo(index);
+                    });
+                });
+
+                if (container) {
+                    container.addEventListener('mouseenter', function() {
+                        if (interval) clearInterval(interval);
+                    });
+
+                    container.addEventListener('mouseleave', function() {
+                        resetInterval();
+                    });
+                }
+
+                resetInterval();
+                return { goTo, next, prev };
+            }
+
+            createSlideshow('gallerySlideshow', 'galleryPrevBtn', 'galleryNextBtn', 'galleryDots');
+
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

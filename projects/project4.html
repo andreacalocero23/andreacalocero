@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Life After Gorgonian's Forest · Andrea Calocero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ================================================================ */
+        /* RESET & BASE */
+        /* ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ================================================================ */
+        /* NAVBAR */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        /* ================================================================ */
+        /* HERO */
+        /* ================================================================ */
+        .project-hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            background: #0e2f44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .project-hero .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('../images/gallery/e1.jpg') center center / cover no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project-hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,47,68,0.75) 0%, rgba(26,82,118,0.5) 100%);
+            z-index: 1;
+        }
+
+        .project-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .project-hero .hero-content .category-tag {
+            display: inline-block;
+            background: #1abc9c;
+            color: #0e2f44;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 18px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-hero .hero-content .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #76d7c4;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .project-hero .hero-content .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .project-hero .hero-content .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-hero .hero-content .hero-meta i {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-hero {
+                height: 55vh;
+                min-height: 380px;
+            }
+            .project-hero .hero-content h1 {
+                font-size: 2rem;
+            }
+            .project-hero .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            .project-hero .hero-content .hero-meta {
+                gap: 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* BREADCRUMB */
+        /* ================================================================ */
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #d5dfe8;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+
+        /* ================================================================ */
+        /* SCROLL INDICATOR */
+        /* ================================================================ */
+        .scroll-indicator {
+            text-align: center;
+            padding: 1rem 0 2rem;
+            background: #ffffff;
+            color: #5d6d7e;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .scroll-indicator i {
+            display: block;
+            font-size: 1.6rem;
+            color: #1abc9c;
+            margin-top: 0.3rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* ================================================================ */
+        /* SLIDESHOW PER IMMAGINI */
+        /* ================================================================ */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background: #1a5276;
+        }
+
+        .slideshow-container .slide-img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #0e2f44;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-container .slide-img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slideshow-container .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(14, 47, 68, 0.6);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .slideshow-container .slideshow-btn:hover {
+            background: rgba(14, 47, 68, 0.8);
+            color: #ffffff;
+        }
+
+        .slideshow-container .slideshow-btn.prev {
+            left: 12px;
+        }
+
+        .slideshow-container .slideshow-btn.next {
+            right: 12px;
+        }
+
+        .slideshow-container .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slideshow-container .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slideshow-container .dots .dot.active {
+            background: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .slideshow-container .slide-img {
+                height: 300px;
+            }
+            .slideshow-container .slideshow-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slideshow-container .slide-img {
+                height: 220px;
+            }
+        }
+
+        /* ================================================================ */
+        /* SECTION STYLES */
+        /* ================================================================ */
+        .section-wrapper {
+            padding: 4rem 2rem;
+        }
+
+        .section-wrapper.light {
+            background: #ffffff;
+        }
+
+        .section-wrapper.grey {
+            background: #f7fafc;
+        }
+
+        .section-wrapper.dark {
+            background: #0e2f44;
+            color: #ffffff;
+        }
+
+        .section-wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper .inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+
+        .section-wrapper .inner h2.centered {
+            text-align: center;
+        }
+
+        .section-wrapper .inner h2.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-wrapper .inner p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section-wrapper .inner p strong {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .section-wrapper.dark .inner h2 {
+            color: #d4eaf7;
+        }
+
+        .section-wrapper.dark .inner h2::after {
+            background: linear-gradient(90deg, #1abc9c, #76d7c4);
+        }
+
+        .section-wrapper.dark .inner p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ================================================================ */
+        /* INFO CARDS */
+        /* ================================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #eaf2f8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #1abc9c;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* GLASSMORPHISM CARDS */
+        /* ================================================================ */
+        .glass-card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        /* ================================================================ */
+        /* FADE-IN ANIMATION */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================ */
+        /* TWO COLUMN LAYOUT */
+        /* ================================================================ */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .two-column .col p {
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* OBJECTIVE CARDS */
+        /* ================================================================ */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .objective-card {
+            background: #ffffff;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .objective-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.8rem;
+        }
+
+        .objective-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #1a5276;
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-card p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ================================================================ */
+        /* WORKFLOW */
+        /* ================================================================ */
+        .workflow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(26, 188, 156, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(26, 188, 156, 0.15);
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .workflow-step:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .workflow-step .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #1abc9c;
+            color: #ffffff;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .workflow-step .step-icon {
+            font-size: 1.2rem;
+            color: #1a5276;
+            width: 30px;
+            text-align: center;
+        }
+
+        .workflow-step .step-text {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 0.95rem;
+        }
+
+        .workflow-arrow {
+            font-size: 1.2rem;
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 600px) {
+            .workflow-step {
+                padding: 0.6rem 1rem;
+                border-radius: 30px;
+            }
+            .workflow-step .step-text {
+                font-size: 0.8rem;
+            }
+            .workflow-step .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* SKILLS TAGS */
+        /* ================================================================ */
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1rem 0;
+        }
+
+        .skills-tags .tag {
+            background: #eaf2f8;
+            color: #1a5276;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid #d5dfe8;
+            transition: all 0.25s ease;
+        }
+
+        .skills-tags .tag:hover {
+            background: #1a5276;
+            color: #ffffff;
+            border-color: #1a5276;
+            transform: translateY(-2px);
+        }
+
+        /* ================================================================ */
+        /* SKILLS GRID */
+        /* ================================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .skill-item .icon {
+            font-size: 1.8rem;
+            color: #1abc9c;
+            margin-bottom: 0.4rem;
+        }
+
+        .skill-item h5 {
+            font-size: 0.85rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* STAKEHOLDER CARDS */
+        /* ================================================================ */
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stakeholder-card {
+            background: #ffffff;
+            padding: 1.2rem 0.8rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .stakeholder-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .stakeholder-card .icon {
+            font-size: 1.6rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .stakeholder-card h5 {
+            font-size: 0.8rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* FUNDING GRID */
+        /* ================================================================ */
+        .funding-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .funding-item {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .funding-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .funding-item .icon {
+            font-size: 1.6rem;
+            color: #2e86c1;
+            margin-bottom: 0.3rem;
+        }
+
+        .funding-item h5 {
+            font-size: 0.8rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* LEGISLATION TIMELINE */
+        /* ================================================================ */
+        .legislation-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .legislation-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: #ffffff;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border-left: 4px solid #1abc9c;
+            transition: all 0.3s ease;
+        }
+
+        .legislation-item:hover {
+            transform: translateX(6px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .legislation-item .year {
+            font-weight: 900;
+            color: #1a5276;
+            font-size: 1rem;
+            min-width: 80px;
+        }
+
+        .legislation-item .desc {
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        /* ================================================================ */
+        /* PROJECT MANAGEMENT CARDS */
+        /* ================================================================ */
+        .management-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .management-card {
+            background: #ffffff;
+            padding: 1.8rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .management-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .management-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #1a5276;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #1abc9c;
+            padding-bottom: 8px;
+        }
+
+        .management-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .management-card ul li {
+            padding: 0.3rem 0 0.3rem 28px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%231abc9c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>') left center no-repeat;
+            background-size: 16px;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            border-bottom: 1px solid #f0f4f8;
+        }
+
+        .management-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            .management-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================================================================ */
+        /* BUTTONS */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+            gap: 0.6rem;
+        }
+
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+
+        .button.accent {
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .button.accent:hover {
+            background: #16a085;
+        }
+
+        .button.outline-light {
+            background: transparent;
+            box-shadow: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+        }
+
+        .button.outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .button .icon {
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .actions li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .actions .button {
+            margin: 0 auto;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================================ */
+        /* HYPOTHESIS BLOCK */
+        /* ================================================================ */
+        .hypothesis-block {
+            background: linear-gradient(135deg, #eaf2f8, #d4eaf7);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            margin: 1.5rem 0;
+            border-left: 5px solid #1abc9c;
+        }
+
+        .hypothesis-block .h-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 0.5rem 0;
+        }
+
+        .hypothesis-block .h-item .h-label {
+            font-weight: 900;
+            color: #1a5276;
+            font-size: 1.1rem;
+            min-width: 60px;
+        }
+
+        .hypothesis-block .h-item .h-text {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .hypothesis-block .h-item .h-text strong {
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* QUOTE */
+        /* ================================================================ */
+        .quote-block {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .quote-block .quote-icon {
+            font-size: 3rem;
+            color: rgba(255,255,255,0.15);
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-block blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-style: italic;
+            color: #ffffff;
+            line-height: 1.4;
+            font-weight: 400;
+        }
+
+        .quote-block blockquote .highlight {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .quote-block blockquote {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .section-wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .section-wrapper .inner h2 {
+                font-size: 1.8rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .objectives-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .skills-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .section-wrapper .inner h2 {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-card {
+                padding: 0.8rem 1rem;
+            }
+            .info-card .value {
+                font-size: 0.85rem;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .stakeholder-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .funding-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hypothesis-block {
+                padding: 1.2rem 1.2rem;
+            }
+            .hypothesis-block .h-item {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+            .hypothesis-block .h-item .h-label {
+                min-width: auto;
+            }
+            .legislation-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+            }
+            .legislation-item .year {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- NAVBAR -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="project-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="category-tag">Field Practice Project</span>
+            <h1>Life After Gorgonian's Forest</h1>
+            <p class="subtitle">Designing a Long-Term Ecological Monitoring Programme for Mediterranean Gorgonian Forests</p>
+            <div class="hero-meta">
+                <span><i class="fas fa-university"></i> UNIVPM</span>
+                <span><i class="fas fa-calendar-alt"></i> 2024</span>
+                <span><i class="fas fa-water"></i> Portofino MPA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BREADCRUMB -->
+    <!-- ================================================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">🏠 Home</a> &nbsp;›&nbsp;
+            <a href="../index.html#portfolio">Portfolio</a> &nbsp;›&nbsp;
+            <span>Life After Gorgonian's Forest</span>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- SCROLL INDICATOR -->
+    <!-- ================================================================ -->
+    <div class="scroll-indicator">
+        Scroll to explore the project
+        <i class="fas fa-chevron-down"></i>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- INTRODUCTION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Introduction</h2>
+            <div class="two-column">
+                <div class="col">
+                    <p>
+                        This project involved designing a complete ecological monitoring programme aimed at evaluating the long-term ecological consequences of a hypothetical mass mortality event affecting the Mediterranean gorgonian <strong>Eunicella cavolini</strong> inside the <strong>Portofino Marine Protected Area</strong>.
+                    </p>
+                    <p>
+                        The project integrates <strong>ecological monitoring</strong>, <strong>marine conservation planning</strong>, <strong>underwater sampling design</strong>, <strong>statistical planning</strong>, <strong>budgeting</strong>, <strong>stakeholder analysis</strong> and <strong>legislative considerations</strong> into a realistic scientific framework.
+                    </p>
+                    <p>
+                        The programme was designed to assess the ecological succession of benthic communities following the loss of gorgonian forests, with a focus on understanding how the disappearance of these habitat-forming species affects the broader ecosystem.
+                    </p>
+                </div>
+                <div class="col">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Study Area</div>
+                            <div class="value">Portofino MPA</div>
+                        </div>
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Species</div>
+                            <div class="value">E. cavolini</div>
+                        </div>
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Monitoring</div>
+                            <div class="value">5 Years</div>
+                        </div>
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Scientific Diving</div>
+                            <div class="value">3 Divers</div>
+                        </div>
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Image Analysis</div>
+                            <div class="value">ImageJ</div>
+                        </div>
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Conservation</div>
+                            <div class="value">Marine</div>
+                        </div>
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Stakeholders</div>
+                            <div class="value">8+</div>
+                        </div>
+                        <div class="info-card" style="border-left-color: #2e86c1;">
+                            <div class="label">Funding</div>
+                            <div class="value">Multiple Sources</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MAIN OBJECTIVES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Main Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-arrow-right"></i></div>
+                    <h4>Evaluate Ecological Succession</h4>
+                    <p>Assess post-disturbance ecological succession following the loss of Eunicella cavolini forests.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-undo"></i></div>
+                    <h4>Assess Community Recovery</h4>
+                    <p>Monitor the recovery trajectory of benthic communities over a five-year period.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-chart-pie"></i></div>
+                    <h4>Monitor Species Composition</h4>
+                    <p>Track changes in species composition and percentage cover using photographic sampling.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-camera"></i></div>
+                    <h4>Analyse Percentage Cover</h4>
+                    <p>Quantify benthic cover through photoquadrat analysis using ImageJ software.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h4>Identify Ecological Shifts</h4>
+                    <p>Detect shifts in community structure and ecological function following gorgonian loss.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-tasks"></i></div>
+                    <h4>Develop Monitoring Strategy</h4>
+                    <p>Design a realistic, long-term monitoring strategy applicable to Mediterranean MPAs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STUDY AREA -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Study Area</h2>
+            <div class="two-column">
+                <div class="col">
+                    <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1);">
+                        <img src="../images/gallery/e2.jpg" alt="Portofino Marine Protected Area map" style="width:100%; display:block;" />
+                    </div>
+                </div>
+                <div class="col">
+                    <p>
+                        The <strong>Portofino Marine Protected Area</strong> (Ligurian Sea, NW Mediterranean) was selected due to the ecological importance of its coralligenous habitats and extensive forests of <strong>Eunicella cavolini</strong>.
+                    </p>
+                    <p>
+                        The study focuses on an area east of <strong>Faro Cape</strong>, on the border between MPA Zones B and C, where fewer restrictions on fishing activities and higher density of fishing vessel routes make the area particularly vulnerable to anthropogenic impacts.
+                    </p>
+                    <p>
+                        <strong>Two impact sites</strong> and <strong>four control sites</strong> were selected for the monitoring programme. The sampling design includes <strong>24 sampling units</strong> with <strong>4 replicates</strong> for each area.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW (e4.jpg, e5.jpg, e6.jpg, e7.jpg) -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="gallerySlideshow">
+                <img src="../images/gallery/e4.jpg" class="slide-img active" alt="Portofino MPA - 1" />
+                <img src="../images/gallery/e5.jpg" class="slide-img" alt="Portofino MPA - 2" />
+                <img src="../images/gallery/e6.jpg" class="slide-img" alt="Portofino MPA - 3" />
+                <img src="../images/gallery/e7.jpg" class="slide-img" alt="Portofino MPA - 4" />
+                
+                <button class="slideshow-btn prev" id="galleryPrevBtn">‹</button>
+                <button class="slideshow-btn next" id="galleryNextBtn">›</button>
+                
+                <div class="dots" id="galleryDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- ECOLOGICAL BACKGROUND -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Ecological Background</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h4>Coralligenous Habitats</h4>
+                    <p>Mediterranean coralligenous habitats are among the most biodiverse marine ecosystems, supporting thousands of species.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h4>Gorgonian Forests</h4>
+                    <p>Gorgonians create 3D "animal forests" that increase substrate complexity and provide ecological niches.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-cubes"></i></div>
+                    <h4>Habitat Complexity</h4>
+                    <p>The structural complexity of gorgonian forests supports high biodiversity and ecosystem functioning.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-sync-alt"></i></div>
+                    <h4>Ecological Succession</h4>
+                    <p>Following disturbance, benthic communities undergo succession, with shifts in species composition and abundance.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h4>Mass Mortality Events</h4>
+                    <p>Climate anomalies, disease outbreaks, and anthropogenic impacts can cause mass mortality of gorgonians.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h4>Ecosystem Function</h4>
+                    <p>Gorgonian forests provide shelter, feeding grounds and nursery areas for numerous marine species.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC HYPOTHESIS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Scientific Hypothesis</h2>
+            <div class="hypothesis-block">
+                <div class="h-item">
+                    <span class="h-label">H₀</span>
+                    <span class="h-text"><strong>Null Hypothesis:</strong> After the impact event on E. cavolinii, there will be <strong>no significant changes</strong> in the benthic communities.</span>
+                </div>
+                <div class="h-item" style="border-top: 1px solid rgba(0,0,0,0.06); padding-top: 1rem; margin-top: 0.5rem;">
+                    <span class="h-label">H₁</span>
+                    <span class="h-text"><strong>Alternative Hypothesis:</strong> After the impact event on E. cavolinii, there will be <strong>significant ecological changes</strong> in the benthic communities.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SAMPLING DESIGN -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Sampling Design</h2>
+            
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <img src="../images/gallery/e8.jpg" alt="Sampling design diagram" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);" />
+            </div>
+
+            <div class="workflow">
+                <div class="workflow-step">
+                    <span class="step-number">1</span>
+                    <span class="step-icon"><i class="fas fa-dharmachakra"></i></span>
+                    <span class="step-text">Scientific Dive Planning</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">2</span>
+                    <span class="step-icon"><i class="fas fa-random"></i></span>
+                    <span class="step-text">Random Quadrat Selection</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">3</span>
+                    <span class="step-icon"><i class="fas fa-camera"></i></span>
+                    <span class="step-text">Underwater Photography</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">4</span>
+                    <span class="step-icon"><i class="fas fa-chart-bar"></i></span>
+                    <span class="step-text">Image Analysis</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">5</span>
+                    <span class="step-icon"><i class="fas fa-percent"></i></span>
+                    <span class="step-text">Percentage Cover Estimation</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">6</span>
+                    <span class="step-icon"><i class="fas fa-ecosystem"></i></span>
+                    <span class="step-text">Community Monitoring</span>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.8rem; margin-top: 1.5rem;">
+                <div class="info-card"><div class="label">Divers</div><div class="value">3</div></div>
+                <div class="info-card"><div class="label">Quadrats</div><div class="value">4 Random</div></div>
+                <div class="info-card"><div class="label">Size</div><div class="value">50 × 50 cm</div></div>
+                <div class="info-card"><div class="label">Tools</div><div class="value">GPS, Camera, Compass</div></div>
+                <div class="info-card"><div class="label">Dives/Day</div><div class="value">2</div></div>
+                <div class="info-card"><div class="label">Duration</div><div class="value">5 Years</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- EXPECTED ECOLOGICAL CHANGES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Expected Ecological Changes</h2>
+            <div class="two-column">
+                <div class="col">
+                    <div class="glass-card">
+                        <h4 style="font-family: 'Playfair Display', serif; color: #1a5276; font-size: 1.2rem; margin-bottom: 0.8rem;">
+                            <i class="fas fa-tree" style="color: #1abc9c; margin-right: 0.5rem;"></i>
+                            Current Gorgonian Forest
+                        </h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid #f0f4f8; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-check-circle" style="color: #1abc9c;"></i>
+                                <span><strong>Bryozoans</strong> — high abundance</span>
+                            </li>
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid #f0f4f8; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-check-circle" style="color: #1abc9c;"></i>
+                                <span><strong>Hydrozoans</strong> — diverse community</span>
+                            </li>
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid #f0f4f8; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-check-circle" style="color: #1abc9c;"></i>
+                                <span><strong>Foraminifera</strong> — abundant</span>
+                            </li>
+                            <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-check-circle" style="color: #1abc9c;"></i>
+                                <span><strong>E. cavolini</strong> — canopy-forming</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="glass-card" style="border-left: 4px solid #e74c3c;">
+                        <h4 style="font-family: 'Playfair Display', serif; color: #1a5276; font-size: 1.2rem; margin-bottom: 0.8rem;">
+                            <i class="fas fa-seedling" style="color: #e74c3c; margin-right: 0.5rem;"></i>
+                            Expected Post-Disturbance Community
+                        </h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid #f0f4f8; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-plus-circle" style="color: #e67e22;"></i>
+                                <span><strong>Green Algae</strong> — increase</span>
+                            </li>
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid #f0f4f8; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-plus-circle" style="color: #e67e22;"></i>
+                                <span><strong>Brown Algae</strong> — increase</span>
+                            </li>
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid #f0f4f8; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-plus-circle" style="color: #e67e22;"></i>
+                                <span><strong>Polychaetes</strong> — increase</span>
+                            </li>
+                            <li style="padding: 0.4rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-plus-circle" style="color: #e67e22;"></i>
+                                <span><strong>Encrusting Sponges</strong> — increase</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 1.5rem; text-align: center; font-style: italic; color: #5d6d7e;">
+                Ecological succession is driven by the disappearance of gorgonian canopy and associated habitat complexity,
+                leading to a shift from hard coralline dominance to fleshy algae dominance.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC METHODS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Scientific Methods</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h4>Scientific Diving</h4>
+                    <p>Professional diving protocols for underwater sampling and photoquadrat collection.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-camera"></i></div>
+                    <h4>Photoquadrats</h4>
+                    <p>Standardised 50×50 cm quadrats for benthic cover assessment.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                    <h4>ImageJ Analysis</h4>
+                    <p>Software-based percentage cover estimation and species composition analysis.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h4>Long-Term Monitoring</h4>
+                    <p>Five-year monitoring programme for ecological succession assessment.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-balance-scale"></i></div>
+                    <h4>Control vs Impact</h4>
+                    <p>BACI (Before-After-Control-Impact) design for rigorous ecological assessment.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-percent"></i></div>
+                    <h4>Percentage Cover</h4>
+                    <p>Quantitative estimation of benthic community composition.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-ecosystem"></i></div>
+                    <h4>Community Ecology</h4>
+                    <p>Assessment of community structure, diversity, and ecological function.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h4>Spatial Analysis</h4>
+                    <p>Integration of GPS data for precise site characterisation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STAKEHOLDERS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Stakeholders</h2>
+            <div class="stakeholder-grid">
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-umbrella"></i></div>
+                    <h5>Marine Protected Area Portofino</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-university"></i></div>
+                    <h5>Università Politecnica delle Marche</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-university"></i></div>
+                    <h5>Università di Genova</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h5>Divers</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h5>Fishermen</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-landmark"></i></div>
+                    <h5>Italian Government</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-globe-europe"></i></div>
+                    <h5>European Environment Agency</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-paw"></i></div>
+                    <h5>WWF Italy</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FUNDING -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Funding</h2>
+            <div class="funding-grid">
+                <div class="funding-item">
+                    <div class="icon"><i class="fas fa-coins"></i></div>
+                    <h5>Italian Climate Fund</h5>
+                </div>
+                <div class="funding-item">
+                    <div class="icon"><i class="fas fa-umbrella"></i></div>
+                    <h5>Marine Protected Area Portofino</h5>
+                </div>
+                <div class="funding-item">
+                    <div class="icon"><i class="fas fa-flask"></i></div>
+                    <h5>ISPRA</h5>
+                </div>
+                <div class="funding-item">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>PNRR MER</h5>
+                </div>
+                <div class="funding-item">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h5>EMFAF</h5>
+                </div>
+                <div class="funding-item">
+                    <div class="icon"><i class="fas fa-globe-europe"></i></div>
+                    <h5>European Environment Agency</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- LEGISLATION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Legislation</h2>
+            <div class="legislation-timeline">
+                <div class="legislation-item">
+                    <span class="year">1982</span>
+                    <span class="desc">Provisions for the defense of the sea (n. 979 of 31 December 1982)</span>
+                </div>
+                <div class="legislation-item">
+                    <span class="year">1991</span>
+                    <span class="desc">Framework law on protected areas (n. 394 of 6 December 1991)</span>
+                </div>
+                <div class="legislation-item">
+                    <span class="year">2008</span>
+                    <span class="desc">Official Journal no. 181 of 04/08/2008 — Regulates nautical activity within Marine Protected Areas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT MANAGEMENT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Project Management</h2>
+            <div class="management-grid">
+                <div class="management-card">
+                    <h4><i class="fas fa-euro-sign" style="color: #1abc9c; margin-right: 0.5rem;"></i> Costs</h4>
+                    <ul>
+                        <li>Estimated expedition cost</li>
+                        <li>Overall project cost</li>
+                        <li>Personnel</li>
+                        <li>Travel</li>
+                        <li>Equipment</li>
+                        <li>Boat rental</li>
+                    </ul>
+                </div>
+                <div class="management-card">
+                    <h4><i class="fas fa-shield-alt" style="color: #1abc9c; margin-right: 0.5rem;"></i> Risk Analysis</h4>
+                    <ul>
+                        <li>Bad weather</li>
+                        <li>Equipment damage</li>
+                        <li>Scientific diving risks</li>
+                        <li>Funding delays</li>
+                        <li>Sampling constraints</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SKILLS DEVELOPED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Skills Developed</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h5>Marine Conservation</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-tasks"></i></div>
+                    <h5>Scientific Project Design</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h5>Scientific Diving Planning</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-ecosystem"></i></div>
+                    <h5>Ecological Monitoring</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                    <h5>Image Analysis</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-gavel"></i></div>
+                    <h5>Environmental Legislation</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Stakeholder Engagement</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-coins"></i></div>
+                    <h5>Budget Planning</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                    <h5>Risk Assessment</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-random"></i></div>
+                    <h5>Sampling Design</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>Marine Ecology</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <h5>Scientific Communication</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OUTCOMES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Project Outcomes</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-file-alt"></i></div>
+                    <h4>Scientific Project Proposal</h4>
+                    <p>Complete scientific project proposal for long-term ecological monitoring.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h4>Realistic Monitoring Protocol</h4>
+                    <p>Detailed monitoring protocol with standardised sampling procedures.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h4>Five-Year Monitoring Strategy</h4>
+                    <p>Comprehensive five-year ecological monitoring strategy.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-project-diagram"></i></div>
+                    <h4>Project Management Framework</h4>
+                    <p>Complete framework integrating ecology, conservation and planning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- DOWNLOAD REPORT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner" style="text-align: center;">
+            <h2 class="centered">Download Full Report</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem auto;">
+                Download the complete project report including all data, figures, and detailed analyses.
+            </p>
+            <ul class="actions">
+                <li>
+                    <a href="../documents/gorgonian-monitoring-report.pdf" class="button accent" download>
+                        <i class="fas fa-file-pdf icon"></i> Download PDF
+                    </a>
+                </li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">
+                PDF document · 2.4 MB
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FINAL SECTION - QUOTE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper dark fade-in-section" style="padding: 5rem 2rem;">
+        <div class="inner">
+            <div class="quote-block">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <blockquote>
+                    "Effective marine conservation begins long before fieldwork—with <span class="highlight">rigorous scientific planning</span>, <span class="highlight">robust monitoring design</span> and a <span class="highlight">deep understanding</span> of ecosystem dynamics."
+                </blockquote>
+            </div>
+            <div class="actions-row" style="margin-top: 2.5rem;">
+                <a href="../index.html#portfolio" class="button outline-light">
+                    <i class="fas fa-arrow-left icon"></i> Back to Portfolio
+                </a>
+                <a href="project5.html" class="button accent">
+                    Next Project <i class="fas fa-arrow-right icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+
+            // ============================================================
+            // SLIDESHOW
+            // ============================================================
+            function createSlideshow(containerId, prevBtnId, nextBtnId, dotsId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                const slides = container.querySelectorAll('.slide-img');
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const dotsContainer = document.getElementById(dotsId);
+                const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+                let currentIndex = 0;
+                let interval;
+
+                function goTo(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                    currentIndex = index;
+                    resetInterval();
+                }
+
+                function next() {
+                    goTo((currentIndex + 1) % slides.length);
+                }
+
+                function prev() {
+                    goTo((currentIndex - 1 + slides.length) % slides.length);
+                }
+
+                function resetInterval() {
+                    if (interval) clearInterval(interval);
+                    interval = setInterval(next, 4000);
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        prev();
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        next();
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', function() {
+                        goTo(index);
+                    });
+                });
+
+                if (container) {
+                    container.addEventListener('mouseenter', function() {
+                        if (interval) clearInterval(interval);
+                    });
+
+                    container.addEventListener('mouseleave', function() {
+                        resetInterval();
+                    });
+                }
+
+                resetInterval();
+                return { goTo, next, prev };
+            }
+
+            createSlideshow('gallerySlideshow', 'galleryPrevBtn', 'galleryNextBtn', 'galleryDots');
+
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

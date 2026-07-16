@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cerbère-Banyuls Marine Reserve · Andrea Calocero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ================================================================ */
+        /* RESET & BASE */
+        /* ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ================================================================ */
+        /* NAVBAR */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        /* ================================================================ */
+        /* HERO */
+        /* ================================================================ */
+        .project-hero {
+            position: relative;
+            height: 85vh;
+            min-height: 550px;
+            background: #0e2f44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .project-hero .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('../images/gallery/mpa.jpg') center center / cover no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project-hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,47,68,0.8) 0%, rgba(26,82,118,0.5) 100%);
+            z-index: 1;
+        }
+
+        .project-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .project-hero .hero-content .badge {
+            display: inline-block;
+            background: rgba(26, 188, 156, 0.2);
+            border: 1px solid rgba(26, 188, 156, 0.3);
+            color: #76d7c4;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 20px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-hero .hero-content .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #76d7c4;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .project-hero .hero-content .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .project-hero .hero-content .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-hero .hero-content .hero-meta i {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+            .project-hero .hero-content h1 {
+                font-size: 2rem;
+            }
+            .project-hero .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            .project-hero .hero-content .hero-meta {
+                gap: 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* BREADCRUMB */
+        /* ================================================================ */
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #d5dfe8;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+
+        /* ================================================================ */
+        /* SECTION STYLES */
+        /* ================================================================ */
+        .section-wrapper {
+            padding: 4rem 2rem;
+        }
+
+        .section-wrapper.light {
+            background: #ffffff;
+        }
+
+        .section-wrapper.grey {
+            background: #f7fafc;
+        }
+
+        .section-wrapper.dark {
+            background: #0e2f44;
+            color: #ffffff;
+        }
+
+        .section-wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper .inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+
+        .section-wrapper .inner h2.centered {
+            text-align: center;
+        }
+
+        .section-wrapper .inner h2.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-wrapper .inner p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section-wrapper .inner p strong {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .section-wrapper.dark .inner h2 {
+            color: #d4eaf7;
+        }
+
+        .section-wrapper.dark .inner h2::after {
+            background: linear-gradient(90deg, #1abc9c, #76d7c4);
+        }
+
+        .section-wrapper.dark .inner p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ================================================================ */
+        /* FADE-IN ANIMATION */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================ */
+        /* INFO CARDS */
+        /* ================================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #eaf2f8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #1abc9c;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        .info-card .value a {
+            color: #1a5276;
+            text-decoration: none;
+        }
+
+        .info-card .value a:hover {
+            color: #1abc9c;
+            text-decoration: underline;
+        }
+
+        /* ================================================================ */
+        /* OBJECTIVE CARDS */
+        /* ================================================================ */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .objective-card {
+            background: #ffffff;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .objective-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.8rem;
+        }
+
+        .objective-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #1a5276;
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-card p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ================================================================ */
+        /* SLIDESHOW PER IMMAGINI */
+        /* ================================================================ */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background: #1a5276;
+        }
+
+        .slideshow-container .slide-img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #0e2f44;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-container .slide-img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slideshow-container .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(14, 47, 68, 0.6);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .slideshow-container .slideshow-btn:hover {
+            background: rgba(14, 47, 68, 0.8);
+            color: #ffffff;
+        }
+
+        .slideshow-container .slideshow-btn.prev {
+            left: 12px;
+        }
+
+        .slideshow-container .slideshow-btn.next {
+            right: 12px;
+        }
+
+        .slideshow-container .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slideshow-container .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slideshow-container .dots .dot.active {
+            background: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .slideshow-container .slide-img {
+                height: 300px;
+            }
+            .slideshow-container .slideshow-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slideshow-container .slide-img {
+                height: 220px;
+            }
+        }
+
+        /* ================================================================ */
+        /* TIMELINE - HISTORY */
+        /* ================================================================ */
+        .history-timeline {
+            position: relative;
+            padding: 0;
+            margin: 2rem 0;
+            padding-left: 50px;
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #2e86c1, #1abc9c);
+            border-radius: 3px;
+        }
+
+        .history-item {
+            position: relative;
+            padding: 1.2rem 1.5rem 1.2rem 2rem;
+            margin-bottom: 1.2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .history-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .history-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 1.5rem;
+            width: 14px;
+            height: 14px;
+            background: #2e86c1;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #2e86c1;
+            z-index: 0;
+        }
+
+        .history-item .icon {
+            position: absolute;
+            left: -36px;
+            top: 1.2rem;
+            font-size: 1.2rem;
+            color: #2e86c1;
+            background: #eaf2f8;
+            padding: 0.2rem;
+            border-radius: 50%;
+            z-index: 2;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 4px #eaf2f8;
+        }
+
+        .history-item .year {
+            display: inline-block;
+            background: #1a5276;
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.8rem;
+            border-radius: 20px;
+            margin-bottom: 0.3rem;
+        }
+
+        .history-item h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .history-item p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .history-timeline {
+                padding-left: 40px;
+            }
+            .history-item {
+                padding: 1rem 1rem 1rem 1.2rem;
+            }
+            .history-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+            .history-item .icon {
+                left: -28px;
+                font-size: 1rem;
+                width: 24px;
+                height: 24px;
+            }
+            .history-timeline::before {
+                left: 12px;
+            }
+        }
+
+        /* ================================================================ */
+        /* SKILLS GRID */
+        /* ================================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .skill-item .icon {
+            font-size: 1.8rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .skill-item h5 {
+            font-size: 0.82rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* MANAGEMENT CARDS */
+        /* ================================================================ */
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .management-card {
+            background: #ffffff;
+            padding: 1.2rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            border-left: 4px solid #1abc9c;
+        }
+
+        .management-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .management-card .icon {
+            font-size: 1.6rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .management-card h5 {
+            font-size: 0.85rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* STAKEHOLDER GRID */
+        /* ================================================================ */
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stakeholder-card {
+            background: #ffffff;
+            padding: 1.2rem 0.8rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .stakeholder-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .stakeholder-card .icon {
+            font-size: 1.6rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .stakeholder-card h5 {
+            font-size: 0.8rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* BUTTONS */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+            gap: 0.6rem;
+        }
+
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+
+        .button.accent {
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .button.accent:hover {
+            background: #16a085;
+        }
+
+        .button.outline-light {
+            background: transparent;
+            box-shadow: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+        }
+
+        .button.outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .button .icon {
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .actions li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .actions .button {
+            margin: 0 auto;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================================ */
+        /* HIGHLIGHT BOX */
+        /* ================================================================ */
+        .highlight-box {
+            background: linear-gradient(135deg, #d4eaf7, #eaf2f8);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            border-left: 5px solid #1abc9c;
+            margin: 2rem 0;
+        }
+
+        .highlight-box .icon {
+            font-size: 2rem;
+            color: #1abc9c;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #1a5276;
+            line-height: 1.7;
+        }
+
+        .highlight-box blockquote .highlight {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .highlight-box {
+                padding: 1.5rem 1.5rem;
+            }
+            .highlight-box blockquote {
+                font-size: 1rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* ORIGINAL CONTRIBUTION - EXPANSION PROPOSAL */
+        /* ================================================================ */
+        .expansion-box {
+            background: linear-gradient(135deg, #1a5276, #2e86c1);
+            border-radius: 16px;
+            padding: 2.5rem 3rem;
+            margin: 2rem 0;
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .expansion-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        .expansion-box p {
+            color: rgba(255,255,255,0.85);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .expansion-box .highlight-text {
+            color: #76d7c4;
+            font-weight: 700;
+        }
+
+        @media screen and (max-width: 768px) {
+            .expansion-box {
+                padding: 1.5rem 1.5rem;
+            }
+            .expansion-box h3 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* GALLERY - PROJECT GALLERY */
+        /* ================================================================ */
+        .project-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .gallery-label {
+            padding: 0.6rem 0.8rem;
+            background: #ffffff;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+
+        /* ================================================================ */
+        /* TIMELINE - PROJECT */
+        /* ================================================================ */
+        .project-timeline {
+            position: relative;
+            padding: 0;
+            margin: 2rem 0;
+            padding-left: 50px;
+        }
+
+        .project-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #2e86c1, #1abc9c);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.2rem 1.5rem 1.2rem 2rem;
+            margin-bottom: 1.2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 1.5rem;
+            width: 14px;
+            height: 14px;
+            background: #2e86c1;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #2e86c1;
+            z-index: 0;
+        }
+
+        .timeline-item .icon {
+            position: absolute;
+            left: -36px;
+            top: 1.2rem;
+            font-size: 1.2rem;
+            color: #2e86c1;
+            background: #eaf2f8;
+            padding: 0.2rem;
+            border-radius: 50%;
+            z-index: 2;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 4px #eaf2f8;
+        }
+
+        .timeline-item h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .project-timeline {
+                padding-left: 40px;
+            }
+            .timeline-item {
+                padding: 1rem 1rem 1rem 1.2rem;
+            }
+            .timeline-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+            .timeline-item .icon {
+                left: -28px;
+                font-size: 1rem;
+                width: 24px;
+                height: 24px;
+            }
+            .project-timeline::before {
+                left: 12px;
+            }
+        }
+
+        /* ================================================================ */
+        /* REFERENCES */
+        /* ================================================================ */
+        .ref-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .ref-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 0.85rem;
+            color: #34495e;
+            line-height: 1.6;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .ref-list li::before {
+            content: '📄';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+        }
+
+        .ref-list li:last-child {
+            border-bottom: none;
+        }
+
+        .ref-list li strong {
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .section-wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .section-wrapper .inner h2 {
+                font-size: 1.8rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .objectives-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .project-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .section-wrapper .inner h2 {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-card {
+                padding: 0.8rem 1rem;
+            }
+            .info-card .value {
+                font-size: 0.85rem;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .stakeholder-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .management-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .project-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- NAVBAR -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="project-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge">Marine Protected Areas</span>
+            <h1>Cerbère-Banyuls Marine Reserve</h1>
+            <p class="subtitle">A Case Study in Marine Protected Area Management</p>
+            <div class="hero-meta">
+                <span><i class="fas fa-university"></i> UNIVPM</span>
+                <span><i class="fas fa-calendar-alt"></i> 2024/2025</span>
+                <span><i class="fas fa-fish"></i> Marine Protected Areas</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BREADCRUMB -->
+    <!-- ================================================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">🏠 Home</a> &nbsp;›&nbsp;
+            <a href="../index.html#portfolio">Portfolio</a> &nbsp;›&nbsp;
+            <span>Cerbère-Banyuls Marine Reserve</span>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- INTRODUCTION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <div style="display: flex; align-items: flex-start; gap: 1rem; background: #eaf2f8; padding: 1.5rem 2rem; border-radius: 12px; border-left: 5px solid #1abc9c; margin-bottom: 2rem;">
+                <div style="font-size: 2rem; color: #1abc9c; flex-shrink: 0; margin-top: 0.2rem;">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div>
+                    <h4 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #1a5276; margin-bottom: 0.3rem;">Project Context</h4>
+                    <p style="font-size: 0.95rem; color: #2c3e50; line-height: 1.7; margin: 0; text-align: justify;">
+                        This project was developed during the Master's Degree course in <strong>Marine Protected Areas</strong>. Each student group was assigned an existing Marine Protected Area and asked to conduct an <strong>extensive scientific and management review</strong>. Our group was assigned the <strong>Cerbère-Banyuls Marine Nature Reserve</strong>, one of the oldest and most renowned Marine Protected Areas in the Mediterranean Sea. The project concluded with a scientific presentation delivered to the rest of the class and to Professor <strong><a href="https://www.researchgate.net/profile/Carlo-Cerrano" target="_blank" style="color: #1a5276; text-decoration: underline;">Carlo Cerrano</a></strong>, marine zoologist and expert in Marine Protected Areas.
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                The objective was to investigate the reserve through an in-depth analysis of its <strong>history, governance, biodiversity, habitats, management strategies, stakeholder engagement, scientific monitoring, educational activities and conservation outcomes</strong>. Most of the information was obtained from scientific publications, official reports and institutional documents.
+            </p>
+            <p>
+                However, unlike the descriptive sections, the <strong>final proposal for expanding the Marine Protected Area boundaries</strong> and introducing new enhanced protection zones was <strong>independently developed by our student group</strong> as part of the project.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OVERVIEW -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Overview</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="label">Institution</div>
+                    <div class="value">Università Politecnica delle Marche</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Course</div>
+                    <div class="value">Marine Protected Areas</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Project Type</div>
+                    <div class="value">Scientific Case Study</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Study Area</div>
+                    <div class="value">Cerbère-Banyuls Marine Nature Reserve</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Country</div>
+                    <div class="value">France</div>
+                </div>
+                <div class="info-card" style="grid-column: 1 / -1;">
+                    <div class="label">Focus</div>
+                    <div class="value">Marine Conservation · Protected Area Management · Marine Ecology · Governance</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW y1.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="slideshow1">
+                <img src="../images/gallery/y1.jpg" class="slide-img active" alt="Cerbère-Banyuls Marine Reserve - Overview" />
+                
+                <button class="slideshow-btn prev" id="slideshow1Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow1Next">›</button>
+                
+                <div class="dots" id="slideshow1Dots">
+                    <span class="dot active" data-index="0"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- HISTORY OF THE MARINE RESERVE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>History of the Marine Reserve</h2>
+            <div class="history-timeline">
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-flag"></i></span>
+                    <span class="year">1965</span>
+                    <h4>Local Initiative Begins</h4>
+                    <p>The municipality initiated the project following the request of local residents concerned about the protection of marine resources.</p>
+                </div>
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-flask"></i></span>
+                    <span class="year">1971</span>
+                    <h4>Scientific Support</h4>
+                    <p>The Arago Laboratory presented a scientific report in support of the creation of the reserve, providing the necessary scientific evidence.</p>
+                </div>
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-gavel"></i></span>
+                    <span class="year">1974</span>
+                    <h4>Official Establishment</h4>
+                    <p>Creation of the Cerbère-Banyuls Marine Nature Reserve, managed by the local people through a collaborative governance model.</p>
+                </div>
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-university"></i></span>
+                    <span class="year">1977</span>
+                    <h4>Regional Management</h4>
+                    <p>The regional government of Pyrénées-Orientales took over the management of the reserve, strengthening its institutional framework.</p>
+                </div>
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-shield-alt"></i></span>
+                    <span class="year">1990</span>
+                    <h4>Strengthened Management</h4>
+                    <p>The decree 90-790 replaced the initial one, involving stakeholders more closely and reinforcing the protection level of the area.</p>
+                </div>
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-award"></i></span>
+                    <span class="year">2018</span>
+                    <h4>International Recognition</h4>
+                    <p>Awarded IUCN Green List status and recognised as a global marine refugee site by the Marine Conservation Institute in Seattle.</p>
+                </div>
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-globe-europe"></i></span>
+                    <span class="year">2019</span>
+                    <h4>SPAMI Designation</h4>
+                    <p>Entered the list of Specially Protected Areas of Mediterranean Importance (SPAMI), recognising its regional conservation value.</p>
+                </div>
+                <div class="history-item">
+                    <span class="icon"><i class="fas fa-expand-arrows-alt"></i></span>
+                    <span class="year">2022</span>
+                    <h4>Expansion Process Initiated</h4>
+                    <p>A project to extend the perimeter of the reserve started, with extensive stakeholder consultation and public participation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MANAGEMENT AND GOVERNANCE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Management and Governance</h2>
+            <p>
+                The Cerbère-Banyuls Marine Reserve is considered an <strong>excellent example of collaborative governance</strong>. It is part of the MEDPAN network and its board of directors is made of <strong>35 members</strong> representing a wide range of stakeholders.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-users"></i></div>
+                    <h4 style="font-size: 0.9rem;">11 Public Administrators</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-city"></i></div>
+                    <h4 style="font-size: 0.9rem;">7 Local Elected Officials</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-flask"></i></div>
+                    <h4 style="font-size: 0.9rem;">6 Scientists</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-fish"></i></div>
+                    <h4 style="font-size: 0.9rem;">Industrial &amp; Recreational Fishing Reps</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-swimmer"></i></div>
+                    <h4 style="font-size: 0.9rem;">6 Aquatic Sports Representatives</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-handshake"></i></div>
+                    <h4 style="font-size: 0.9rem;">3 Other Stakeholder Representatives</h4>
+                </div>
+            </div>
+            <p>
+                The reserve maintains a <strong>Scientific Council</strong> with 16 members, established in 2000, to guide research and monitoring activities. Technical staff, law enforcement cooperation and stakeholder involvement ensure effective management and conservation outcomes.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW y2.jpg, y3.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="slideshow2">
+                <img src="../images/gallery/y2.jpg" class="slide-img active" alt="Management and governance - 1" />
+                <img src="../images/gallery/y3.jpg" class="slide-img" alt="Management and governance - 2" />
+                
+                <button class="slideshow-btn prev" id="slideshow2Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow2Next">›</button>
+                
+                <div class="dots" id="slideshow2Dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BIODIVERSITY AND HABITATS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Biodiversity and Habitats</h2>
+            <p>
+                The Cerbère-Banyuls Marine Reserve hosts an extraordinary diversity of marine life, with <strong>1,239 animal species</strong> and <strong>497 plant species</strong> recorded within its boundaries. Among these, <strong>49 species</strong> are protected under national, European or international legislation.
+            </p>
+            <p>
+                The reserve's key habitats include:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-water"></i></div>
+                    <h4 style="font-size: 0.9rem;">Coralligenous Reefs</h4>
+                    <p style="font-size: 0.8rem;">The most important habitat-type, forming extensions of rocky outcrops along the 6 km coast</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-leaf"></i></div>
+                    <h4 style="font-size: 0.9rem;"><em>Posidonia oceanica</em> Meadows</h4>
+                    <p style="font-size: 0.8rem;">Essential seagrass habitats supporting high biodiversity and ecosystem services</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-mountain"></i></div>
+                    <h4 style="font-size: 0.9rem;">Rocky Reefs</h4>
+                    <p style="font-size: 0.8rem;">Complex substrates supporting diverse benthic communities</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-cave"></i></div>
+                    <h4 style="font-size: 0.9rem;">Caves and Cracks</h4>
+                    <p style="font-size: 0.8rem;">Hosting many different types of life, including specialised cave-dwelling species</p>
+                </div>
+            </div>
+            <p>
+                The coralligenous reefs are particularly significant, forming extensions of the many rocky outcrops along the coastline. Caves and cracks exhibit many different types of life, contributing to the reserve's exceptional biodiversity.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW y4.jpg, y5.jpg, y6.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="slideshow3">
+                <img src="../images/gallery/y4.jpg" class="slide-img active" alt="Biodiversity and habitats - 1" />
+                <img src="../images/gallery/y5.jpg" class="slide-img" alt="Biodiversity and habitats - 2" />
+                <img src="../images/gallery/y6.jpg" class="slide-img" alt="Biodiversity and habitats - 3" />
+                
+                <button class="slideshow-btn prev" id="slideshow3Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow3Next">›</button>
+                
+                <div class="dots" id="slideshow3Dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC RESEARCH -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Scientific Research</h2>
+            <p>
+                The reserve hosts <strong>continuous ecological research</strong>, with at least a dozen monitoring expeditions carried out each year, either internally, externally or in collaboration with research laboratories.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-fish"></i></div>
+                    <h4 style="font-size: 0.85rem;">Biodiversity Monitoring</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-water"></i></div>
+                    <h4 style="font-size: 0.85rem;">Water Quality Assessment</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-thermometer-half"></i></div>
+                    <h4 style="font-size: 0.85rem;">Temperature Monitoring</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-microphone"></i></div>
+                    <h4 style="font-size: 0.85rem;">Passive Acoustic Monitoring</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-dna"></i></div>
+                    <h4 style="font-size: 0.85rem;">Fish Population Studies</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-seashell"></i></div>
+                    <h4 style="font-size: 0.85rem;"><em>Pinna nobilis</em> Monitoring</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-chart-line"></i></div>
+                    <h4 style="font-size: 0.85rem;">Long-Term Ecological Monitoring</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-flask"></i></div>
+                    <h4 style="font-size: 0.85rem;">Research Collaborations</h4>
+                </div>
+            </div>
+            <p>
+                Key studies include the inventory of ichtyofauna, population evolution of <em>Epinephelus marginatus</em> (dusky grouper), effects of fishing prohibition on <em>Posidonia oceanica</em> meadows, and acoustic telemetry surveys investigating the territoriality of emblematic species.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MANAGEMENT TOOLS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Management Tools</h2>
+            <div class="management-grid">
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-anchor"></i></div>
+                    <h5>Ecological Moorings</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h5>Fishing Regulations</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Visitor Management</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h5>Diving Management</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h5>Monitoring Programs</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-users-cog"></i></div>
+                    <h5>Citizen Science</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h5>Environmental Education</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-swimmer"></i></div>
+                    <h5>Underwater Trail</h5>
+                </div>
+                <div class="management-card">
+                    <div class="icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h5>Scientific Permits</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STAKEHOLDER ENGAGEMENT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Stakeholder Engagement</h2>
+            <p>
+                The Cerbère-Banyuls Marine Reserve is characterised by a <strong>high level of stakeholder and social user engagement</strong>, which is considered essential for the long-term success of the protected area.
+            </p>
+            <div class="stakeholder-grid">
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h5>Professional Fishermen</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-fishing-rod"></i></div>
+                    <h5>Recreational Fishermen</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h5>Divers</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-umbrella-beach"></i></div>
+                    <h5>Tourism Operators</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-flask"></i></div>
+                    <h5>Scientists</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-city"></i></div>
+                    <h5>Public Administrations</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>Environmental NGOs</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Citizens</h5>
+                </div>
+            </div>
+            <p>
+                <strong>Participatory management</strong> is a cornerstone of the reserve's governance. The board of directors includes representatives from all major stakeholder groups, ensuring that management decisions reflect the diverse interests and needs of the local community while maintaining conservation objectives.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- EDUCATION AND OUTREACH -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Education and Outreach</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-school"></i></div>
+                    <h4 style="font-size: 0.85rem;">Schools</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-users-cog"></i></div>
+                    <h4 style="font-size: 0.85rem;">Citizen Science</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-tree"></i></div>
+                    <h4 style="font-size: 0.85rem;">Nature Festival</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h4 style="font-size: 0.85rem;">Educational Workshops</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-info-circle"></i></div>
+                    <h4 style="font-size: 0.85rem;">Interpretative Panels</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-swimmer"></i></div>
+                    <h4 style="font-size: 0.85rem;">Underwater Trail</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-microscope"></i></div>
+                    <h4 style="font-size: 0.85rem;">Oceanographic Observatory</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-bullhorn"></i></div>
+                    <h4 style="font-size: 0.85rem;">Public Awareness Activities</h4>
+                </div>
+            </div>
+            <p>
+                Education contributes to <strong>long-term conservation success</strong> by fostering environmental awareness and building a sense of stewardship among local communities and visitors. The reserve's educational initiatives engage diverse audiences, from school children to tourists, promoting understanding of marine ecosystems and the importance of protected areas.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- ORIGINAL CONTRIBUTION - EXPANSION PROPOSAL -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Proposed Expansion of the Marine Protected Area</h2>
+            <p>
+                This section represents the <strong>original contribution of our student group</strong> to the project. While the scientific review of the existing reserve was based on published literature and official documents, the following expansion proposal was <strong>independently developed by our team</strong> as a conservation planning exercise.
+            </p>
+
+            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); margin: 1.5rem 0;">
+                <img src="../images/gallery/y7.jpg" alt="Expansion proposal map" style="width:100%; display:block;" />
+            </div>
+
+            <div class="expansion-box">
+                <h3><i class="fas fa-lightbulb" style="color: #76d7c4; margin-right: 0.8rem;"></i>Our Group's Proposal</h3>
+                <p>
+                    We developed a proposal to <span class="highlight-text">extend the reserve boundaries</span> to the south and north, and to establish <span class="highlight-text">two new zones of enhanced protection</span> within the expanded perimeter. The proposal considered <span class="highlight-text">ecological connectivity</span>, habitat representation and improved conservation effectiveness.
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    The expansion proposal was developed through <span class="highlight-text">stakeholder consultation</span>, including 5 workshops with representatives of sea users, 4 public meetings in Port Vente, Banyuls, Collioure and Cerbère, and a collaborative platform (CartoDébat) to gather community input and ensure participatory planning.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC SKILLS DEVELOPED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Scientific Skills Developed</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-draw-polygon"></i></div>
+                    <h5>Marine Protected Area Management</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-gavel"></i></div>
+                    <h5>Conservation Governance</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-ecosystem"></i></div>
+                    <h5>Marine Ecology</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-book-open"></i></div>
+                    <h5>Scientific Literature Review</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h5>Protected Area Evaluation</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Stakeholder Analysis</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <h5>Science Communication</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-gavel"></i></div>
+                    <h5>Policy Analysis</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-map"></i></div>
+                    <h5>GIS Interpretation</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-users-cog"></i></div>
+                    <h5>Teamwork</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h5>Presentation Skills</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT GALLERY -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Project Gallery</h2>
+            <div class="project-gallery">
+                <div class="gallery-item">
+                    <img src="../images/gallery/y1.jpg" alt="Reserve overview" />
+                    <div class="gallery-label">Reserve Overview</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/gallery/y4.jpg" alt="Habitat maps" />
+                    <div class="gallery-label">Habitat Distribution</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/gallery/y5.jpg" alt="Species distribution" />
+                    <div class="gallery-label">Species Distribution</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/gallery/y6.jpg" alt="Species distribution" />
+                    <div class="gallery-label">Biodiversity Mapping</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/gallery/y7.jpg" alt="Expansion proposal" />
+                    <div class="gallery-label">Expansion Proposal</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/gallery/y2.jpg" alt="Management" />
+                    <div class="gallery-label">Management Structure</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FULL PRESENTATION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" id="presentation">
+        <div class="inner" style="text-align: center;">
+            <h2 class="centered">Full Presentation</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem auto;">
+                Download the complete case study presentation on the Cerbère-Banyuls Marine Reserve, including detailed analysis of history, governance, biodiversity, management and expansion proposal.
+            </p>
+            <ul class="actions">
+                <li>
+                    <a href="../documents/cerbere-banyuls-mpa-presentation.pdf" class="button accent" target="_blank">
+                        <i class="fas fa-file-pdf icon"></i> View Presentation
+                    </a>
+                </li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">
+                PDF document · Case Study Presentation · 3.2 MB
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- REFERENCES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>References</h2>
+            <p>
+                The project was based on:
+            </p>
+            <ul class="ref-list">
+                <li><strong>Peer-reviewed scientific literature</strong> on marine protected areas, Mediterranean ecology and conservation</li>
+                <li><strong>Official management reports</strong> from the Cerbère-Banyuls Marine Reserve (Rapport d'Activité)</li>
+                <li><strong>IUCN documentation</strong> including Green List assessment and conservation evaluations</li>
+                <li><strong>MEDPAN resources</strong> on Mediterranean Marine Protected Areas</li>
+                <li><strong>Government publications</strong> from the Département des Pyrénées-Orientales</li>
+                <li><strong>Institutional biodiversity databases</strong> including GBIF and OBIS</li>
+                <li><strong>Scientific studies</strong> on ichthyofauna, grouper populations, <em>Posidonia</em> meadows and coralligenous habitats</li>
+            </ul>
+            <p style="font-style: italic; color: #5d6d7e; margin-top: 1rem;">
+                <i class="fas fa-info-circle" style="color: #1abc9c;"></i>
+                The complete reference list is available within the presentation document.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- TIMELINE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Timeline</h2>
+            <div class="project-timeline">
+                <div class="timeline-item">
+                    <span class="icon">🐠</span>
+                    <h4>Marine Protected Areas Course</h4>
+                    <p>Enrolment in the Marine Protected Areas course as part of the MSc in Marine Biology</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🐠</span>
+                    <h4>Selection of Case Study</h4>
+                    <p>Assignment of the Cerbère-Banyuls Marine Reserve as the group's case study</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🐠</span>
+                    <h4>Scientific Literature Review</h4>
+                    <p>Extensive review of scientific publications, official reports and institutional documents</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🐠</span>
+                    <h4>Management Analysis</h4>
+                    <p>In-depth analysis of governance, stakeholder engagement, biodiversity and management tools</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🐠</span>
+                    <h4>Group Presentation</h4>
+                    <p>Delivery of the case study presentation to the class</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🐠</span>
+                    <h4>Discussion with Professor Carlo Cerrano</h4>
+                    <p>Q&A session and feedback from the course professor and expert in Marine Protected Areas</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🐠</span>
+                    <h4>Development of MPA Expansion Proposal</h4>
+                    <p>Original contribution: design of the reserve expansion proposal with enhanced protection zones</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FINAL HIGHLIGHT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper dark fade-in-section" style="padding: 4rem 2rem;">
+        <div class="inner">
+            <div class="highlight-box" style="background: rgba(255,255,255,0.05); border-left-color: #1abc9c; padding: 2.5rem 3rem;">
+                <div class="icon" style="color: #1abc9c;"><i class="fas fa-quote-left"></i></div>
+                <blockquote style="color: #d4eaf7;">
+                    "This project strengthened my understanding of <span class="highlight">Marine Protected Area governance</span> by analysing one of the Mediterranean's most successful marine reserves. Beyond reviewing existing management strategies, our group developed a <span class="highlight">realistic proposal to expand the reserve</span>, providing practical experience in conservation planning, stakeholder analysis and protected area design."
+                </blockquote>
+            </div>
+            <div class="actions-row" style="margin-top: 2rem;">
+                <a href="../index.html#portfolio" class="button outline-light">
+                    <i class="fas fa-arrow-left icon"></i> Back to Portfolio
+                </a>
+                <a href="project11.html" class="button accent">
+                    Next Project <i class="fas fa-arrow-right icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+
+            // ============================================================
+            // SLIDESHOW HELPER
+            // ============================================================
+            function createSlideshow(containerId, prevBtnId, nextBtnId, dotsId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                const slides = container.querySelectorAll('.slide-img');
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const dotsContainer = document.getElementById(dotsId);
+                const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+                let currentIndex = 0;
+                let interval;
+
+                function goTo(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                    currentIndex = index;
+                    resetInterval();
+                }
+
+                function next() {
+                    goTo((currentIndex + 1) % slides.length);
+                }
+
+                function prev() {
+                    goTo((currentIndex - 1 + slides.length) % slides.length);
+                }
+
+                function resetInterval() {
+                    if (interval) clearInterval(interval);
+                    interval = setInterval(next, 4000);
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        prev();
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        next();
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', function() {
+                        goTo(index);
+                    });
+                });
+
+                if (container) {
+                    container.addEventListener('mouseenter', function() {
+                        if (interval) clearInterval(interval);
+                    });
+
+                    container.addEventListener('mouseleave', function() {
+                        resetInterval();
+                    });
+                }
+
+                resetInterval();
+                return { goTo, next, prev };
+            }
+
+            createSlideshow('slideshow1', 'slideshow1Prev', 'slideshow1Next', 'slideshow1Dots');
+            createSlideshow('slideshow2', 'slideshow2Prev', 'slideshow2Next', 'slideshow2Dots');
+            createSlideshow('slideshow3', 'slideshow3Prev', 'slideshow3Next', 'slideshow3Dots');
+
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

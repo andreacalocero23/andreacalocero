@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Design Proposal for a Marine Protected Area Along the Coast of Maratea · Andrea Calocero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ================================================================ */
+        /* RESET & BASE */
+        /* ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ================================================================ */
+        /* NAVBAR */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        /* ================================================================ */
+        /* HERO */
+        /* ================================================================ */
+        .project-hero {
+            position: relative;
+            height: 85vh;
+            min-height: 550px;
+            background: #0e2f44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .project-hero .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('../images/gallery/maratea.jpg') center center / cover no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project-hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,47,68,0.8) 0%, rgba(26,82,118,0.5) 100%);
+            z-index: 1;
+        }
+
+        .project-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .project-hero .hero-content .badge {
+            display: inline-block;
+            background: rgba(26, 188, 156, 0.2);
+            border: 1px solid rgba(26, 188, 156, 0.3);
+            color: #76d7c4;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 20px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-hero .hero-content .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #76d7c4;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .project-hero .hero-content .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .project-hero .hero-content .hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-hero .hero-content .hero-meta i {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+            .project-hero .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .project-hero .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            .project-hero .hero-content .hero-meta {
+                gap: 0.8rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* BREADCRUMB */
+        /* ================================================================ */
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #d5dfe8;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+
+        /* ================================================================ */
+        /* DISCLAIMER BOX */
+        /* ================================================================ */
+        .disclaimer-box {
+            background: linear-gradient(135deg, #d4eaf7, #eaf2f8);
+            border-radius: 16px;
+            padding: 1.8rem 2.2rem;
+            margin: 2rem 0;
+            border-left: 5px solid #1abc9c;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .disclaimer-box .icon {
+            font-size: 2rem;
+            color: #1abc9c;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .disclaimer-box .content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #1a5276;
+            margin-bottom: 0.3rem;
+        }
+
+        .disclaimer-box .content p {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            line-height: 1.7;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .disclaimer-box {
+                flex-direction: column;
+                padding: 1.2rem 1.2rem;
+                gap: 0.8rem;
+            }
+            .disclaimer-box .icon {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* SECTION STYLES */
+        /* ================================================================ */
+        .section-wrapper {
+            padding: 4rem 2rem;
+        }
+
+        .section-wrapper.light {
+            background: #ffffff;
+        }
+
+        .section-wrapper.grey {
+            background: #f7fafc;
+        }
+
+        .section-wrapper.dark {
+            background: #0e2f44;
+            color: #ffffff;
+        }
+
+        .section-wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper .inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+
+        .section-wrapper .inner h2.centered {
+            text-align: center;
+        }
+
+        .section-wrapper .inner h2.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-wrapper .inner p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section-wrapper .inner p strong {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .section-wrapper.dark .inner h2 {
+            color: #d4eaf7;
+        }
+
+        .section-wrapper.dark .inner h2::after {
+            background: linear-gradient(90deg, #1abc9c, #76d7c4);
+        }
+
+        .section-wrapper.dark .inner p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ================================================================ */
+        /* FADE-IN ANIMATION */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================ */
+        /* INFO CARDS */
+        /* ================================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #eaf2f8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #1abc9c;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* OBJECTIVE CARDS */
+        /* ================================================================ */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .objective-card {
+            background: #ffffff;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .objective-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.8rem;
+        }
+
+        .objective-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #1a5276;
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-card p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ================================================================ */
+        /* SLIDESHOW PER IMMAGINI */
+        /* ================================================================ */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background: #1a5276;
+        }
+
+        .slideshow-container .slide-img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #0e2f44;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-container .slide-img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slideshow-container .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(14, 47, 68, 0.6);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .slideshow-container .slideshow-btn:hover {
+            background: rgba(14, 47, 68, 0.8);
+            color: #ffffff;
+        }
+
+        .slideshow-container .slideshow-btn.prev {
+            left: 12px;
+        }
+
+        .slideshow-container .slideshow-btn.next {
+            right: 12px;
+        }
+
+        .slideshow-container .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slideshow-container .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slideshow-container .dots .dot.active {
+            background: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .slideshow-container .slide-img {
+                height: 300px;
+            }
+            .slideshow-container .slideshow-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slideshow-container .slide-img {
+                height: 220px;
+            }
+        }
+
+        /* ================================================================ */
+        /* SKILLS GRID */
+        /* ================================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .skill-item .icon {
+            font-size: 1.8rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .skill-item h5 {
+            font-size: 0.82rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* STAKEHOLDER GRID */
+        /* ================================================================ */
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .stakeholder-card {
+            background: #ffffff;
+            padding: 1.2rem 0.8rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .stakeholder-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .stakeholder-card .icon {
+            font-size: 1.6rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .stakeholder-card h5 {
+            font-size: 0.8rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* PARTNERSHIP GRID */
+        /* ================================================================ */
+        .partnership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .partnership-card {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .partnership-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .partnership-card .icon {
+            font-size: 1.6rem;
+            color: #2e86c1;
+            margin-bottom: 0.3rem;
+        }
+
+        .partnership-card h5 {
+            font-size: 0.8rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* MANAGEMENT ACTIONS */
+        /* ================================================================ */
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .action-card {
+            background: #ffffff;
+            padding: 1.2rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            border-left: 4px solid #1abc9c;
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .action-card .icon {
+            font-size: 1.6rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .action-card h5 {
+            font-size: 0.85rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* BUTTONS */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+            gap: 0.6rem;
+        }
+
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+
+        .button.accent {
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .button.accent:hover {
+            background: #16a085;
+        }
+
+        .button.outline-light {
+            background: transparent;
+            box-shadow: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+        }
+
+        .button.outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .button .icon {
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .actions li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .actions .button {
+            margin: 0 auto;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================================ */
+        /* BUDGET TABLE */
+        /* ================================================================ */
+        .budget-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .budget-table th {
+            background: #1a5276;
+            color: #ffffff;
+            padding: 0.8rem 1.2rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .budget-table td {
+            padding: 0.8rem 1.2rem;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+
+        .budget-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .budget-table tr:hover {
+            background: #f7fafc;
+        }
+
+        .budget-table .total {
+            font-weight: 900;
+            color: #1a5276;
+            font-size: 1rem;
+        }
+
+        @media screen and (max-width: 600px) {
+            .budget-table {
+                font-size: 0.75rem;
+            }
+            .budget-table th,
+            .budget-table td {
+                padding: 0.5rem 0.6rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* HIGHLIGHT BOX */
+        /* ================================================================ */
+        .highlight-box {
+            background: linear-gradient(135deg, #d4eaf7, #eaf2f8);
+            border-radius: 16px;
+            padding: 2rem 2.5rem;
+            border-left: 5px solid #1abc9c;
+            margin: 2rem 0;
+        }
+
+        .highlight-box .icon {
+            font-size: 2rem;
+            color: #1abc9c;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #1a5276;
+            line-height: 1.7;
+        }
+
+        .highlight-box blockquote .highlight {
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .highlight-box {
+                padding: 1.5rem 1.5rem;
+            }
+            .highlight-box blockquote {
+                font-size: 1rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* TIMELINE */
+        /* ================================================================ */
+        .project-timeline {
+            position: relative;
+            padding: 0;
+            margin: 2rem 0;
+            padding-left: 50px;
+        }
+
+        .project-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #2e86c1, #1abc9c);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.2rem 1.5rem 1.2rem 2rem;
+            margin-bottom: 1.2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 1.5rem;
+            width: 14px;
+            height: 14px;
+            background: #2e86c1;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #2e86c1;
+            z-index: 0;
+        }
+
+        .timeline-item .icon {
+            position: absolute;
+            left: -36px;
+            top: 1.2rem;
+            font-size: 1.2rem;
+            color: #2e86c1;
+            background: #eaf2f8;
+            padding: 0.2rem;
+            border-radius: 50%;
+            z-index: 2;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 4px #eaf2f8;
+        }
+
+        .timeline-item h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .project-timeline {
+                padding-left: 40px;
+            }
+            .timeline-item {
+                padding: 1rem 1rem 1rem 1.2rem;
+            }
+            .timeline-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+            .timeline-item .icon {
+                left: -28px;
+                font-size: 1rem;
+                width: 24px;
+                height: 24px;
+            }
+            .project-timeline::before {
+                left: 12px;
+            }
+        }
+
+        /* ================================================================ */
+        /* REFERENCES */
+        /* ================================================================ */
+        .ref-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .ref-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 0.85rem;
+            color: #34495e;
+            line-height: 1.6;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .ref-list li::before {
+            content: '📄';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+        }
+
+        .ref-list li:last-child {
+            border-bottom: none;
+        }
+
+        .ref-list li strong {
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .section-wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .section-wrapper .inner h2 {
+                font-size: 1.8rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .objectives-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .section-wrapper .inner h2 {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-card {
+                padding: 0.8rem 1rem;
+            }
+            .info-card .value {
+                font-size: 0.85rem;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .stakeholder-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .partnership-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .actions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- NAVBAR -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="project-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge">Marine Policy</span>
+            <h1>Design Proposal for a Marine Protected Area</h1>
+            <p class="subtitle">Along the Coast of Maratea (Southern Italy)</p>
+            <div class="hero-meta">
+                <span><i class="fas fa-university"></i> UNIVPM</span>
+                <span><i class="fas fa-calendar-alt"></i> 2024/2025</span>
+                <span><i class="fas fa-gavel"></i> Marine Policy</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BREADCRUMB -->
+    <!-- ================================================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">🏠 Home</a> &nbsp;›&nbsp;
+            <a href="../index.html#portfolio">Portfolio</a> &nbsp;›&nbsp;
+            <span>Design Proposal for a Marine Protected Area</span>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- INTRODUCTION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <div style="display: flex; align-items: flex-start; gap: 1rem; background: #eaf2f8; padding: 1.5rem 2rem; border-radius: 12px; border-left: 5px solid #1abc9c; margin-bottom: 2rem;">
+                <div style="font-size: 2rem; color: #1abc9c; flex-shrink: 0; margin-top: 0.2rem;">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div>
+                    <h4 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #1a5276; margin-bottom: 0.3rem;">Project Context</h4>
+                    <p style="font-size: 0.95rem; color: #2c3e50; line-height: 1.7; margin: 0; text-align: justify;">
+                        This project was developed during the <strong>Marine Policy</strong> course as part of my MSc in Marine Biology. The assignment consisted of designing a <strong>hypothetical Marine Protected Area</strong> anywhere in the world while respecting realistic ecological, legal, political and financial constraints. I selected the coast of <strong>Maratea (Basilicata, Southern Italy)</strong>, one of the most biodiverse stretches of coastline in the region.
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                The ecological background, policy framework and conservation information were derived from <strong>scientific publications, official legislation and institutional reports</strong>. However, the proposed Marine Protected Area — including site selection, conservation strategy, stakeholder engagement, management actions, implementation priorities, partnership network and budget allocation — was <strong>independently designed and developed</strong> as a hypothetical conservation proposal.
+            </p>
+            <p>
+                The objective was to produce a <strong>complete conservation proposal</strong> integrating marine ecology, environmental policy, protected area management, stakeholder engagement and financial planning into a realistic framework.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OVERVIEW -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Overview</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="label">Institution</div>
+                    <div class="value">Università Politecnica delle Marche</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Course</div>
+                    <div class="value">Marine Policy</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Project Type</div>
+                    <div class="value">Conservation Planning · Marine Protected Area Design</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Study Area</div>
+                    <div class="value">Maratea Coast, Basilicata</div>
+                </div>
+                <div class="info-card" style="grid-column: 1 / -1;">
+                    <div class="label">Focus</div>
+                    <div class="value">Marine Conservation · Environmental Policy · Protected Areas · Stakeholder Management · Marine Spatial Planning</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- WHY MARATEA -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Why Maratea?</h2>
+            <p>
+                The coast of Maratea overlooks the <strong>Tyrrhenian Sea</strong> and is characterised by high biodiversity due to its particular habitats, including <strong>sea caves, cliffs, rocky reefs and Posidonia oceanica meadows</strong>. This stretch of coastline hosts numerous species of conservation concern and represents one of the most ecologically valuable areas in the region.
+            </p>
+            <p>
+                Several factors make Maratea particularly suitable for enhanced marine protection:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-leaf"></i></div>
+                    <h4 style="font-size: 0.9rem;">High Biodiversity</h4>
+                    <p style="font-size: 0.8rem;">Rich marine communities including <em>Posidonia oceanica</em> meadows, rocky reefs and sea caves</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-fish"></i></div>
+                    <h4 style="font-size: 0.9rem;">Protected Species</h4>
+                    <p style="font-size: 0.8rem;">Presence of <em>Caretta caretta</em>, <em>Cladocora caespitosa</em> and other species of conservation concern</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-umbrella-beach"></i></div>
+                    <h4 style="font-size: 0.9rem;">Tourism &amp; Fisheries</h4>
+                    <p style="font-size: 0.8rem;">Seaside tourism and traditional fisheries are key economic activities</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-mountain"></i></div>
+                    <h4 style="font-size: 0.9rem;">Landscape Value</h4>
+                    <p style="font-size: 0.8rem;">Outstanding natural beauty, cultural heritage and archaeological significance</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- CONSERVATION OBJECTIVES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Conservation Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Protect Marine Biodiversity</h4>
+                    <p>Safeguard the rich marine communities and species of conservation concern along the Maratea coast.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h4>Preserve Critical Habitats</h4>
+                    <p>Protect <em>Posidonia oceanica</em> meadows, rocky reefs, sea caves and other essential habitats.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-sync-alt"></i></div>
+                    <h4>Improve Ecosystem Resilience</h4>
+                    <p>Enhance the resilience of marine ecosystems to climate change and anthropogenic pressures.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-umbrella-beach"></i></div>
+                    <h4>Promote Sustainable Tourism</h4>
+                    <p>Support eco-tourism and sustainable recreational activities that benefit local communities.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h4>Support Local Fisheries</h4>
+                    <p>Improve fish stocks through spillover effects and sustainable fisheries management.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h4>Enhance Environmental Education</h4>
+                    <p>Promote awareness and understanding of marine conservation among local communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- ECOLOGICAL FRAMEWORK -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Ecological Framework</h2>
+            <p>
+                The Maratea coast hosts a remarkable diversity of marine habitats, including:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-water"></i></div>
+                    <h4 style="font-size: 0.9rem;"><em>Posidonia oceanica</em> Meadows</h4>
+                    <p style="font-size: 0.8rem;">Essential habitat providing oxygen, biodiversity and coastal protection</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-mountain"></i></div>
+                    <h4 style="font-size: 0.9rem;">Rocky Reefs</h4>
+                    <p style="font-size: 0.8rem;">Complex substrates supporting diverse benthic communities</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-cave"></i></div>
+                    <h4 style="font-size: 0.9rem;">Sea Caves</h4>
+                    <p style="font-size: 0.8rem;">Unique habitats hosting specialised species communities</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-cliff"></i></div>
+                    <h4 style="font-size: 0.9rem;">Coastal Cliffs</h4>
+                    <p style="font-size: 0.8rem;">Important nesting and resting areas for marine species</p>
+                </div>
+            </div>
+            <p>
+                The area hosts species of conservation concern including <strong>Caretta caretta</strong> (loggerhead turtle), <strong>Cladocora caespitosa</strong>, yellow gorgonians, sea urchins, octopus, sea stars and numerous commercially important fish species. These habitats provide essential <strong>ecosystem services</strong> including nursery grounds, carbon sequestration, coastal protection and biodiversity support.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- POLICY AND LEGAL FRAMEWORK -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Policy and Legal Framework</h2>
+            <p>
+                The proposal was developed within the context of existing environmental legislation and conservation policies:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="text-align: left; padding: 1.2rem;">
+                    <div class="icon" style="text-align: left; font-size: 1.6rem;"><i class="fas fa-flag"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Italian Legislation</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">National protected area laws and marine conservation regulations</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem;">
+                    <div class="icon" style="text-align: left; font-size: 1.6rem;"><i class="fas fa-globe-europe"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">European Directives</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Marine Strategy Framework Directive · Habitats Directive</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem;">
+                    <div class="icon" style="text-align: left; font-size: 1.6rem;"><i class="fas fa-tree"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Natura 2000</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Three existing Natura 2000 sites: IT9210160, IT9210155, IT9210015</p>
+                </div>
+                <div class="objective-card" style="text-align: left; padding: 1.2rem;">
+                    <div class="icon" style="text-align: left; font-size: 1.6rem;"><i class="fas fa-landmark"></i></div>
+                    <h4 style="text-align: left; font-size: 0.95rem;">Existing Regulations</h4>
+                    <p style="text-align: left; font-size: 0.85rem;">Ordinance 9/93 protecting the Santo Janni islet archaeological site</p>
+                </div>
+            </div>
+            <p>
+                These frameworks influenced the proposed management strategy, providing the legal basis for enhanced marine protection and ensuring alignment with established conservation principles.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MPA DESIGN -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>MPA Design</h2>
+            <p>
+                The proposed <strong>"Tyrrhenian Pearl MPA"</strong> integrates the existing Natura 2000 sites already present in the area — primarily focused on terrestrial biodiversity conservation — by merging their marine portions into one large, cohesive Marine Protected Area that can effectively protect the marine ecosystems of the Maratea coast.
+            </p>
+            <p>
+                The MPA design includes:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-bullseye"></i></div>
+                    <h4 style="font-size: 0.9rem;">Protection Objectives</h4>
+                    <p style="font-size: 0.8rem;">Clear conservation goals for biodiversity and habitat protection</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-clipboard-list"></i></div>
+                    <h4 style="font-size: 0.9rem;">Management Priorities</h4>
+                    <p style="font-size: 0.8rem;">Identification of key actions and implementation strategies</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-layer-group"></i></div>
+                    <h4 style="font-size: 0.9rem;">Zoning Concepts</h4>
+                    <p style="font-size: 0.8rem;">Spatial planning to balance conservation and human activities</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-chart-line"></i></div>
+                    <h4 style="font-size: 0.9rem;">Monitoring &amp; Adaptive Management</h4>
+                    <p style="font-size: 0.8rem;">Long-term monitoring to evaluate effectiveness and adapt management</p>
+                </div>
+            </div>
+            <p>
+                The proposal includes implementation priorities and a long-term conservation vision, ensuring the MPA can achieve its ecological and socio-economic objectives.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW p1.jpg, p2.jpg, p3.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="gallerySlideshow1">
+                <img src="../images/gallery/p1.jpg" class="slide-img active" alt="Maratea coast - 1" />
+                <img src="../images/gallery/p2.jpg" class="slide-img" alt="Maratea coast - 2" />
+                <img src="../images/gallery/p3.jpg" class="slide-img" alt="Maratea coast - 3" />
+                
+                <button class="slideshow-btn prev" id="slideshow1Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow1Next">›</button>
+                
+                <div class="dots" id="slideshow1Dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STAKEHOLDER ENGAGEMENT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Stakeholder Engagement</h2>
+            <p>
+                Stakeholder participation is essential for the successful implementation of any Marine Protected Area. The proposed MPA involves multiple stakeholders who could potentially be affected by the conservation measures:
+            </p>
+            <div class="stakeholder-grid">
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h5>Local Fishermen</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-umbrella-beach"></i></div>
+                    <h5>Tourism Operators</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h5>Dive Centres</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-city"></i></div>
+                    <h5>Local Municipalities</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-university"></i></div>
+                    <h5>Universities</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>Environmental NGOs</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-landmark"></i></div>
+                    <h5>Regional Authorities</h5>
+                </div>
+                <div class="stakeholder-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Citizens</h5>
+                </div>
+            </div>
+            <p>
+                Effective stakeholder engagement, including meetings, consultations and collaborative management planning, is essential to build trust, address concerns and ensure the long-term success of the MPA.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- ECONOMIC PLAN - BUDGET -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Economic Plan</h2>
+            <p>
+                The project had to respect a <strong>maximum available budget of €100,000</strong> for the initial implementation phase. The budget was allocated across several key activities, reflecting the priorities of the conservation proposal.
+            </p>
+
+            <div style="border-radius: 12px; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,0.1); margin: 1.5rem 0;">
+                <img src="../images/gallery/p4.jpg" alt="Budget allocation" style="width:100%; display:block;" />
+            </div>
+
+            <table class="budget-table">
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>Amount (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Seminars (3 sessions)</td>
+                        <td>5,000</td>
+                    </tr>
+                    <tr>
+                        <td>Sea-Life Interactive Exhibition</td>
+                        <td>10,000</td>
+                    </tr>
+                    <tr>
+                        <td>Short Film Contest (1st Prize)</td>
+                        <td>1,500</td>
+                    </tr>
+                    <tr>
+                        <td>Logo Contest (1st Prize)</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td>Stickers (20,000 units)</td>
+                        <td>1,000</td>
+                    </tr>
+                    <tr>
+                        <td>Social Promotion</td>
+                        <td>8,000</td>
+                    </tr>
+                    <tr>
+                        <td>Organizing Meetings</td>
+                        <td>5,000</td>
+                    </tr>
+                    <tr style="border-top: 2px solid #1a5276;">
+                        <td class="total">Total Budget</td>
+                        <td class="total">€31,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="font-style: italic; color: #5d6d7e;">
+                <i class="fas fa-info-circle" style="color: #1abc9c;"></i>
+                The budget allocation reflects the priorities of the MPA proposal, with a focus on communication, education and stakeholder engagement. Additional funding could be sought from regional, national and European sources.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW p5.jpg, p6.jpg -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 0rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="gallerySlideshow2">
+                <img src="../images/gallery/p5.jpg" class="slide-img active" alt="Budget planning - 1" />
+                <img src="../images/gallery/p6.jpg" class="slide-img" alt="Budget planning - 2" />
+                
+                <button class="slideshow-btn prev" id="slideshow2Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow2Next">›</button>
+                
+                <div class="dots" id="slideshow2Dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PARTNERSHIPS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Partnerships</h2>
+            <p>
+                Successful MPA implementation requires strong partnerships between institutions, NGOs, local associations and research organisations:
+            </p>
+            <div class="partnership-grid">
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-landmark"></i></div>
+                    <h5>Regione Basilicata</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-city"></i></div>
+                    <h5>Città di Maratea</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-ship"></i></div>
+                    <h5>Guardia Costiera</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-university"></i></div>
+                    <h5>UNIBAS</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-university"></i></div>
+                    <h5>UNIVPM</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h5>MAREVIVO</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>LEGAMBIENTE</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-paw"></i></div>
+                    <h5>WWF</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h5>Maratea Sub</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Associazione Amici di Maratea</h5>
+                </div>
+                <div class="partnership-card">
+                    <div class="icon"><i class="fas fa-star"></i></div>
+                    <h5>Pro Loco Maratea "La Perla"</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MANAGEMENT ACTIONS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Management Actions</h2>
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h5>Scientific Monitoring</h5>
+                </div>
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h5>Habitat Conservation</h5>
+                </div>
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h5>Environmental Education</h5>
+                </div>
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-umbrella-beach"></i></div>
+                    <h5>Ecotourism Development</h5>
+                </div>
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-dharmachakra"></i></div>
+                    <h5>Diving Infrastructure</h5>
+                </div>
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Citizen Science</h5>
+                </div>
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-bullhorn"></i></div>
+                    <h5>Communication Campaigns</h5>
+                </div>
+                <div class="action-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h5>Fisheries Dialogue</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC AND PROFESSIONAL SKILLS DEVELOPED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Scientific &amp; Professional Skills Developed</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-draw-polygon"></i></div>
+                    <h5>Marine Protected Area Planning</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-gavel"></i></div>
+                    <h5>Marine Policy</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h5>Stakeholder Engagement</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h5>Environmental Management</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h5>Conservation Planning</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-coins"></i></div>
+                    <h5>Budget Allocation</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-map"></i></div>
+                    <h5>Marine Spatial Planning</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-book"></i></div>
+                    <h5>Environmental Legislation</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-project-diagram"></i></div>
+                    <h5>Project Design</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-comments"></i></div>
+                    <h5>Science Communication</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-users-cog"></i></div>
+                    <h5>Teamwork</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-lightbulb"></i></div>
+                    <h5>Critical Thinking</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PDF SECTION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" id="report">
+        <div class="inner" style="text-align: center;">
+            <h2 class="centered">Full Report</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem auto;">
+                Download the complete Marine Protected Area proposal including ecological assessment, policy framework, stakeholder analysis, management actions and budget allocation.
+            </p>
+            <ul class="actions">
+                <li>
+                    <a href="../documents/maratea-mpa-proposal.pdf" class="button accent" target="_blank">
+                        <i class="fas fa-file-pdf icon"></i> View Report
+                    </a>
+                </li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">
+                PDF document · MPA Proposal · 2.8 MB
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- REFERENCES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>References</h2>
+            <p>
+                The proposal was based on:
+            </p>
+            <ul class="ref-list">
+                <li><strong>Peer-reviewed scientific literature</strong> on marine conservation, protected area design and coastal ecology</li>
+                <li><strong>Italian environmental legislation</strong> on protected areas and marine conservation</li>
+                <li><strong>European Directives</strong> including the Marine Strategy Framework Directive and Habitats Directive</li>
+                <li><strong>Official conservation documents</strong> from the Region of Basilicata</li>
+                <li><strong>Regional biodiversity reports</strong> on the Maratea coast</li>
+                <li><strong>Institutional cartographic datasets</strong> from EMODnet and IGM</li>
+                <li><strong>Natura 2000</strong> site documentation for IT9210160, IT9210155 and IT9210015</li>
+            </ul>
+            <p style="font-style: italic; color: #5d6d7e; margin-top: 1rem;">
+                <i class="fas fa-info-circle" style="color: #1abc9c;"></i>
+                The complete reference list is available within the original project document.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- TIMELINE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Timeline</h2>
+            <div class="project-timeline">
+                <div class="timeline-item">
+                    <span class="icon">🌊</span>
+                    <h4>Marine Policy Course</h4>
+                    <p>Enrolment in the Marine Policy course as part of the MSc in Marine Biology</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌊</span>
+                    <h4>MSc Marine Biology</h4>
+                    <p>Selection of Maratea as the study area for the MPA design project</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌊</span>
+                    <h4>Conservation Planning Project</h4>
+                    <p>Development of the complete MPA proposal integrating ecology, policy and management</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌊</span>
+                    <h4>Marine Protected Area Proposal</h4>
+                    <p>Finalisation of the "Tyrrhenian Pearl MPA" proposal including budget and stakeholder plan</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon">🌊</span>
+                    <h4>Presentation to Classmates</h4>
+                    <p>Delivery of the complete MPA proposal to the Marine Policy course class</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FINAL HIGHLIGHT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper dark fade-in-section" style="padding: 4rem 2rem;">
+        <div class="inner">
+            <div class="highlight-box" style="background: rgba(255,255,255,0.05); border-left-color: #1abc9c; padding: 2.5rem 3rem;">
+                <div class="icon" style="color: #1abc9c;"><i class="fas fa-quote-left"></i></div>
+                <blockquote style="color: #d4eaf7;">
+                    "This project provided practical experience in integrating <span class="highlight">marine ecology, environmental legislation and conservation planning</span> into a realistic Marine Protected Area proposal. Beyond the scientific background, it strengthened my ability to translate ecological knowledge into <span class="highlight">actionable management strategies</span> by balancing biodiversity conservation, stakeholder interests and financial feasibility within a real-world policy framework."
+                </blockquote>
+            </div>
+            <div class="actions-row" style="margin-top: 2rem;">
+                <a href="../index.html#portfolio" class="button outline-light">
+                    <i class="fas fa-arrow-left icon"></i> Back to Portfolio
+                </a>
+                <a href="project11.html" class="button accent">
+                    Next Project <i class="fas fa-arrow-right icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+
+            // ============================================================
+            // SLIDESHOW HELPER
+            // ============================================================
+            function createSlideshow(containerId, prevBtnId, nextBtnId, dotsId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                const slides = container.querySelectorAll('.slide-img');
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const dotsContainer = document.getElementById(dotsId);
+                const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+                let currentIndex = 0;
+                let interval;
+
+                function goTo(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                    currentIndex = index;
+                    resetInterval();
+                }
+
+                function next() {
+                    goTo((currentIndex + 1) % slides.length);
+                }
+
+                function prev() {
+                    goTo((currentIndex - 1 + slides.length) % slides.length);
+                }
+
+                function resetInterval() {
+                    if (interval) clearInterval(interval);
+                    interval = setInterval(next, 4000);
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        prev();
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        next();
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', function() {
+                        goTo(index);
+                    });
+                });
+
+                if (container) {
+                    container.addEventListener('mouseenter', function() {
+                        if (interval) clearInterval(interval);
+                    });
+
+                    container.addEventListener('mouseleave', function() {
+                        resetInterval();
+                    });
+                }
+
+                resetInterval();
+                return { goTo, next, prev };
+            }
+
+            createSlideshow('gallerySlideshow1', 'slideshow1Prev', 'slideshow1Next', 'slideshow1Dots');
+            createSlideshow('gallerySlideshow2', 'slideshow2Prev', 'slideshow2Next', 'slideshow2Dots');
+
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Oyster Reef Restoration in the Adriatic Sea · Andrea Calocero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ================================================================ */
+        /* RESET & BASE */
+        /* ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ================================================================ */
+        /* NAVBAR */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        /* ================================================================ */
+        /* HERO */
+        /* ================================================================ */
+        .project-hero {
+            position: relative;
+            height: 75vh;
+            min-height: 550px;
+            background: #0e2f44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .project-hero .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('../images/gallery/orbita.jpg') center center / cover no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project-hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,47,68,0.8) 0%, rgba(26,82,118,0.5) 100%);
+            z-index: 1;
+        }
+
+        .project-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            width: 100%;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .project-hero .hero-text .category-tag {
+            display: inline-block;
+            background: #1abc9c;
+            color: #0e2f44;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 4px 18px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-hero .hero-text h1 i {
+            color: #76d7c4;
+        }
+
+        .project-hero .hero-text .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #76d7c4;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-text .description {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.7;
+            max-width: 550px;
+            margin-bottom: 20px;
+        }
+
+        .project-hero .hero-actions .button {
+            width: 100%;
+            max-width: 280px;
+        }
+
+        @media screen and (max-width: 992px) {
+            .project-hero .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .project-hero .hero-text .description {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .project-hero .hero-actions .button {
+                margin: 0 auto;
+            }
+            .project-hero .hero-text h1 {
+                font-size: 2.4rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-hero {
+                height: auto;
+                min-height: 450px;
+                padding: 80px 0 60px;
+            }
+            .project-hero .hero-text h1 {
+                font-size: 1.8rem;
+            }
+            .project-hero .hero-text .subtitle {
+                font-size: 1rem;
+            }
+            .project-hero .hero-text .description {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* BREADCRUMB */
+        /* ================================================================ */
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #d5dfe8;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+
+        /* ================================================================ */
+        /* SLIDESHOW PER IMMAGINI */
+        /* ================================================================ */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            background: #1a5276;
+        }
+
+        .slideshow-container .slide-img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            background: #0e2f44;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slideshow-container .slide-img.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .slideshow-container .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(14, 47, 68, 0.6);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+        }
+
+        .slideshow-container .slideshow-btn:hover {
+            background: rgba(14, 47, 68, 0.8);
+            color: #ffffff;
+        }
+
+        .slideshow-container .slideshow-btn.prev {
+            left: 12px;
+        }
+
+        .slideshow-container .slideshow-btn.next {
+            right: 12px;
+        }
+
+        .slideshow-container .dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .slideshow-container .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .slideshow-container .dots .dot.active {
+            background: #1abc9c;
+        }
+
+        @media screen and (max-width: 768px) {
+            .slideshow-container .slide-img {
+                height: 300px;
+            }
+            .slideshow-container .slideshow-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .slideshow-container .slide-img {
+                height: 220px;
+            }
+        }
+
+        /* ================================================================ */
+        /* SECTION STYLES */
+        /* ================================================================ */
+        .section-wrapper {
+            padding: 4rem 2rem;
+        }
+
+        .section-wrapper.light {
+            background: #ffffff;
+        }
+
+        .section-wrapper.grey {
+            background: #f7fafc;
+        }
+
+        .section-wrapper.dark {
+            background: #0e2f44;
+            color: #ffffff;
+        }
+
+        .section-wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper .inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+
+        .section-wrapper .inner h2.centered {
+            text-align: center;
+        }
+
+        .section-wrapper .inner h2.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-wrapper .inner p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section-wrapper .inner p strong {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .section-wrapper.dark .inner h2 {
+            color: #d4eaf7;
+        }
+
+        .section-wrapper.dark .inner h2::after {
+            background: linear-gradient(90deg, #1abc9c, #76d7c4);
+        }
+
+        .section-wrapper.dark .inner p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ================================================================ */
+        /* INFO CARDS */
+        /* ================================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #eaf2f8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #1abc9c;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        .info-card .value a {
+            color: #1a5276;
+            text-decoration: none;
+        }
+
+        .info-card .value a:hover {
+            color: #1abc9c;
+            text-decoration: underline;
+        }
+
+        /* ================================================================ */
+        /* FADE-IN ANIMATION */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================ */
+        /* TWO COLUMN LAYOUT */
+        /* ================================================================ */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .two-column .col p {
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* OBJECTIVE CARDS */
+        /* ================================================================ */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .objective-card {
+            background: #ffffff;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .objective-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.8rem;
+        }
+
+        .objective-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #1a5276;
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-card p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ================================================================ */
+        /* ECOSYSTEM SERVICES GRID */
+        /* ================================================================ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .service-card {
+            background: #ffffff;
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .service-card .icon {
+            font-size: 1.8rem;
+            color: #1abc9c;
+            margin-bottom: 0.4rem;
+        }
+
+        .service-card h5 {
+            font-size: 0.85rem;
+            color: #1a5276;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .service-card p {
+            font-size: 0.8rem;
+            color: #5d6d7e;
+            margin: 0;
+        }
+
+        /* ================================================================ */
+        /* BUTTONS */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+            gap: 0.6rem;
+        }
+
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+
+        .button.accent {
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .button.accent:hover {
+            background: #16a085;
+        }
+
+        .button.outline-light {
+            background: transparent;
+            box-shadow: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+        }
+
+        .button.outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .button .icon {
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .actions li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .actions .button {
+            margin: 0 auto;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================================ */
+        /* TIMELINE */
+        /* ================================================================ */
+        .restoration-timeline {
+            position: relative;
+            padding: 0;
+            margin: 2rem 0;
+            padding-left: 50px;
+        }
+
+        .restoration-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #2e86c1, #1abc9c);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.2rem 1.5rem 1.2rem 2rem;
+            margin-bottom: 1.2rem;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 1.5rem;
+            width: 14px;
+            height: 14px;
+            background: #2e86c1;
+            border-radius: 50%;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 3px #2e86c1;
+            z-index: 0;
+        }
+
+        .timeline-item .icon {
+            position: absolute;
+            left: -36px;
+            top: 1.2rem;
+            font-size: 1.2rem;
+            color: #2e86c1;
+            background: #eaf2f8;
+            padding: 0.2rem;
+            border-radius: 50%;
+            z-index: 2;
+            width: 28px;
+            height: 28px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 4px #eaf2f8;
+        }
+
+        .timeline-item h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .restoration-timeline {
+                padding-left: 40px;
+            }
+            .timeline-item {
+                padding: 1rem 1rem 1rem 1.2rem;
+            }
+            .timeline-item::before {
+                left: -22px;
+                width: 12px;
+                height: 12px;
+            }
+            .timeline-item .icon {
+                left: -28px;
+                font-size: 1rem;
+                width: 24px;
+                height: 24px;
+            }
+            .restoration-timeline::before {
+                left: 12px;
+            }
+        }
+
+        /* ================================================================ */
+        /* INTERVIEW GRID */
+        /* ================================================================ */
+        .interview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .interview-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .interview-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .interview-card .interview-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .interview-card .interview-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .interview-card .interview-header .name {
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 0.85rem;
+        }
+
+        .interview-card .interview-header .role {
+            font-size: 0.7rem;
+            color: #5d6d7e;
+            font-style: italic;
+        }
+
+        .interview-card .interview-text {
+            font-size: 0.85rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            font-style: italic;
+            border-left: 3px solid #1abc9c;
+            padding-left: 0.8rem;
+        }
+
+        .interview-card .interview-text .quote {
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            .interview-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================================================================ */
+        /* SWOT GRID */
+        /* ================================================================ */
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .swot-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .swot-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .swot-card.strengths {
+            background: #d4eaf7;
+            border-left: 4px solid #2e86c1;
+        }
+        .swot-card.weaknesses {
+            background: #fadbd8;
+            border-left: 4px solid #e74c3c;
+        }
+        .swot-card.opportunities {
+            background: #d5f5e3;
+            border-left: 4px solid #27ae60;
+        }
+        .swot-card.threats {
+            background: #fdebd0;
+            border-left: 4px solid #e67e22;
+        }
+
+        .swot-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .swot-card h4 .icon {
+            font-size: 1.4rem;
+        }
+
+        .swot-card.strengths h4 { color: #1a5276; }
+        .swot-card.weaknesses h4 { color: #922b21; }
+        .swot-card.opportunities h4 { color: #1a7a3a; }
+        .swot-card.threats h4 { color: #a04000; }
+
+        .swot-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .swot-card ul li {
+            padding: 0.3rem 0 0.3rem 24px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%231abc9c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>') left center no-repeat;
+            background-size: 14px;
+            font-size: 0.85rem;
+            color: #2c3e50;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .swot-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .swot-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================================================================ */
+        /* REFERENCES */
+        /* ================================================================ */
+        .ref-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .ref-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 0.85rem;
+            color: #34495e;
+            line-height: 1.6;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .ref-list li::before {
+            content: '📄';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+        }
+
+        .ref-list li:last-child {
+            border-bottom: none;
+        }
+
+        .ref-list li strong {
+            color: #1a5276;
+        }
+
+        .ref-list li a {
+            color: #1a5276;
+            text-decoration: none;
+        }
+
+        .ref-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .section-wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .section-wrapper .inner h2 {
+                font-size: 1.8rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .objectives-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .section-wrapper .inner h2 {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-card {
+                padding: 0.8rem 1rem;
+            }
+            .info-card .value {
+                font-size: 0.85rem;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- NAVBAR -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="project-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="category-tag">Restoration Ecology</span>
+                <h1>Oyster Reef Restoration in the Adriatic Sea</h1>
+                <p class="subtitle"><i>Oyster Reef Restoration Proposal developed during the Marine Ecosystem Restoration course</i></p>
+                <p class="description">
+                    This project presents an original restoration proposal for native European oyster reefs in the Adriatic Sea, integrating ecological restoration, marine conservation, long-term monitoring, stakeholder engagement and ecosystem service assessment into a realistic restoration framework.
+                </p>
+                <div class="hero-actions">
+                    <a href="#download" class="button accent">
+                        <i class="fas fa-file-pdf icon"></i> Download Project
+                    </a>
+                </div>
+            </div>
+            <div class="hero-side">
+                <!-- Spazio per info aggiuntive -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BREADCRUMB -->
+    <!-- ================================================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">🏠 Home</a> &nbsp;›&nbsp;
+            <a href="../index.html#portfolio">Portfolio</a> &nbsp;›&nbsp;
+            <span>Oyster Reef Restoration in the Adriatic Sea</span>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OVERVIEW -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Project Overview</h2>
+            <p>
+                <strong>O.R.B.I.T.A.</strong> — <em>Oyster Reef Restoration Back Into The Adriatic Sea</em> —
+                is an original restoration proposal developed during my Master's Degree in Marine Biology.
+                The project aims to restore a portion of the once abundant <strong>Ostrea edulis</strong>
+                beds in the Adriatic Sea, bringing back these important ecosystems with all the benefits they provide.
+            </p>
+            <p>
+                Although the restoration has not yet been implemented, the project was conceived as a <strong>realistic proposal</strong>
+                that could potentially be submitted to real funding programmes such as LIFE, Horizon Europe
+                or regional restoration initiatives. The restoration framework was entirely designed by our team,
+                integrating scientific literature, international restoration guidelines, and local knowledge.
+            </p>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="label">Project Type</div>
+                    <div class="value">Original Academic Restoration Proposal</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Examiner</div>
+                    <div class="value"><a href="https://it.wikipedia.org/wiki/Roberto_Danovaro" target="_blank">Prof. Roberto Danovaro</a></div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Target Habitat</div>
+                    <div class="value">Native European Oyster Reef</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Target Species</div>
+                    <div class="value"><i>Ostrea edulis</i></div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Study Area</div>
+                    <div class="value">Adriatic Sea</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Proposed Area</div>
+                    <div class="value">2 Hectares</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Monitoring Design</div>
+                    <div class="value">BACI</div>
+                </div>
+                <div class="info-card">
+                    <div class="label">Monitoring Duration</div>
+                    <div class="value">10+ Years</div>
+                </div>
+                <div class="info-card" style="grid-column: 1 / -1;">
+                    <div class="label">Project Status</div>
+                    <div class="value">Conceptual Restoration Proposal</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW (ost1.jpg - ost5.jpg) -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="gallerySlideshow1">
+                <img src="../images/gallery/ost1.jpg" class="slide-img active" alt="Oyster reef ecosystem - 1" />
+                <img src="../images/gallery/ost2.jpg" class="slide-img" alt="Oyster reef ecosystem - 2" />
+                <img src="../images/gallery/ost3.jpg" class="slide-img" alt="Oyster reef ecosystem - 3" />
+                <img src="../images/gallery/ost4.jpg" class="slide-img" alt="Oyster reef ecosystem - 4" />
+                <img src="../images/gallery/ost5.jpg" class="slide-img" alt="Oyster reef ecosystem - 5" />
+                
+                <button class="slideshow-btn prev" id="slideshow1Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow1Next">›</button>
+                
+                <div class="dots" id="slideshow1Dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OBJECTIVES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Project Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-drafting-compass"></i></div>
+                    <h4>Design Feasible Restoration</h4>
+                    <p>Develop a scientifically grounded, realistic restoration strategy for native oyster reefs in the Adriatic Sea.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-fish"></i></div>
+                    <h4>Enhance Marine Biodiversity</h4>
+                    <p>Restore habitat complexity to support associated fauna and increase local biodiversity.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-undo-alt"></i></div>
+                    <h4>Restore Ecosystem Functions</h4>
+                    <p>Re-establish key ecological functions including water filtration, carbon sequestration and nutrient cycling.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-layer-group"></i></div>
+                    <h4>Improve Habitat Complexity</h4>
+                    <p>Create three-dimensional structures that provide shelter, feeding and nursery grounds.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h4>Support Fisheries</h4>
+                    <p>Enhance local fisheries through spillover effects and increased fish production.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Increase Ecosystem Resilience</h4>
+                    <p>Contribute to coastal ecosystem resilience against climate change and anthropogenic pressures.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-users"></i></div>
+                    <h4>Promote Stakeholder Participation</h4>
+                    <p>Integrate local communities, fishermen, restaurants and diving centres into the restoration process.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h4>Develop Scalable Framework</h4>
+                    <p>Create a restoration framework that can be scaled up to larger areas in the future.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- WHY OYSTER REEFS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Why Oyster Reefs?</h2>
+            <p>
+                <i>Ostrea edulis</i>, the European flat oyster, is an <strong>ecosystem engineer</strong> that creates complex three-dimensional structures known as oyster beds or reefs. These habitats provide numerous ecosystem services, including water filtration, habitat creation, carbon sequestration and shoreline protection.
+            </p>
+            <p>
+                Unfortunately, natural oyster beds in the North Adriatic are strongly declining due to overharvesting, bottom trawling, habitat loss and disease. Today, only a few small residual beds remain, making restoration urgently needed.
+            </p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-faucet"></i></div>
+                    <h5>Water Filtration</h5>
+                    <p>Oysters filter plankton and suspended particles, improving water clarity</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-home"></i></div>
+                    <h5>Habitat Creation</h5>
+                    <p>Complex 3D structures provide shelter for invertebrates and fish</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-cloud"></i></div>
+                    <h5>Carbon Sequestration</h5>
+                    <p>Oyster reefs act as carbon sinks, storing carbon in shells and sediments</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                    <h5>Shoreline Protection</h5>
+                    <p>Reefs reduce wave energy and coastal erosion</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-egg"></i></div>
+                    <h5>Nursery Grounds</h5>
+                    <p>Provide foraging and nursery areas for commercially important fish species</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>Biodiversity Enhancement</h5>
+                    <p>Support diverse assemblages of invertebrates, fish and algae</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- RESTORATION STRATEGY -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Restoration Strategy</h2>
+            <p>
+                The proposed restoration strategy follows a systematic approach, from site selection to long-term monitoring. Each phase was carefully designed to maximize restoration success.
+            </p>
+
+            <!-- Site Selection -->
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #0e2f44; margin: 1.5rem 0 0.5rem 0; border-bottom: 2px solid #1abc9c; padding-bottom: 8px;">
+                <i class="fas fa-map-marked-alt" style="color: #1abc9c; margin-right: 0.5rem;"></i>Site Selection
+            </h3>
+            <p>
+                The proposed restoration site is located in front of the <strong>Fano coast</strong>, approximately <strong>3.5 nautical miles</strong> from the coast, at <strong>10 metres depth</strong>, near existing oyster occurrences. The site selection was based on a careful analysis of multiple data sources:
+            </p>
+
+            <div style="margin: 1rem 0;">
+                <div style="background: #f7fafc; padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 0.8rem; border-left: 4px solid #2e86c1;">
+                    <h4 style="font-family: 'Playfair Display', serif; font-size: 1rem; color: #1a5276; margin-bottom: 0.3rem;">
+                        <i class="fas fa-history" style="color: #2e86c1; margin-right: 0.5rem;"></i>Historical Records
+                    </h4>
+                    <p style="font-size: 0.9rem; color: #2c3e50; margin: 0;">
+                        Historical data from Thurstan et al. (2024) and Marsili (1715) revealed that oyster reefs were once widespread in the Adriatic, with the only documented reef of known extent located between Fano and Pesaro.
+                    </p>
+                </div>
+                <div style="background: #f7fafc; padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 0.8rem; border-left: 4px solid #2e86c1;">
+                    <h4 style="font-family: 'Playfair Display', serif; font-size: 1rem; color: #1a5276; margin-bottom: 0.3rem;">
+                        <i class="fas fa-globe-europe" style="color: #2e86c1; margin-right: 0.5rem;"></i>Actual Distribution
+                    </h4>
+                    <p style="font-size: 0.9rem; color: #2c3e50; margin: 0;">
+                        Occurrence data from OBIS and GBIF databases were exported and analysed on GIS maps, revealing a patchy distribution pattern in the Adriatic, with residual populations scattered along the coast.
+                    </p>
+                </div>
+                <div style="background: #f7fafc; padding: 1rem 1.5rem; border-radius: 12px; border-left: 4px solid #2e86c1;">
+                    <h4 style="font-family: 'Playfair Display', serif; font-size: 1rem; color: #1a5276; margin-bottom: 0.3rem;">
+                        <i class="fas fa-users" style="color: #2e86c1; margin-right: 0.5rem;"></i>Local Fishermen Interviews (L.E.K.)
+                    </h4>
+                    <p style="font-size: 0.9rem; color: #2c3e50; margin: 0;">
+                        Local Ecological Knowledge (L.E.K.) was collected through interviews with fishermen at Ancona's port, providing valuable insights into past and present oyster distribution in the Marche region.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interview Grid -->
+            <div class="interview-grid">
+                <div class="interview-card">
+                    <div class="interview-header">
+                        <img src="../images/gallery/int2.jpg" alt="Mr. Luigi" />
+                        <div>
+                            <div class="name">Mr. Luigi</div>
+                            <div class="role">Fisherman from Ancona</div>
+                        </div>
+                    </div>
+                    <div class="interview-text">
+                        <span class="quote">"In the past 15-20 years there were several oysters' aggregations in the Ancona's area but nowadays there are very few left, from some fishermen friends I know that there are a little bit more near Fano and San Benedetto del Tronto."</span>
+                        <span class="quote">"I think that their disappearance is mainly due to the loss of their habitats, especially with changes in the seabed structure."</span>
+                    </div>
+                </div>
+
+                <div class="interview-card">
+                    <div class="interview-header">
+                        <img src="../images/gallery/int1.jpg" alt="Young Beam Trawl-fisherman" />
+                        <div>
+                            <div class="name">Young Fisherman</div>
+                            <div class="role">Beam Trawl-fisherman</div>
+                        </div>
+                    </div>
+                    <div class="interview-text">
+                        <span class="quote">"I fish with beam trawl between the Conero area and Civitanova Marche and it can happen to catch some oyster here but probably, in the Northern part of the Adriatic sea are more abundant while in the Northern part of Marche region there a few more oysters than here, but not that much, in fact oysters are not our fishing target but, when we catch them, we are happy the same."</span>
+                        <span class="quote">"Since I started working as fisherman, the number of Oysters' catches in the area I fish is more or less the same."</span>
+                    </div>
+                </div>
+
+                <div class="interview-card">
+                    <div class="interview-header">
+                        <img src="../images/gallery/int4.jpg" alt="Fisherman selling oysters" />
+                        <div>
+                            <div class="name">Fisherman</div>
+                            <div class="role">Oyster seller at Ancona's port</div>
+                        </div>
+                    </div>
+                    <div class="interview-text">
+                        <span class="quote">"There are some oysters here in the Ancona's nearby, mainly around 3.5 Nm from the coast but they are not that common and for sure they're less than in the past, especially here."</span>
+                    </div>
+                </div>
+
+                <div class="interview-card">
+                    <div class="interview-header">
+                        <img src="../images/gallery/int3.jpg" alt="Ancona's fish market employee" />
+                        <div>
+                            <div class="name">Fish Market Employee</div>
+                            <div class="role">Ancona's fish market</div>
+                        </div>
+                    </div>
+                    <div class="interview-text">
+                        <span class="quote">"Here at the fish market, we have oysters very rarely as there are not many in the area. Until a few years ago a larger number of them could be found but currently they are a rarity, a few more are caught going further north of Ancona and sometimes fishermen catch some, now and then, near Civitanova; in the Northern Adriatic there are more oysters than here."</span>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: 1rem;">
+                <strong>Cross-referencing all the obtained data</strong>, we concluded that the Fano area could be an optimal restoration site. The selected area is positioned <strong>downstream from residual natural oyster aggregations</strong> to take advantage of natural larval dispersal.
+            </p>
+
+            <!-- Implementation Timeline -->
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #0e2f44; margin: 2rem 0 0.5rem 0; border-bottom: 2px solid #1abc9c; padding-bottom: 8px;">
+                <i class="fas fa-tasks" style="color: #1abc9c; margin-right: 0.5rem;"></i>Proposed Implementation Timeline
+            </h3>
+
+            <div class="restoration-timeline">
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-search-location"></i></span>
+                    <h4>Site Selection &amp; Baseline Assessment</h4>
+                    <p>Historical data analysis, GIS mapping, fishermen interviews, and environmental baseline assessment.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-water"></i></span>
+                    <h4>Natural Reef Monitoring</h4>
+                    <p>Collection of baseline data on natural oyster populations, habitat condition and environmental parameters.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-recycle"></i></span>
+                    <h4>Shell Collection &amp; Biosecurity</h4>
+                    <p>Collection of 200m³ of oyster shells from local restaurants and fishermen, followed by washing and UV sterilization.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-seedling"></i></span>
+                    <h4>Broodstock Production</h4>
+                    <p>Procurement of 10,000 adult oysters from certified hatcheries with health and biosecurity certification.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-dragon"></i></span>
+                    <h4>Gravel Deposition &amp; Artificial Reef Construction</h4>
+                    <p>Construction of 40 reef-blocks (10m³ each) composed of metal cages filled with calcareous stones and recycled oyster shells.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-ship"></i></span>
+                    <h4>Artificial Reef Block Deployment</h4>
+                    <p>Deployment of reef-blocks using a vessel equipped with a crane over 4-5 days.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-plus-circle"></i></span>
+                    <h4>Broodstock Positioning</h4>
+                    <p>Attachment of 10 mesh-bags containing 25 adult oysters each (25 ind/m²) to the upper face of each block.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="icon"><i class="fas fa-chart-line"></i></span>
+                    <h4>Long-Term Monitoring &amp; Adaptive Management</h4>
+                    <p>10+ years of monitoring following BACI design, with quarterly surveys and adaptive management as needed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW (ost6.jpg - ost9.jpg) -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="gallerySlideshow2">
+                <img src="../images/gallery/ost6.jpg" class="slide-img active" alt="Restoration methods - 1" />
+                <img src="../images/gallery/ost7.jpg" class="slide-img" alt="Restoration methods - 2" />
+                <img src="../images/gallery/ost8.jpg" class="slide-img" alt="Restoration methods - 3" />
+                <img src="../images/gallery/ost9.jpg" class="slide-img" alt="Restoration methods - 4" />
+                
+                <button class="slideshow-btn prev" id="slideshow2Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow2Next">›</button>
+                
+                <div class="dots" id="slideshow2Dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MONITORING PROGRAMME -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Monitoring Programme</h2>
+            <p>
+                The monitoring programme was specifically designed for this restoration proposal following a <strong>BACI</strong> (Before-After-Control-Impact) design. It includes three main components:
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="border-left: 4px solid #2e86c1;">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h4>Natural Reference Reef</h4>
+                    <p>Monitoring of habitat progression, oyster density, cover percentage and sex ratio on natural residual beds.</p>
+                </div>
+                <div class="objective-card" style="border-left: 4px solid #1abc9c;">
+                    <div class="icon"><i class="fas fa-ruler-combined"></i></div>
+                    <h4>Restoration Site</h4>
+                    <p>Assessment of growth rate, survival rate, sex ratio and recruitment rate on the artificial reef blocks.</p>
+                </div>
+                <div class="objective-card" style="border-left: 4px solid #27ae60;">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h4>Environmental Parameters</h4>
+                    <p>Continuous monitoring of water quality, temperature, salinity and biodiversity indicators.</p>
+                </div>
+            </div>
+
+            <p>
+                <strong>Monitoring metrics</strong> include photoquadrats (1m × 1m), CTD profiling, Niskin bottle sampling, BRUV surveys, ImageJ analyses for percentage cover estimation, and ecological indicator assessment.
+            </p>
+            <p>
+                <strong>Quarterly surveys</strong> are planned over a <strong>10+ year period</strong>, with 4 sampling events per year. The natural reef will be monitored for 11.5 years to establish a robust baseline, while the restoration site will be monitored for 10 years following reef-block deployment.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- STAKEHOLDER ENGAGEMENT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Stakeholder Engagement</h2>
+            <p>
+                Stakeholder involvement was intentionally incorporated into the project design to maximize long-term ecological and social success. Involving as many people as possible in the project is crucial to its success, informing people about the restoration work is essential for developing networks, awareness and impact.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-fish"></i></div>
+                    <h4 style="font-size: 0.9rem;">Fishermen</h4>
+                    <p style="font-size: 0.8rem;">Shell supply, future spillover benefits</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-utensils"></i></div>
+                    <h4 style="font-size: 0.9rem;">Restaurants</h4>
+                    <p style="font-size: 0.8rem;">Shell recycling, Oyster Friendly stamp</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-users"></i></div>
+                    <h4 style="font-size: 0.9rem;">Local Communities</h4>
+                    <p style="font-size: 0.8rem;">Volunteers, donations, public awareness</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-university"></i></div>
+                    <h4 style="font-size: 0.9rem;">Universities</h4>
+                    <p style="font-size: 0.8rem;">Research, monitoring, student involvement</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-flask"></i></div>
+                    <h4 style="font-size: 0.9rem;">Research Institutes</h4>
+                    <p style="font-size: 0.8rem;">Scientific support, expertise, co-design</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-landmark"></i></div>
+                    <h4 style="font-size: 0.9rem;">Authorities</h4>
+                    <p style="font-size: 0.8rem;">Permitting, regulations, institutional support</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-globe"></i></div>
+                    <h4 style="font-size: 0.9rem;">NGOs</h4>
+                    <p style="font-size: 0.8rem;">Citizen science, volunteering, expertise</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-dharmachakra"></i></div>
+                    <h4 style="font-size: 0.9rem;">Diving Centres</h4>
+                    <p style="font-size: 0.8rem;">Recreational diving, citizen science, revenue sharing</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-users-cog"></i></div>
+                    <h4 style="font-size: 0.9rem;">Citizen Scientists</h4>
+                    <p style="font-size: 0.8rem;">Visual census, monitoring support, engagement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SLIDESHOW (ost10.jpg - ost12.jpg) -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section" style="padding-top: 1rem; padding-bottom: 3rem;">
+        <div class="inner">
+            <div class="slideshow-container" id="gallerySlideshow3">
+                <img src="../images/gallery/ost10.jpg" class="slide-img active" alt="Stakeholder engagement - 1" />
+                <img src="../images/gallery/ost11.jpg" class="slide-img" alt="Stakeholder engagement - 2" />
+                <img src="../images/gallery/ost12.jpg" class="slide-img" alt="Stakeholder engagement - 3" />
+                
+                <button class="slideshow-btn prev" id="slideshow3Prev">‹</button>
+                <button class="slideshow-btn next" id="slideshow3Next">›</button>
+                
+                <div class="dots" id="slideshow3Dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- COMMUNICATION STRATEGY -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Communication Strategy</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-globe"></i></div>
+                    <h4 style="font-size: 0.9rem;">Project Website</h4>
+                    <p style="font-size: 0.8rem;">All info, news, events and ways to get involved</p>
+                </div>
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-share-alt"></i></div>
+                    <h4 style="font-size: 0.9rem;">Social Media</h4>
+                    <p style="font-size: 0.8rem;">Periodical updates and high visibility</p>
+                </div>
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h4 style="font-size: 0.9rem;">Educational Seminars</h4>
+                    <p style="font-size: 0.8rem;">3-session cycle with scientists from different universities</p>
+                </div>
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-microscope"></i></div>
+                    <h4 style="font-size: 0.9rem;">Citizen Science</h4>
+                    <p style="font-size: 0.8rem;">Visual census and monitoring involvement</p>
+                </div>
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-hands-helping"></i></div>
+                    <h4 style="font-size: 0.9rem;">Volunteer Activities</h4>
+                    <p style="font-size: 0.8rem;">Workshops and restoration activities</p>
+                </div>
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-utensils"></i></div>
+                    <h4 style="font-size: 0.9rem;">Oyster Friendly Restaurants</h4>
+                    <p style="font-size: 0.8rem;">Partner network and awareness</p>
+                </div>
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-recycle"></i></div>
+                    <h4 style="font-size: 0.9rem;">Shell Recycling</h4>
+                    <p style="font-size: 0.8rem;">Public drop points and restaurant collection</p>
+                </div>
+                <div class="objective-card" style="padding: 1.2rem;">
+                    <div class="icon" style="font-size: 1.8rem;"><i class="fas fa-donate"></i></div>
+                    <h4 style="font-size: 0.9rem;">Donation Campaigns</h4>
+                    <p style="font-size: 0.8rem;">Oyster Friend certificates and merchandise</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- COST ANALYSIS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Cost Analysis</h2>
+            <p>
+                The estimated total budget for the proposed restoration project is approximately <strong>€450,000</strong>.
+                Costs are unevenly distributed over time, with higher initial costs for reef-block construction and deployment,
+                while monitoring costs are more significant but diluted over the 10+ year period.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="border-left: 4px solid #2e86c1; padding: 1.5rem;">
+                    <div class="icon"><i class="fas fa-tools"></i></div>
+                    <h4>Restoration Costs</h4>
+                    <p style="font-size: 0.85rem; text-align: left;">
+                        <strong>€185,000</strong><br />
+                        Broodstock: €70,000<br />
+                        Calcareous rocks: €15,000<br />
+                        Gravel: €9,000<br />
+                        Cages: €25,000<br />
+                        Boat + crane + crew: €33,000<br />
+                        Blocks construction: €10,000<br />
+                        Biosecurity: €6,000<br />
+                        Oyster shells: In kind + incentives
+                    </p>
+                </div>
+                <div class="objective-card" style="border-left: 4px solid #27ae60; padding: 1.5rem;">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Monitoring Costs</h4>
+                    <p style="font-size: 0.85rem; text-align: left;">
+                        <strong>€239,000</strong><br />
+                        Equipment: €4,000<br />
+                        Research divers: €170,000<br />
+                        Boat rental: €50,000<br />
+                        Lab analysis + personnel: €15,000
+                    </p>
+                </div>
+                <div class="objective-card" style="border-left: 4px solid #e67e22; padding: 1.5rem;">
+                    <div class="icon"><i class="fas fa-bullhorn"></i></div>
+                    <h4>Communication Costs</h4>
+                    <p style="font-size: 0.85rem; text-align: left;">
+                        <strong>€26,000</strong><br />
+                        Seminars: €6,000<br />
+                        Social promotion: €10,000<br />
+                        Workshops: €10,000
+                    </p>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 1.1rem; font-weight: 700; color: #1a5276;">
+                Estimated Total Budget: <span style="color: #1abc9c;">≈ €450,000</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FUNDING OPPORTUNITIES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Funding Opportunities</h2>
+            <p>
+                The following funding sources were identified as potential mechanisms for a future implementation of the restoration proposal:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-leaf"></i></div>
+                    <h4 style="font-size: 0.9rem;">LIFE Programme</h4>
+                    <p style="font-size: 0.8rem;">EU funding for environment and climate</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-globe-europe"></i></div>
+                    <h4 style="font-size: 0.9rem;">Horizon Europe</h4>
+                    <p style="font-size: 0.8rem;">EU research and innovation framework</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-water"></i></div>
+                    <h4 style="font-size: 0.9rem;">Interreg Euro-MED</h4>
+                    <p style="font-size: 0.8rem;">European territorial cooperation</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-flask"></i></div>
+                    <h4 style="font-size: 0.9rem;">NBFC</h4>
+                    <p style="font-size: 0.8rem;">National Biodiversity Future Centre</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h4 style="font-size: 0.9rem;">Private Investors</h4>
+                    <p style="font-size: 0.8rem;">Corporate sponsorship and foundations</p>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-donate"></i></div>
+                    <h4 style="font-size: 0.9rem;">Donations &amp; Merchandising</h4>
+                    <p style="font-size: 0.8rem;">Public crowdfunding and merchandise sales</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- EXPECTED ECOSYSTEM SERVICES - CORRETTO -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Expected Ecosystem Services</h2>
+            <p>
+                If implemented successfully, the restoration is expected to provide the following ecosystem services:
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0;">
+                <div>
+                    <h4 style="font-family: 'Playfair Display', serif; color: #1a5276; border-bottom: 2px solid #2e86c1; padding-bottom: 0.3rem;">
+                        <i class="fas fa-hand-holding-heart" style="color: #2e86c1; margin-right: 0.5rem;"></i>Supporting
+                    </h4>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; font-size: 0.95rem; color: #2c3e50; line-height: 1.8;">
+                        <li>Habitat creation</li>
+                        <li>Biodiversity enhancement</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-family: 'Playfair Display', serif; color: #1a5276; border-bottom: 2px solid #27ae60; padding-bottom: 0.3rem;">
+                        <i class="fas fa-utensils" style="color: #27ae60; margin-right: 0.5rem;"></i>Provisioning
+                    </h4>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; font-size: 0.95rem; color: #2c3e50; line-height: 1.8;">
+                        <li>Fish production</li>
+                        <li>Spillover effects for fisheries</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-family: 'Playfair Display', serif; color: #1a5276; border-bottom: 2px solid #1abc9c; padding-bottom: 0.3rem;">
+                        <i class="fas fa-shield-alt" style="color: #1abc9c; margin-right: 0.5rem;"></i>Regulating
+                    </h4>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; font-size: 0.95rem; color: #2c3e50; line-height: 1.8;">
+                        <li>Water clarification</li>
+                        <li>Carbon sequestration</li>
+                        <li>Shoreline protection</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-family: 'Playfair Display', serif; color: #1a5276; border-bottom: 2px solid #e67e22; padding-bottom: 0.3rem;">
+                        <i class="fas fa-gem" style="color: #e67e22; margin-right: 0.5rem;"></i>Cultural
+                    </h4>
+                    <ul style="list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; font-size: 0.95rem; color: #2c3e50; line-height: 1.8;">
+                        <li>Environmental education</li>
+                        <li>Ecotourism &amp; recreational diving</li>
+                        <li>Community wellbeing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SWOT ANALYSIS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>SWOT Analysis</h2>
+            <div style="text-align: center; margin-bottom: 1rem;">
+                <img src="../images/gallery/ost13.jpg" alt="SWOT Analysis" style="max-width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1);" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FUTURE PERSPECTIVES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Future Perspectives</h2>
+            <p>
+                This restoration proposal was conceived as a <strong>pilot restoration project</strong> covering approximately <strong>two hectares</strong>.
+                The aim of this pilot-scale approach is to <strong>demonstrate the effectiveness of our restoration plan</strong>
+                on a manageable scale, in order to obtain the funding necessary for a larger-scale project.
+            </p>
+            <p>
+                Successful implementation of this pilot could support <strong>future expansion at larger spatial scales</strong>
+                and contribute to native oyster restoration initiatives throughout the Adriatic Sea, helping to bring
+                back these important ecosystems with all the benefits they provide.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SCIENTIFIC SKILLS DEVELOPED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Scientific Skills Developed</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-leaf"></i></div>
+                    <h4 style="font-size: 0.9rem;">Marine Restoration Ecology</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-recycle"></i></div>
+                    <h4 style="font-size: 0.9rem;">Nature-Based Solutions</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-drafting-compass"></i></div>
+                    <h4 style="font-size: 0.9rem;">Conservation Planning</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-balance-scale"></i></div>
+                    <h4 style="font-size: 0.9rem;">BACI Experimental Design</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-tasks"></i></div>
+                    <h4 style="font-size: 0.9rem;">Project Management</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-users"></i></div>
+                    <h4 style="font-size: 0.9rem;">Stakeholder Engagement</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-chart-line"></i></div>
+                    <h4 style="font-size: 0.9rem;">Ecological Monitoring</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-coins"></i></div>
+                    <h4 style="font-size: 0.9rem;">Cost-Benefit Analysis</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h4 style="font-size: 0.9rem;">Funding Strategy</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-bullhorn"></i></div>
+                    <h4 style="font-size: 0.9rem;">Science Communication</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-clipboard-check"></i></div>
+                    <h4 style="font-size: 0.9rem;">Environmental Impact Assessment</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-ecosystem"></i></div>
+                    <h4 style="font-size: 0.9rem;">Ecosystem Services Evaluation</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <h4 style="font-size: 0.9rem;">Scientific Presentation</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- REFERENCES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>References</h2>
+            <p>
+                The restoration proposal was supported by current scientific literature and international restoration guidelines.
+                All methodologies and design choices were informed by published research, while the restoration framework
+                itself was independently developed by our team.
+            </p>
+            <ul class="ref-list">
+                <li>
+                    <strong>Bolton, A., &amp; Nedosyko, A. (2019).</strong>
+                    Windara shellfish reef construction. <em>Australasian Coasts and Ports 2019 Conference</em>.
+                </li>
+                <li>
+                    <strong>Branigan, S., Fitzsimons, J., &amp; Gillies, C. L. (2020).</strong>
+                    Modern middens: recycling shells for the restoration of a marine ecosystem in Victoria, Australia.
+                    <em>Ecological Management &amp; Restoration</em>, 21(3).
+                </li>
+                <li>
+                    <strong>Grabowski, J. H., et al. (2012).</strong>
+                    Economic valuation of ecosystem services provided by oyster reefs.
+                    <em>Bioscience</em>, 62(10), 900-909.
+                </li>
+                <li>
+                    <strong>Harding, S., Nelson, L., &amp; Glover, T. (2016).</strong>
+                    Solent oyster restoration project management plan. <em>Blue Marine Foundation</em>.
+                </li>
+                <li>
+                    <strong>Preston, J., et al. (2020).</strong>
+                    European native oyster habitat restoration handbook.
+                    <em>Zoological Society of London</em>.
+                </li>
+                <li>
+                    <strong>Robertshaw, G., Nedosyko, A., &amp; Bayram, A. (2019).</strong>
+                    Windara Reef: lessons learnt from the first large scale oyster reef restoration in Australia.
+                    <em>Australasian Coasts and Ports 2019 Conference</em>.
+                </li>
+                <li>
+                    <strong>Thurstan, R. H., et al. (2024).</strong>
+                    Records reveal the vast historical extent of European oyster reef ecosystems.
+                    <em>Nature Sustainability</em>, 1-11.
+                </li>
+                <li>
+                    <strong>Zu Ermgassen, P., et al. (2020).</strong>
+                    European guidelines on biosecurity in native oyster restoration.
+                    <em>Zoological Society of London</em>.
+                </li>
+                <li>
+                    <strong>Zu Ermgassen, P., et al. (2021).</strong>
+                    European native oyster habitat restoration monitoring handbook.
+                    <em>Zoological Society of London</em>.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FINAL TAKE-HOME MESSAGE -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper dark fade-in-section" style="padding: 5rem 2rem;">
+        <div class="inner">
+            <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <div style="font-size: 3rem; color: rgba(255,255,255,0.15); margin-bottom: 0.5rem;">
+                    <i class="fas fa-oyster"></i>
+                </div>
+                <h2 class="centered" style="color: #d4eaf7; margin-bottom: 1rem;">From Theory to Restoration</h2>
+                <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem; text-align: center; line-height: 1.8;">
+                    This project challenged me to transform ecological theory into a <strong>realistic restoration proposal</strong>,
+                    integrating marine ecology, ecosystem restoration, conservation planning, stakeholder engagement
+                    and long-term monitoring into a coherent framework inspired by current international restoration practices.
+                    Designing this project strengthened both my scientific reasoning and my ability to develop
+                    <strong>practical, evidence-based solutions</strong> for marine ecosystem recovery.
+                </p>
+            </div>
+            <div class="actions-row" style="margin-top: 2.5rem;">
+                <a href="../index.html#portfolio" class="button outline-light">
+                    <i class="fas fa-arrow-left icon"></i> Back to Portfolio
+                </a>
+                <a href="#download" class="button accent">
+                    <i class="fas fa-file-pdf icon"></i> Download Project
+                </a>
+                <a href="project7.html" class="button outline-light">
+                    Next Project <i class="fas fa-arrow-right icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- DOWNLOAD SECTION (hidden anchor) -->
+    <!-- ================================================================ -->
+    <div id="download" style="scroll-margin-top: 80px;"></div>
+    <section class="section-wrapper grey fade-in-section" style="padding-top: 2rem; padding-bottom: 3rem;">
+        <div class="inner" style="text-align: center;">
+            <h2 class="centered">Download Project</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem auto;">
+                Download the complete Oyster Restoration Project proposal including detailed methodology, cost analysis, monitoring programme and stakeholder engagement strategy.
+            </p>
+            <ul class="actions">
+                <li>
+                    <a href="../documents/oyster-restoration-proposal-orbita.pdf" class="button accent" target="_blank">
+                        <i class="fas fa-file-pdf icon"></i> Download PDF
+                    </a>
+                </li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">
+                PDF document · Restoration Proposal · 3.8 MB
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+
+            // ============================================================
+            // SLIDESHOW HELPER
+            // ============================================================
+            function createSlideshow(containerId, prevBtnId, nextBtnId, dotsId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                const slides = container.querySelectorAll('.slide-img');
+                const prevBtn = document.getElementById(prevBtnId);
+                const nextBtn = document.getElementById(nextBtnId);
+                const dotsContainer = document.getElementById(dotsId);
+                const dots = dotsContainer ? dotsContainer.querySelectorAll('.dot') : [];
+                let currentIndex = 0;
+                let interval;
+
+                function goTo(index) {
+                    slides.forEach((slide, i) => {
+                        slide.classList.toggle('active', i === index);
+                    });
+                    dots.forEach((dot, i) => {
+                        dot.classList.toggle('active', i === index);
+                    });
+                    currentIndex = index;
+                    resetInterval();
+                }
+
+                function next() {
+                    goTo((currentIndex + 1) % slides.length);
+                }
+
+                function prev() {
+                    goTo((currentIndex - 1 + slides.length) % slides.length);
+                }
+
+                function resetInterval() {
+                    if (interval) clearInterval(interval);
+                    interval = setInterval(next, 4000);
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        prev();
+                    });
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        next();
+                    });
+                }
+
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', function() {
+                        goTo(index);
+                    });
+                });
+
+                if (container) {
+                    container.addEventListener('mouseenter', function() {
+                        if (interval) clearInterval(interval);
+                    });
+
+                    container.addEventListener('mouseleave', function() {
+                        resetInterval();
+                    });
+                }
+
+                resetInterval();
+                return { goTo, next, prev };
+            }
+
+            // Avvia tutti gli slideshow
+            createSlideshow('gallerySlideshow1', 'slideshow1Prev', 'slideshow1Next', 'slideshow1Dots');
+            createSlideshow('gallerySlideshow2', 'slideshow2Prev', 'slideshow2Next', 'slideshow2Dots');
+            createSlideshow('gallerySlideshow3', 'slideshow3Prev', 'slideshow3Next', 'slideshow3Dots');
+
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+
+            // ============================================================
+            // SCROLL TO DOWNLOAD ANCHOR
+            // ============================================================
+            document.querySelectorAll('a[href="#download"]').forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    var target = document.getElementById('download');
+                    if (target) {
+                        var offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

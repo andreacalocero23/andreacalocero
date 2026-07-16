@@ -1,0 +1,353 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Andrea Calocero - EUREMAP Summer School</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background: #eaf2f8; color: #2c3e50; padding-top: 60px; font-size: 14px; }
+        
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(14, 47, 68, 0.92); backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+        #navbar .nav-left { display: flex; align-items: center; }
+        #navbar .nav-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; opacity: 0.85; }
+        #navbar .nav-links { display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; justify-content: flex-end; align-items: center; }
+        #navbar a { color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.3rem 0.6rem; border-radius: 15px; transition: all 0.3s ease; opacity: 0.6; }
+        #navbar a:hover { opacity: 1; background: rgba(46, 134, 193, 0.25); }
+        #navbar a.active { opacity: 1; background: rgba(46, 134, 193, 0.35); }
+        @media screen and (max-width: 768px) {
+            #navbar { padding: 0.3rem 1rem; flex-direction: column; gap: 0.2rem; }
+            #navbar .nav-left { width: 100%; justify-content: center; }
+            #navbar .nav-links { justify-content: center; gap: 0.1rem 0.5rem; }
+            #navbar a { font-size: 0.55rem; padding: 0.2rem 0.5rem; }
+            body { padding-top: 80px; }
+        }
+        
+        .wrapper { padding: 3.5rem 2rem; }
+        .wrapper.style1 { background: #eaf2f8; }
+        .wrapper .inner { max-width: 1000px; margin: 0 auto; }
+        .wrapper .inner h2 { font-size: 2.6rem; font-weight: 900; color: #1a5276; text-align: center; margin-bottom: 0.3rem; }
+        .wrapper .inner .subtitle { text-align: center; font-size: 1.1rem; font-weight: 400; color: #5d6d7e; margin-bottom: 1.5rem; }
+        .wrapper .inner .cert-image { margin: 2rem auto; border-radius: 12px; overflow: hidden; text-align: center; max-width: 700px; }
+        .wrapper .inner .cert-image img { width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+        .wrapper .inner .description { text-align: justify; font-weight: 700; line-height: 1.8; color: #2c3e50; max-width: 850px; margin: 0 auto; font-size: 0.95rem; }
+        .wrapper .inner .description p { margin-bottom: 1rem; }
+        .wrapper .inner .description ul { margin: 0.5rem 0 1rem 1.5rem; }
+        .wrapper .inner .description ul li { margin-bottom: 0.2rem; }
+        .wrapper .inner .description a { color: #2e86c1; text-decoration: none; font-weight: 700; }
+        .wrapper .inner .description a:hover { color: #1a5276; text-decoration: underline; }
+        
+        .download-area { text-align: center; margin: 2rem 0; }
+        .download-area .button { max-width: 280px; background: #1abc9c; box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4); }
+        .download-area .button:hover { background: #16a085; }
+        .download-area .download-note { font-size: 0.75rem; color: #5d6d7e; margin-top: 0.3rem; font-style: italic; }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 850px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        .slideshow-container .slide {
+            display: none;
+            width: 100%;
+        }
+        .slideshow-container .slide.active {
+            display: block;
+        }
+        .slideshow-container .slide img {
+            width: 100%;
+            display: block;
+        }
+        
+        .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Arial', sans-serif;
+            line-height: 1;
+            padding: 0;
+        }
+        .slideshow-btn:hover {
+            background: rgba(255,255,255,0.3);
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.4);
+        }
+        .slideshow-btn.prev { left: 12px; }
+        .slideshow-btn.next { right: 12px; }
+        
+        .ostend-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem auto 2rem auto;
+            max-width: 400px;
+            position: relative;
+        }
+        .ostend-container .ostend-photo {
+            width: 180px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            border: 3px solid #ffffff;
+        }
+        .ostend-container .ostend-photo:first-child {
+            transform: rotate(-8deg) translateY(5px);
+            z-index: 1;
+        }
+        .ostend-container .ostend-photo:last-child {
+            transform: rotate(8deg) translateY(-5px);
+            z-index: 2;
+        }
+        .ostend-container .ostend-photo:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 3;
+        }
+        .ostend-container .ostend-photo img {
+            width: 100%;
+            border-radius: 10px;
+            display: block;
+        }
+        .ostend-label {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5d6d7e;
+            font-style: italic;
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #2e86c1; color: #ffffff !important;
+            padding: 0.7rem 2.2rem; border-radius: 30px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; border: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer; text-align: center; min-height: 42px; line-height: 1.2;
+            font-size: 0.8rem;
+        }
+        .button:hover { background: #1a5276; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5); }
+        .actions { list-style: none; padding: 0; margin: 2rem 0 0 0; text-align: center; }
+        .actions li { margin-bottom: 0.5rem; display: flex; justify-content: center; }
+        
+        footer {
+            background: #0e2f44; color: #ffffff; padding: 1.5rem 2rem; text-align: center;
+        }
+        footer .inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        footer .footer-left { text-align: left; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-left .footer-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; }
+        footer .footer-left .footer-tagline { font-size: 0.7rem; opacity: 0.6; font-weight: 300; letter-spacing: 0.5px; }
+        footer .footer-right { text-align: right; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-right .get-in-touch { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #aed6f1; }
+        footer .footer-right .footer-email { font-size: 0.75rem; color: #2e86c1; text-decoration: none; transition: color 0.3s ease; }
+        footer .footer-right .footer-email:hover { color: #ffffff; }
+        footer .footer-right .footer-open { font-size: 0.65rem; opacity: 0.5; font-style: italic; }
+        footer .footer-icons { display: flex; gap: 0.8rem; margin-top: 0.2rem; justify-content: flex-end; }
+        footer .footer-icons a { color: #2e86c1 !important; font-size: 1.2rem; transition: all 0.3s ease; text-decoration: none; }
+        footer .footer-icons a:hover { color: #ffffff !important; transform: scale(1.1); }
+        @media screen and (max-width: 768px) {
+            footer .inner { flex-direction: column; text-align: center; gap: 0.8rem; }
+            footer .footer-left { text-align: center; align-items: center; }
+            footer .footer-right { text-align: center; align-items: center; }
+            footer .footer-icons { justify-content: center; }
+            .slideshow-btn { width: 32px; height: 32px; font-size: 0.9rem; }
+            .slideshow-btn.prev { left: 8px; }
+            .slideshow-btn.next { right: 8px; }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .wrapper { padding: 2rem 1rem; }
+            .wrapper .inner h2 { font-size: 2rem; }
+            .ostend-container .ostend-photo { width: 120px; }
+            .slideshow-container { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-left"><span class="nav-name">Andrea Calocero</span></div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#resume">Resume</a>
+            <a href="../index.html#education">Education</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#certifications">Certifications</a>
+            <a href="../index.html#awards">Awards</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="wrapper style1 align-center">
+        <div class="inner">
+            <h2>EUREMAP Summer School on Marine Bioprospecting</h2>
+            <div class="subtitle">Ghent University, Belgium · Marine@UGent</div>
+
+            <!-- Certificato -->
+            <div class="cert-image">
+                <img src="../images/details/CertificatoEUREMAP.png" alt="EUREMAP Summer School Certificate" />
+            </div>
+
+            <!-- Descrizione -->
+            <div class="description">
+                <p>
+                    Selected as an international participant in the <a href="https://euremap.eu/" target="_blank">EUREMAP</a> Summer School on Marine Bioprospecting, an intensive training programme organised by <a href="https://www.ugent.be/marine/en" target="_blank">Marine@UGent</a> (Ghent University) aimed at providing an interdisciplinary overview of the marine bioprospecting pipeline, from marine biodiversity exploration to the development of innovative and sustainable biotechnological applications.
+                </p>
+                <p>
+                    The programme combined lectures, laboratory training, technical visits and discussions with leading researchers and industry professionals, covering topics including marine biotechnology, marine natural products, the Nagoya Protocol, the BBNJ Agreement, research valorisation, intellectual property, and the translation of scientific discoveries into industrial applications.
+                </p>
+                <p>
+                    Practical laboratory sessions provided hands-on experience with analytical techniques commonly used in marine bioprospecting, including:
+                </p>
+                <ul>
+                    <li>Assessment of temperature effects on the phenolic content of macroalgae.</li>
+                    <li>Extraction and quantification of R-phycoerythrin from red seaweeds.</li>
+                    <li>Detection of microbial siderophore production using the Chrome Azurol S (CAS) assay.</li>
+                </ul>
+                <p>
+                    The programme also included technical visits to Marine@UGent research laboratories, the Bio Base Europe Pilot Plant, and Tech Lane Ghent Science Park, offering direct insight into how academic research is transferred to industrial-scale innovation and commercialization.
+                </p>
+                <p>
+                    Beyond the technical training, the Summer School strengthened my understanding of the potential role of marine bioprospecting in supporting marine ecology, biodiversity conservation and ecosystem restoration through the sustainable use of marine biological resources. It also provided an excellent opportunity to collaborate and exchange ideas with MSc students, PhD candidates, researchers and professionals from diverse scientific backgrounds and countries, fostering international networking and interdisciplinary collaboration.
+                </p>
+            </div>
+
+            <!-- DOWNLOAD PROGRAMME -->
+            <div class="download-area">
+                <a href="../files/EUREMAP_Programme.pdf" class="button" target="_blank">
+                    📄 Download Programme
+                </a>
+                <p class="download-note">Full programme with all speakers and sessions</p>
+            </div>
+
+            <!-- Foto Ostend a ventaglio -->
+            <div class="ostend-container">
+                <div class="ostend-photo">
+                    <img src="../images/details/ostend1.jpg" alt="Ostend, Belgium" />
+                </div>
+                <div class="ostend-photo">
+                    <img src="../images/details/ostend2.jpg" alt="Ostend, Belgium" />
+                </div>
+            </div>
+            <div class="ostend-label">Ostend, Belgium · Summer School Location</div>
+
+            <!-- Slideshow 8 immagini -->
+            <div class="slideshow-container" id="slideshow">
+                <div class="slide active"><img src="../images/details/euremap1.jpg" alt="EUREMAP 1" /></div>
+                <div class="slide"><img src="../images/details/euremap2.jpg" alt="EUREMAP 2" /></div>
+                <div class="slide"><img src="../images/details/euremap3.jpg" alt="EUREMAP 3" /></div>
+                <div class="slide"><img src="../images/details/euremap4.jpg" alt="EUREMAP 4" /></div>
+                <div class="slide"><img src="../images/details/euremap5.jpg" alt="EUREMAP 5" /></div>
+                <div class="slide"><img src="../images/details/euremap6.jpg" alt="EUREMAP 6" /></div>
+                <div class="slide"><img src="../images/details/euremap7.jpg" alt="EUREMAP 7" /></div>
+                <div class="slide"><img src="../images/details/euremap8.jpg" alt="EUREMAP 8" /></div>
+                
+                <button class="slideshow-btn prev" id="prevBtn" aria-label="Previous">‹</button>
+                <button class="slideshow-btn next" id="nextBtn" aria-label="Next">›</button>
+            </div>
+
+            <!-- Torna indietro -->
+            <ul class="actions">
+                <li><a href="../index.html#education" class="button">← Back to Education</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoq" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slideshow
+            var slides = document.querySelectorAll('.slideshow-container .slide');
+            var current = 0;
+            var total = slides.length;
+            var interval;
+            
+            function goTo(index) {
+                slides.forEach(function(slide) {
+                    slide.classList.remove('active');
+                });
+                slides[index].classList.add('active');
+                current = index;
+                resetInterval();
+            }
+            
+            function nextSlide() {
+                var next = (current + 1) % total;
+                goTo(next);
+            }
+            
+            function prevSlide() {
+                var prev = (current - 1 + total) % total;
+                goTo(prev);
+            }
+            
+            function resetInterval() {
+                if (interval) clearInterval(interval);
+                interval = setInterval(nextSlide, 5000);
+            }
+            
+            document.getElementById('prevBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                prevSlide();
+            });
+            
+            document.getElementById('nextBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                nextSlide();
+            });
+            
+            resetInterval();
+        });
+    </script>
+
+</body>
+</html>

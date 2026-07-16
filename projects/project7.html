@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>GIS-Based Spatial Analysis of Loggerhead Turtle Bycatch Risk · Andrea Calocero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ================================================================ */
+        /* RESET & BASE */
+        /* ================================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: #eaf2f8;
+            color: #2c3e50;
+            padding-top: 60px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            font-size: 14px;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ================================================================ */
+        /* NAVBAR */
+        /* ================================================================ */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(14, 47, 68, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+
+        #navbar .nav-left {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar .nav-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.2rem 0.8rem;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        #navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        #navbar a:hover {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.25);
+        }
+
+        #navbar a.active {
+            opacity: 1;
+            background: rgba(46, 134, 193, 0.35);
+        }
+
+        @media screen and (max-width: 768px) {
+            #navbar {
+                padding: 0.3rem 1rem;
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            #navbar .nav-left {
+                width: 100%;
+                justify-content: center;
+            }
+            #navbar .nav-links {
+                justify-content: center;
+                gap: 0.1rem 0.5rem;
+            }
+            #navbar a {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            body {
+                padding-top: 80px;
+            }
+        }
+
+        /* ================================================================ */
+        /* HERO */
+        /* ================================================================ */
+        .project-hero {
+            position: relative;
+            height: 85vh;
+            min-height: 550px;
+            background: #0e2f44;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .project-hero .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('../images/gallery/bycatch.jpg') center center / cover no-repeat;
+            opacity: 0.35;
+            z-index: 0;
+        }
+
+        .project-hero .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(14,47,68,0.8) 0%, rgba(26,82,118,0.5) 100%);
+            z-index: 1;
+        }
+
+        .project-hero .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .project-hero .hero-content .badge {
+            display: inline-block;
+            background: rgba(26, 188, 156, 0.2);
+            border: 1px solid rgba(26, 188, 156, 0.3);
+            color: #76d7c4;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 4px 20px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .project-hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 10px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .project-hero .hero-content .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #76d7c4;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .project-hero .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .project-hero .hero-actions .button {
+            min-width: 180px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .project-hero {
+                height: 60vh;
+                min-height: 400px;
+            }
+            .project-hero .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .project-hero .hero-content .subtitle {
+                font-size: 1rem;
+            }
+            .project-hero .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .project-hero .hero-actions .button {
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* ================================================================ */
+        /* BREADCRUMB */
+        /* ================================================================ */
+        .breadcrumb {
+            background: #fff;
+            padding: 12px 0;
+            border-bottom: 1px solid #d5dfe8;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb a {
+            color: #1a5276;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #7f8c8d;
+        }
+
+        /* ================================================================ */
+        /* SECTION STYLES */
+        /* ================================================================ */
+        .section-wrapper {
+            padding: 4rem 2rem;
+        }
+
+        .section-wrapper.light {
+            background: #ffffff;
+        }
+
+        .section-wrapper.grey {
+            background: #f7fafc;
+        }
+
+        .section-wrapper.dark {
+            background: #0e2f44;
+            color: #ffffff;
+        }
+
+        .section-wrapper .inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-wrapper .inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #1a5276;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-wrapper .inner h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+
+        .section-wrapper .inner h2.centered {
+            text-align: center;
+        }
+
+        .section-wrapper .inner h2.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-wrapper .inner p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #34495e;
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .section-wrapper .inner p strong {
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .section-wrapper.dark .inner h2 {
+            color: #d4eaf7;
+        }
+
+        .section-wrapper.dark .inner h2::after {
+            background: linear-gradient(90deg, #1abc9c, #76d7c4);
+        }
+
+        .section-wrapper.dark .inner p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ================================================================ */
+        /* FADE-IN ANIMATION */
+        /* ================================================================ */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ================================================================ */
+        /* INFO CARDS */
+        /* ================================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: #eaf2f8;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #1abc9c;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .info-card .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #5d6d7e;
+            margin-bottom: 4px;
+        }
+
+        .info-card .value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1a5276;
+        }
+
+        /* ================================================================ */
+        /* TWO COLUMN LAYOUT */
+        /* ================================================================ */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .two-column .col p {
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* OBJECTIVE CARDS */
+        /* ================================================================ */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .objective-card {
+            background: #ffffff;
+            padding: 1.8rem 1.8rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        .objective-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.8rem;
+        }
+
+        .objective-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            color: #1a5276;
+            margin-bottom: 0.5rem;
+        }
+
+        .objective-card p {
+            font-size: 0.9rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ================================================================ */
+        /* WORKFLOW */
+        /* ================================================================ */
+        .workflow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(26, 188, 156, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(26, 188, 156, 0.15);
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            background: #ffffff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .workflow-step:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .workflow-step .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #1abc9c;
+            color: #ffffff;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .workflow-step .step-icon {
+            font-size: 1.4rem;
+            color: #1abc9c;
+            width: 40px;
+            text-align: center;
+        }
+
+        .workflow-step .step-text {
+            font-weight: 600;
+            color: #1a5276;
+            font-size: 0.9rem;
+        }
+
+        .workflow-arrow {
+            font-size: 1.2rem;
+            color: #1abc9c;
+        }
+
+        @media screen and (max-width: 600px) {
+            .workflow-step {
+                padding: 0.6rem 1rem;
+                border-radius: 30px;
+            }
+            .workflow-step .step-text {
+                font-size: 0.8rem;
+            }
+            .workflow-step .step-number {
+                width: 30px;
+                height: 30px;
+                font-size: 0.75rem;
+            }
+            .workflow-step .step-icon {
+                font-size: 1.2rem;
+                width: 30px;
+            }
+        }
+
+        /* ================================================================ */
+        /* DATA SOURCE CARDS */
+        /* ================================================================ */
+        .datasource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .datasource-card {
+            background: #ffffff;
+            padding: 1.2rem 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .datasource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .datasource-card .icon {
+            font-size: 2.2rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .datasource-card h5 {
+            font-size: 0.85rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        .datasource-card p {
+            font-size: 0.75rem;
+            color: #5d6d7e;
+            margin: 0.2rem 0 0 0;
+        }
+
+        /* ================================================================ */
+        /* MAP GALLERY - con onclick che apre in nuova scheda */
+        /* ================================================================ */
+        .map-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .map-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .map-card .map-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background: #d4e6f1;
+        }
+
+        .map-card .map-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .map-card:hover .map-image img {
+            transform: scale(1.05);
+        }
+
+        .map-card .map-content {
+            padding: 1.2rem 1.5rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-card .map-content h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #1a5276;
+            margin-bottom: 0.3rem;
+        }
+
+        .map-card .map-content p {
+            font-size: 0.85rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0 0 1rem 0;
+            text-align: justify;
+            flex: 1;
+        }
+
+        .map-card .map-content .map-badge {
+            display: inline-block;
+            background: #1abc9c;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.4rem 1.2rem;
+            border-radius: 30px;
+            text-align: center;
+            align-self: center;
+            min-width: 140px;
+            transition: all 0.3s ease;
+        }
+
+        .map-card:hover .map-content .map-badge {
+            background: #16a085;
+            transform: scale(1.02);
+        }
+
+        @media screen and (max-width: 768px) {
+            .map-gallery {
+                grid-template-columns: 1fr;
+            }
+            .map-card .map-content .map-badge {
+                min-width: 120px;
+                font-size: 0.7rem;
+                padding: 0.3rem 1rem;
+            }
+        }
+
+        /* ================================================================ */
+        /* FINDINGS */
+        /* ================================================================ */
+        .findings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .finding-card {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-left: 4px solid #1abc9c;
+            transition: all 0.3s ease;
+        }
+
+        .finding-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .finding-card .icon {
+            font-size: 1.4rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .finding-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #1a5276;
+            margin-bottom: 0.3rem;
+        }
+
+        .finding-card p {
+            font-size: 0.88rem;
+            color: #2c3e50;
+            line-height: 1.6;
+            margin: 0;
+            text-align: justify;
+        }
+
+        @media screen and (max-width: 600px) {
+            .findings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ================================================================ */
+        /* SKILLS GRID */
+        /* ================================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-item {
+            background: #ffffff;
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .skill-item .icon {
+            font-size: 1.8rem;
+            color: #1abc9c;
+            margin-bottom: 0.3rem;
+        }
+
+        .skill-item h5 {
+            font-size: 0.82rem;
+            color: #1a5276;
+            font-weight: 700;
+        }
+
+        /* ================================================================ */
+        /* BUTTONS */
+        /* ================================================================ */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #2e86c1;
+            color: #ffffff !important;
+            padding: 0.7rem 2.2rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer;
+            text-align: center;
+            min-height: 42px;
+            line-height: 1.2;
+            font-size: 0.8rem;
+            gap: 0.6rem;
+        }
+
+        .button:hover {
+            background: #1a5276;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5);
+        }
+
+        .button.accent {
+            background: #1abc9c;
+            box-shadow: 0 4px 15px rgba(26, 188, 156, 0.4);
+        }
+
+        .button.accent:hover {
+            background: #16a085;
+        }
+
+        .button.outline-light {
+            background: transparent;
+            box-shadow: none;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #ffffff !important;
+        }
+
+        .button.outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #ffffff;
+        }
+
+        .button .icon {
+            font-size: 1.1rem;
+        }
+
+        .actions {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0 0;
+            text-align: center;
+        }
+
+        .actions li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .actions .button {
+            margin: 0 auto;
+        }
+
+        .actions-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ================================================================ */
+        /* REFERENCES - Collapsible */
+        /* ================================================================ */
+        .ref-toggle {
+            background: #1a5276;
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Lato', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 0.5rem 0;
+        }
+
+        .ref-toggle:hover {
+            background: #2e86c1;
+        }
+
+        .ref-toggle .icon {
+            font-size: 1.2rem;
+        }
+
+        .ref-content {
+            display: none;
+            padding: 1.5rem 0;
+            border-top: 2px solid #1abc9c;
+            margin-top: 1rem;
+        }
+
+        .ref-content.open {
+            display: block;
+        }
+
+        .ref-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ref-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #f0f4f8;
+            font-size: 0.85rem;
+            color: #34495e;
+            line-height: 1.6;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .ref-list li::before {
+            content: '📄';
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+        }
+
+        .ref-list li:last-child {
+            border-bottom: none;
+        }
+
+        .ref-list li strong {
+            color: #1a5276;
+        }
+
+        .ref-list li a {
+            color: #1a5276;
+            text-decoration: none;
+        }
+
+        .ref-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* ================================================================ */
+        /* FOOTER */
+        /* ================================================================ */
+        footer {
+            background: #0e2f44;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        footer .inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer .footer-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-left .footer-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #d4eaf7;
+            letter-spacing: 1px;
+        }
+
+        footer .footer-left .footer-tagline {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        footer .footer-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        footer .footer-right .get-in-touch {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aed6f1;
+        }
+
+        footer .footer-right .footer-email {
+            font-size: 0.75rem;
+            color: #2e86c1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-right .footer-email:hover {
+            color: #ffffff;
+        }
+
+        footer .footer-right .footer-open {
+            font-size: 0.65rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        footer .footer-icons {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.2rem;
+            justify-content: flex-end;
+        }
+
+        footer .footer-icons a {
+            color: #2e86c1 !important;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        footer .footer-icons a:hover {
+            color: #ffffff !important;
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 768px) {
+            footer .inner {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.8rem;
+            }
+            footer .footer-left {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-right {
+                text-align: center;
+                align-items: center;
+            }
+            footer .footer-icons {
+                justify-content: center;
+            }
+        }
+
+        /* ================================================================ */
+        /* RESPONSIVE */
+        /* ================================================================ */
+        @media screen and (max-width: 992px) {
+            .section-wrapper {
+                padding: 2.5rem 1rem;
+            }
+            .section-wrapper .inner h2 {
+                font-size: 1.8rem;
+            }
+            .info-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+            .objectives-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            .map-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .section-wrapper .inner h2 {
+                font-size: 1.5rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .info-card {
+                padding: 0.8rem 1rem;
+            }
+            .info-card .value {
+                font-size: 0.85rem;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .map-gallery {
+                grid-template-columns: 1fr;
+            }
+            .findings-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .datasource-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================================================================ -->
+    <!-- NAVBAR -->
+    <!-- ================================================================ -->
+    <nav id="navbar">
+        <div class="nav-left">
+            <span class="nav-name">Andrea Calocero</span>
+        </div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO -->
+    <!-- ================================================================ -->
+    <section class="project-hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="badge">Marine Spatial Planning</span>
+            <h1>GIS-Based Spatial Analysis of Loggerhead Turtle Bycatch Risk</h1>
+            <p class="subtitle">Marine Spatial Planning &amp; Geographic Information Systems Project</p>
+            <div class="hero-actions">
+                <a href="#report" class="button outline-light">
+                    <i class="fas fa-file-alt icon"></i> View Report
+                </a>
+                <a href="#maps" class="button accent">
+                    <i class="fas fa-map icon"></i> Explore Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- BREADCRUMB -->
+    <!-- ================================================================ -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">🏠 Home</a> &nbsp;›&nbsp;
+            <a href="../index.html#portfolio">Portfolio</a> &nbsp;›&nbsp;
+            <span>GIS-Based Spatial Analysis of Loggerhead Turtle Bycatch Risk</span>
+        </div>
+    </div>
+
+    <!-- ================================================================ -->
+    <!-- INTRODUCTION -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <div style="display: flex; align-items: flex-start; gap: 1rem; background: #eaf2f8; padding: 1.5rem 2rem; border-radius: 12px; border-left: 5px solid #1abc9c; margin-bottom: 2rem;">
+                <div style="font-size: 2rem; color: #1abc9c; flex-shrink: 0; margin-top: 0.2rem;">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <div>
+                    <h4 style="font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #1a5276; margin-bottom: 0.3rem;">Academic Context</h4>
+                    <p style="font-size: 0.95rem; color: #2c3e50; line-height: 1.7; margin: 0; text-align: justify;">
+                        This project was developed during the <strong>GIS and Marine Spatial Planning</strong> course as an academic exercise aimed at applying Geographic Information Systems (GIS) to a real marine conservation issue. The objective was to integrate multiple spatial datasets, produce thematic GIS maps and identify potential bycatch hotspots for the loggerhead turtle (<em>Caretta caretta</em>) in the Northern Adriatic Sea, demonstrating how spatial analysis can support ecosystem-based marine management and conservation planning.
+                    </p>
+                </div>
+            </div>
+
+            <div class="two-column">
+                <div class="col">
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">About the Project</h2>
+                    <p>
+                        <em>Caretta caretta</em>, the loggerhead turtle, is the most abundant sea turtle species in the Mediterranean Sea. The northern Adriatic Sea, particularly FAO GSA-17, is considered an <strong>essential foraging ground</strong> for this species, thanks to the high productivity sustained by the Po River discharges.
+                    </p>
+                    <p>
+                        However, this area is also one of the most <strong>overfished</strong> in the Mediterranean, with high fishing vessel density and several major Italian ports. <strong>Bycatch</strong> represents the major threat to <em>C. caretta</em> survival, with more than 10,000 accidental catches occurring annually in the northern Adriatic alone.
+                    </p>
+                    <p>
+                        This project integrated spatial data from multiple authoritative sources — EMODnet, GBIF, OBIS, GEBCO and the European Environment Agency — within <strong>QGIS</strong> to identify potential bycatch hotspots and evaluate the role of Natura 2000 protected areas in turtle conservation.
+                    </p>
+                </div>
+                <div class="col">
+                    <div style="background: #f7fafc; border-radius: 12px; padding: 1.5rem; border: 1px solid #e2e9f0;">
+                        <h4 style="font-family: 'Playfair Display', serif; color: #1a5276; margin-bottom: 1rem; border-bottom: 2px solid #1abc9c; padding-bottom: 0.5rem;">
+                            <i class="fas fa-clipboard-list" style="color: #1abc9c; margin-right: 0.5rem;"></i>Project Details
+                        </h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem;">
+                            <div><span style="font-weight: 700; color: #1a5276; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Project Type</span><br /><span style="font-size: 0.9rem;">Academic GIS Project</span></div>
+                            <div><span style="font-weight: 700; color: #1a5276; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Topic</span><br /><span style="font-size: 0.9rem;">Marine Spatial Planning</span></div>
+                            <div><span style="font-weight: 700; color: #1a5276; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Study Area</span><br /><span style="font-size: 0.9rem;">Northern Adriatic Sea (FAO GSA-17)</span></div>
+                            <div><span style="font-weight: 700; color: #1a5276; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Software</span><br /><span style="font-size: 0.9rem;">QGIS</span></div>
+                            <div style="grid-column: 1 / -1;"><span style="font-weight: 700; color: #1a5276; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Spatial Datasets</span><br /><span style="font-size: 0.9rem;">EMODnet · GBIF · OBIS · GEBCO</span></div>
+                            <div style="grid-column: 1 / -1;"><span style="font-weight: 700; color: #1a5276; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Outputs</span><br /><span style="font-size: 0.9rem;">3 GIS Maps · Scientific Report · Spatial Risk Assessment</span></div>
+                            <div style="grid-column: 1 / -1; padding-top: 0.5rem; border-top: 1px solid #e2e9f0; margin-top: 0.3rem;">
+                                <span style="font-weight: 700; color: #1a5276; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Timeline</span><br />
+                                <span style="font-size: 0.9rem;">🗺️ November 2023</span><br />
+                                <span style="font-size: 0.8rem; color: #5d6d7e;">University Polytechnic of Marche – GIS and Marine Spatial Planning Course</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- PROJECT OBJECTIVES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Project Objectives</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                    <h4>Investigate Spatial Overlap</h4>
+                    <p>Analyse the spatial relationship between loggerhead turtle distribution and fishing vessel density in the Northern Adriatic Sea.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h4>Identify Bycatch Hotspots</h4>
+                    <p>Locate areas with the highest potential bycatch risk through buffer analysis and spatial overlap assessment.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Evaluate Natura 2000 Role</h4>
+                    <p>Assess the extent to which existing Natura 2000 protected areas overlap with high-risk zones for turtle bycatch.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-chart-pie"></i></div>
+                    <h4>Demonstrate GIS Applications</h4>
+                    <p>Show how Geographic Information Systems can support evidence-based marine conservation and spatial planning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- GIS WORKFLOW -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>GIS Workflow</h2>
+            <div class="workflow">
+                <div class="workflow-step">
+                    <span class="step-number">1</span>
+                    <span class="step-icon"><i class="fas fa-book-open"></i></span>
+                    <span class="step-text">Scientific Literature Review</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">2</span>
+                    <span class="step-icon"><i class="fas fa-database"></i></span>
+                    <span class="step-text">Collection of Spatial Datasets</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">3</span>
+                    <span class="step-icon"><i class="fas fa-cogs"></i></span>
+                    <span class="step-text">Data Preprocessing in QGIS</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">4</span>
+                    <span class="step-icon"><i class="fas fa-map"></i></span>
+                    <span class="step-text">Production of Thematic Maps</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">5</span>
+                    <span class="step-icon"><i class="fas fa-merge"></i></span>
+                    <span class="step-text">Spatial Overlap Analysis</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">6</span>
+                    <span class="step-icon"><i class="fas fa-fire"></i></span>
+                    <span class="step-text">Identification of Bycatch Hotspots</span>
+                </div>
+                <div class="workflow-arrow"><i class="fas fa-chevron-down"></i></div>
+                <div class="workflow-step">
+                    <span class="step-number">7</span>
+                    <span class="step-icon"><i class="fas fa-clipboard-check"></i></span>
+                    <span class="step-text">Management Recommendations</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- DATA SOURCES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Data Sources</h2>
+            <p>
+                All spatial datasets were harmonized within <strong>QGIS</strong> before analysis. The following authoritative sources were used:
+            </p>
+            <div class="datasource-grid">
+                <div class="datasource-card">
+                    <div class="icon"><i class="fas fa-water"></i></div>
+                    <h5>EMODnet</h5>
+                    <p>Fishing vessel density</p>
+                </div>
+                <div class="datasource-card">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h5>Natura 2000</h5>
+                    <p>Protected areas (SPA &amp; SCI)</p>
+                </div>
+                <div class="datasource-card">
+                    <div class="icon"><i class="fas fa-ship"></i></div>
+                    <h5>Main Ports</h5>
+                    <p>Italian Adriatic ports</p>
+                </div>
+                <div class="datasource-card">
+                    <div class="icon"><i class="fas fa-turtle"></i></div>
+                    <h5>GBIF</h5>
+                    <p>Loggerhead turtle occurrences</p>
+                </div>
+                <div class="datasource-card">
+                    <div class="icon"><i class="fas fa-globe-europe"></i></div>
+                    <h5>OBIS</h5>
+                    <p>Marine biodiversity records</p>
+                </div>
+                <div class="datasource-card">
+                    <div class="icon"><i class="fas fa-mountain"></i></div>
+                    <h5>GEBCO</h5>
+                    <p>Bathymetry</p>
+                </div>
+                <div class="datasource-card">
+                    <div class="icon"><i class="fas fa-globe-americas"></i></div>
+                    <h5>European Environment Agency</h5>
+                    <p>Coastline</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- GIS ANALYSES -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>GIS Analyses</h2>
+            <div class="objectives-grid">
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-mountain"></i></div>
+                    <h4>Bathymetric Mapping</h4>
+                    <p>GEBCO bathymetry data were used to characterise the seafloor morphology of the Northern Adriatic.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-dot-circle"></i></div>
+                    <h4>Species Occurrence Mapping</h4>
+                    <p>GBIF and OBIS occurrence records were overlaid to visualise turtle distribution patterns.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-ship"></i></div>
+                    <h4>Fishing Vessel Density Mapping</h4>
+                    <p>EMODnet vessel density data were used to represent fishing effort across the study area.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-tree"></i></div>
+                    <h4>Protected Areas Mapping</h4>
+                    <p>Natura 2000 sites (SPA and SCI) were mapped to assess their spatial relationship with turtle habitats.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-expand"></i></div>
+                    <h4>Buffer Analysis</h4>
+                    <p>20 km buffers were generated around turtle sightings based on maximum daily movement speed.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-merge"></i></div>
+                    <h4>Spatial Overlap Analysis</h4>
+                    <p>Overlap between turtle buffers and high fishing effort areas was quantified.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-fire"></i></div>
+                    <h4>Hotspot Identification</h4>
+                    <p>Areas with the greatest overlap were identified as potential bycatch hotspots.</p>
+                </div>
+                <div class="objective-card">
+                    <div class="icon"><i class="fas fa-eye"></i></div>
+                    <h4>Risk Visualization</h4>
+                    <p>Results were visualised through thematic GIS maps for clear communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MAP GALLERY - con click che apre in nuova scheda -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" id="maps">
+        <div class="inner">
+            <h2>Interactive Map Gallery</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 1.5rem auto;">
+                Click on each map to explore the spatial patterns of turtle distribution, fishing activity and potential bycatch risk in the Northern Adriatic Sea.
+            </p>
+            <div class="map-gallery">
+                <div class="map-card" onclick="window.open('../images/gallery/map1.jpg', '_blank')">
+                    <div class="map-image">
+                        <img src="../images/gallery/map1.jpg" alt="Loggerhead turtle distribution and Natura 2000 network" />
+                    </div>
+                    <div class="map-content">
+                        <h4>Loggerhead Turtle Distribution &amp; Natura 2000</h4>
+                        <p>Distribution records from GBIF and OBIS were combined with Natura 2000 protected areas and bathymetry to visualize the spatial relationship between turtle occurrence and conservation measures.</p>
+                        <span class="map-badge"><i class="fas fa-expand" style="margin-right: 0.5rem;"></i>Click to enlarge</span>
+                    </div>
+                </div>
+                <div class="map-card" onclick="window.open('../images/gallery/map2.jpg', '_blank')">
+                    <div class="map-image">
+                        <img src="../images/gallery/map2.jpg" alt="Fishing activity and human pressure" />
+                    </div>
+                    <div class="map-content">
+                        <h4>Fishing Activity &amp; Human Pressure</h4>
+                        <p>Spatial distribution of fishing vessel density together with major ports highlights the intensity of fishing activities across the Northern Adriatic.</p>
+                        <span class="map-badge"><i class="fas fa-expand" style="margin-right: 0.5rem;"></i>Click to enlarge</span>
+                    </div>
+                </div>
+                <div class="map-card" onclick="window.open('../images/gallery/map3.jpg', '_blank')">
+                    <div class="map-image">
+                        <img src="../images/gallery/map3.jpg" alt="Potential bycatch hotspots" />
+                    </div>
+                    <div class="map-content">
+                        <h4>Potential Bycatch Hotspots</h4>
+                        <p>Buffers were generated around turtle sightings and high fishing effort areas to identify zones where the overlap between turtles and fisheries is greatest, providing a spatial proxy for bycatch risk.</p>
+                        <span class="map-badge"><i class="fas fa-expand" style="margin-right: 0.5rem;"></i>Click to enlarge</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MAIN FINDINGS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Main Findings</h2>
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <div class="icon"><i class="fas fa-location-dot"></i></div>
+                    <h4>Highest Overlap</h4>
+                    <p>The main bycatch hotspot was identified in the <strong>area between Ancona's harbour and the Po River delta</strong>, with the highest spatial coincidence between turtle habitats and fishing effort.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Strong Coincidence</h4>
+                    <p>There is a <strong>consistent overlapping</strong> between fishing activities and <em>C. caretta</em> habitats in FAO GSA-17, explaining the high bycatch rate of this area.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="icon"><i class="fas fa-shield"></i></div>
+                    <h4>Protected Areas</h4>
+                    <p>Natura 2000 sites <strong>only partially overlap</strong> with the highest-risk zones, suggesting that existing protected areas may not fully address bycatch risk.</p>
+                </div>
+                <div class="finding-card">
+                    <div class="icon"><i class="fas fa-bullseye"></i></div>
+                    <h4>GIS Effectiveness</h4>
+                    <p>GIS analysis <strong>effectively identified areas</strong> where mitigation measures — such as Turtle Excluder Devices (TEDs) or fishing effort restrictions — could be prioritised to reduce bycatch mortality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- MANAGEMENT IMPLICATIONS -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section">
+        <div class="inner">
+            <h2>Management Implications</h2>
+            <p>
+                The spatial analysis conducted in this project demonstrates how GIS can support <strong>evidence-based marine conservation</strong> and <strong>ecosystem-based management</strong>. The results highlight the importance of integrating spatial data into decision-making processes for:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-draw-polygon"></i></div>
+                    <h4 style="font-size: 0.9rem;">Marine Spatial Planning</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-umbrella"></i></div>
+                    <h4 style="font-size: 0.9rem;">MPA Management</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-fish"></i></div>
+                    <h4 style="font-size: 0.9rem;">Bycatch Mitigation</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-ship"></i></div>
+                    <h4 style="font-size: 0.9rem;">Spatial Fisheries Management</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-shield-alt"></i></div>
+                    <h4 style="font-size: 0.9rem;">Conservation Prioritization</h4>
+                </div>
+                <div class="objective-card" style="padding: 1rem;">
+                    <div class="icon" style="font-size: 1.6rem;"><i class="fas fa-gavel"></i></div>
+                    <h4 style="font-size: 0.9rem;">Evidence-Based Decision Making</h4>
+                </div>
+            </div>
+            <p>
+                The identification of bycatch hotspots through spatial analysis provides a <strong>scientific basis</strong> for implementing targeted conservation measures, such as Turtle Excluder Devices (TEDs), limiting haul duration, or establishing temporary fishing restrictions in areas with high turtle abundance.
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- SKILLS DEVELOPED -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Skills Developed</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-globe"></i></div>
+                    <h5>QGIS</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-map"></i></div>
+                    <h5>GIS Mapping</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-draw-polygon"></i></div>
+                    <h5>Marine Spatial Planning</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-compress-arrows-alt"></i></div>
+                    <h5>Spatial Analysis</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-expand"></i></div>
+                    <h5>Buffer Analysis</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-chart-bar"></i></div>
+                    <h5>Data Visualization</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-leaf"></i></div>
+                    <h5>Marine Conservation</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-book-open"></i></div>
+                    <h5>Scientific Literature Review</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-database"></i></div>
+                    <h5>Geospatial Data Integration</h5>
+                </div>
+                <div class="skill-item">
+                    <div class="icon"><i class="fas fa-satellite"></i></div>
+                    <h5>Environmental GIS</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- REPORT -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper grey fade-in-section" id="report">
+        <div class="inner" style="text-align: center;">
+            <h2 class="centered">Read Full Report</h2>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto 1.5rem auto;">
+                Download the complete GIS project report including detailed methodology, spatial analysis results and management recommendations.
+            </p>
+            <ul class="actions">
+                <li>
+                    <a href="../documents/report.pdf" class="button accent" target="_blank">
+                        <i class="fas fa-file-pdf icon"></i> Read Full Report
+                    </a>
+                </li>
+            </ul>
+            <p style="font-size: 0.8rem; color: #7f8c8d; margin-top: 0.5rem;">
+                PDF document · GIS Project Report · 1.8 MB
+            </p>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- REFERENCES - Collapsible -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper light fade-in-section">
+        <div class="inner">
+            <h2>Scientific References</h2>
+            <p>
+                The project was entirely developed using <strong>peer-reviewed scientific literature</strong> together with <strong>authoritative geospatial datasets</strong> from EMODnet, GBIF, OBIS and GEBCO.
+            </p>
+            <button class="ref-toggle" onclick="toggleReferences()">
+                <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                Show / Hide References
+            </button>
+            <div class="ref-content" id="refContent">
+                <ul class="ref-list">
+                    <li>
+                        <strong>Casale, P., Laurent, L., &amp; De Metrio, G. (2004).</strong>
+                        Incidental capture of marine turtles by the Italian trawl fishery in the north Adriatic Sea.
+                        <em>Biological Conservation</em>, 119(3), 287-295.
+                        <a href="https://doi.org/10.1016/j.biocon.2003.11.013" target="_blank">doi:10.1016/j.biocon.2003.11.013</a>
+                    </li>
+                    <li>
+                        <strong>Casale, P., et al. (2010).</strong>
+                        Sea turtle strandings reveal high anthropogenic mortality in Italian waters.
+                        <em>Aquatic Conservation: Marine and Freshwater Ecosystems</em>, 20(6), 611-620.
+                        <a href="https://doi.org/10.1002/aqc.1133" target="_blank">doi:10.1002/aqc.1133</a>
+                    </li>
+                    <li>
+                        <strong>Casale, P., et al. (2012).</strong>
+                        Foraging grounds, movement patterns and habitat connectivity of juvenile loggerhead turtles (<em>Caretta caretta</em>) tracked from the Adriatic Sea.
+                        <em>Marine Biology</em>, 159, 1527-1535.
+                        <a href="https://doi.org/10.1007/s00227-012-1937-2" target="_blank">doi:10.1007/s00227-012-1937-2</a>
+                    </li>
+                    <li>
+                        <strong>Fortuna, C. M., et al. (2018).</strong>
+                        The coherence of the European Union marine Natura 2000 network for wide-ranging charismatic species: a Mediterranean case study.
+                        <em>Frontiers in Marine Science</em>, 5, 356.
+                        <a href="https://doi.org/10.3389/fmars.2018.00356" target="_blank">doi:10.3389/fmars.2018.00356</a>
+                    </li>
+                    <li>
+                        <strong>Lucchetti, A., Pulcinella, J., Angelini, V., Pari, S., Russo, T., &amp; Cataudella, S. (2016).</strong>
+                        An interaction index to predict turtle bycatch in a Mediterranean bottom trawl fishery.
+                        <em>Ecological Indicators</em>, 60, 557-564.
+                        <a href="https://doi.org/10.1016/j.ecolind.2015.07.007" target="_blank">doi:10.1016/j.ecolind.2015.07.007</a>
+                    </li>
+                    <li>
+                        <strong>Lucchetti, A., Vasapollo, C., &amp; Virgili, M. (2017).</strong>
+                        Sea turtles' bycatch in the Adriatic Sea set net fisheries and possible hot-spot identification.
+                        <em>Aquatic Conservation: Marine and Freshwater Ecosystems</em>, 27(6), 1176-1185.
+                        <a href="https://doi.org/10.1002/aqc.2787" target="_blank">doi:10.1002/aqc.2787</a>
+                    </li>
+                    <li>
+                        <strong>Marisaldi, L., Torresan, A., &amp; Ferrari, A. (2023).</strong>
+                        The area south of the Po River delta (Italy) is a hot spot for strandings of loggerhead sea turtles.
+                        <em>Journal of the Marine Biological Association of the United Kingdom</em>, 103, e81.
+                        <a href="https://doi.org/10.1017/S002531542300070X" target="_blank">doi:10.1017/S002531542300070X</a>
+                    </li>
+                    <li>
+                        <strong>Pulcinella, J., et al. (2019).</strong>
+                        Bycatch of loggerhead turtle (<em>Caretta caretta</em>) in the Italian Adriatic midwater pair trawl fishery.
+                        <em>Frontiers in Marine Science</em>, 6, 365.
+                        <a href="https://doi.org/10.3389/fmars.2019.00365" target="_blank">doi:10.3389/fmars.2019.00365</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FINAL SECTION - BACK TO PORTFOLIO -->
+    <!-- ================================================================ -->
+    <section class="section-wrapper dark fade-in-section" style="padding: 5rem 2rem;">
+        <div class="inner">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <div style="font-size: 3rem; color: rgba(255,255,255,0.15); margin-bottom: 0.5rem;">
+                    <i class="fas fa-map"></i>
+                </div>
+                <h2 class="centered" style="color: #d4eaf7; margin-bottom: 1rem;">GIS for Marine Conservation</h2>
+                <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem; text-align: center; line-height: 1.8;">
+                    This project demonstrated how <strong>Geographic Information Systems</strong> can be applied to real-world marine conservation challenges, integrating spatial data from multiple sources to identify bycatch hotspots and support <strong>evidence-based decision making</strong> for the protection of threatened marine species.
+                </p>
+            </div>
+            <div class="actions-row" style="margin-top: 2.5rem;">
+                <a href="../index.html#portfolio" class="button outline-light">
+                    <i class="fas fa-arrow-left icon"></i> Back to Portfolio
+                </a>
+                <a href="project8.html" class="button accent">
+                    Next Project <i class="fas fa-arrow-right icon"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================ -->
+    <!-- FOOTER -->
+    <!-- ================================================================ -->
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ================================================================ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('loaded');
+
+            // ============================================================
+            // REFERENCES TOGGLE
+            // ============================================================
+            window.toggleReferences = function() {
+                var content = document.getElementById('refContent');
+                content.classList.toggle('open');
+                var icon = document.querySelector('.ref-toggle .icon i');
+                if (icon) {
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                }
+            };
+
+            // ============================================================
+            // FADE-IN AL SCROLL
+            // ============================================================
+            var fadeElements = document.querySelectorAll('.fade-in-section');
+
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>

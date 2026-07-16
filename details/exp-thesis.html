@@ -1,0 +1,1025 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Andrea Calocero - Master's Thesis Research</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background: #eaf2f8; color: #2c3e50; padding-top: 60px; font-size: 14px; }
+        
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(14, 47, 68, 0.92); backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+        #navbar .nav-left { display: flex; align-items: center; }
+        #navbar .nav-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; opacity: 0.85; }
+        #navbar .nav-links { display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; justify-content: flex-end; align-items: center; }
+        #navbar a { color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.3rem 0.6rem; border-radius: 15px; transition: all 0.3s ease; opacity: 0.6; }
+        #navbar a:hover { opacity: 1; background: rgba(46, 134, 193, 0.25); }
+        #navbar a.active { opacity: 1; background: rgba(46, 134, 193, 0.35); }
+        @media screen and (max-width: 768px) {
+            #navbar { padding: 0.3rem 1rem; flex-direction: column; gap: 0.2rem; }
+            #navbar .nav-left { width: 100%; justify-content: center; }
+            #navbar .nav-links { justify-content: center; gap: 0.1rem 0.5rem; }
+            #navbar a { font-size: 0.55rem; padding: 0.2rem 0.5rem; }
+            body { padding-top: 80px; }
+        }
+        
+        .wrapper { padding: 3.5rem 2rem; }
+        .wrapper.style1 { background: #eaf2f8; }
+        .wrapper .inner { max-width: 1000px; margin: 0 auto; }
+        
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 60vh;
+            background: linear-gradient(135deg, #0e2f44 0%, #1a5276 50%, #2e86c1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        .hero .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .hero .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 850px;
+            color: #ffffff;
+        }
+        .hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 900;
+            font-style: italic;
+            color: #ffffff;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+        .hero .hero-content .hero-sub {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #aed6f1;
+            margin-bottom: 0.5rem;
+        }
+        .hero .hero-content .hero-summary {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #ffffff;
+            max-width: 700px;
+            margin: 0 auto 1.5rem auto;
+            line-height: 1.6;
+        }
+        .hero .hero-info-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .hero .hero-info-cards .info-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .hero .hero-info-cards .info-card .label { opacity: 0.6; font-weight: 400; }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #1a5276;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+        .section-sub {
+            text-align: center;
+            font-size: 1rem;
+            color: #5d6d7e;
+            max-width: 700px;
+            margin: -0.5rem auto 2rem auto;
+            font-weight: 400;
+        }
+        
+        .overview-text {
+            text-align: justify;
+            font-weight: 700;
+            line-height: 1.8;
+            color: #2c3e50;
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+        .overview-text p { margin-bottom: 1rem; }
+        .overview-text strong { color: #1a5276; }
+        .overview-text a { color: #2e86c1; text-decoration: none; font-weight: 700; }
+        .overview-text a:hover { color: #1a5276; text-decoration: underline; }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .cards-grid .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+        .cards-grid .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        .cards-grid .card h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .cards-grid .card p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        .cards-grid .card .card-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+        
+        /* Tabella stazioni vegetate / non vegetate */
+        .stations-box {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin: 2rem auto;
+            max-width: 750px;
+            border-left: 5px solid #1abc9c;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .stations-box h4 {
+            font-family: 'Playfair Display', serif;
+            color: #1a5276;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .stations-box .stations-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem 1.5rem;
+        }
+        .stations-box .stations-grid .veg { color: #27ae60; font-weight: 700; }
+        .stations-box .stations-grid .non-veg { color: #e74c3c; font-weight: 700; }
+        .stations-box .stations-grid .list { font-size: 0.95rem; color: #2c3e50; font-weight: 500; }
+        .stations-box .stations-grid .badge {
+            display: inline-block;
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .stations-box .stations-grid .badge.veg-badge { background: #d5f5e3; color: #27ae60; }
+        .stations-box .stations-grid .badge.non-badge { background: #fadbd8; color: #e74c3c; }
+        @media screen and (max-width: 600px) {
+            .stations-box .stations-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .stations-box { padding: 1rem 1.2rem; }
+        }
+        
+        .timeline-sampling {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            margin: 2rem auto;
+            max-width: 650px;
+        }
+        .timeline-sampling .step {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid #1abc9c;
+        }
+        .timeline-sampling .step:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        .timeline-sampling .step .step-icon { margin-right: 0.5rem; }
+        .timeline-sampling .arrow { color: #2e86c1; font-size: 1.2rem; opacity: 0.4; }
+        
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .findings-grid .finding-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-top: 4px solid #1abc9c;
+            transition: all 0.3s ease;
+        }
+        .findings-grid .finding-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        .findings-grid .finding-card .finding-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+        .findings-grid .finding-card h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .findings-grid .finding-card p { color: #2c3e50; font-size: 0.85rem; line-height: 1.5; font-weight: 400; }
+        
+        /* Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 850px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            background: #ffffff;
+        }
+        .slideshow-container .slide { display: none; width: 100%; }
+        .slideshow-container .slide.active { display: block; }
+        .slideshow-container .slide img { width: 100%; display: block; }
+        .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Arial', sans-serif;
+            line-height: 1;
+            padding: 0;
+        }
+        .slideshow-btn:hover {
+            background: rgba(255,255,255,0.3);
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.4);
+        }
+        .slideshow-btn.prev { left: 12px; }
+        .slideshow-btn.next { right: 12px; }
+        .slideshow-label {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5d6d7e;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        
+        /* Lab images */
+        .lab-images {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        .lab-images .lab-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .lab-images .lab-img:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.12);
+        }
+        .lab-images .lab-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* NMDS */
+        .nmds-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem auto;
+            flex-wrap: wrap;
+            max-width: 900px;
+        }
+        .nmds-container .nmds-img {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .nmds-container .nmds-img:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.12);
+        }
+        .nmds-container .nmds-img img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.92);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            cursor: pointer;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+        }
+        .lightbox .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: #ffffff;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            z-index: 2001;
+            font-family: 'Arial', sans-serif;
+        }
+        .lightbox .close-btn:hover { opacity: 1; }
+        
+        /* Skills */
+        .skills-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+        .skills-badges .badge {
+            background: #ffffff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1a5276;
+            border: 1px solid #2e86c1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .skills-badges .badge:hover {
+            background: #2e86c1;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.3);
+        }
+        
+        .download-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .download-grid .download-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            text-align: center;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+        .download-grid .download-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        .download-grid .download-card .icon { font-size: 2rem; margin-bottom: 0.3rem; display: block; }
+        .download-grid .download-card h4 { color: #1a5276; font-weight: 700; font-size: 0.95rem; margin-bottom: 0.2rem; }
+        .download-grid .download-card p { color: #5d6d7e; font-size: 0.75rem; font-weight: 400; }
+        .download-grid .download-card .button {
+            margin-top: 0.8rem;
+            font-size: 0.7rem;
+            padding: 0.4rem 1.5rem;
+            min-height: 34px;
+            max-width: 100%;
+        }
+        
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #2e86c1; color: #ffffff !important;
+            padding: 0.7rem 2.2rem; border-radius: 30px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; border: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer; text-align: center; min-height: 42px; line-height: 1.2;
+            font-size: 0.8rem;
+        }
+        .button:hover { background: #1a5276; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5); }
+        .button.small { padding: 0.4rem 1.2rem; font-size: 0.7rem; background: #1abc9c; box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3); min-height: 32px; max-width: 180px; }
+        .button.small:hover { background: #16a085; }
+        .actions { list-style: none; padding: 0; margin: 2rem 0 0 0; text-align: center; }
+        .actions li { margin-bottom: 0.5rem; display: flex; justify-content: center; }
+        
+        footer {
+            background: #0e2f44; color: #ffffff; padding: 1.5rem 2rem; text-align: center;
+        }
+        footer .inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        footer .footer-left { text-align: left; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-left .footer-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; }
+        footer .footer-left .footer-tagline { font-size: 0.7rem; opacity: 0.6; font-weight: 300; letter-spacing: 0.5px; }
+        footer .footer-right { text-align: right; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-right .get-in-touch { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #aed6f1; }
+        footer .footer-right .footer-email { font-size: 0.75rem; color: #2e86c1; text-decoration: none; transition: color 0.3s ease; }
+        footer .footer-right .footer-email:hover { color: #ffffff; }
+        footer .footer-right .footer-open { font-size: 0.65rem; opacity: 0.5; font-style: italic; }
+        footer .footer-icons { display: flex; gap: 0.8rem; margin-top: 0.2rem; justify-content: flex-end; }
+        footer .footer-icons a { color: #2e86c1 !important; font-size: 1.2rem; transition: all 0.3s ease; text-decoration: none; }
+        footer .footer-icons a:hover { color: #ffffff !important; transform: scale(1.1); }
+        @media screen and (max-width: 768px) {
+            footer .inner { flex-direction: column; text-align: center; gap: 0.8rem; }
+            footer .footer-left { text-align: center; align-items: center; }
+            footer .footer-right { text-align: center; align-items: center; }
+            footer .footer-icons { justify-content: center; }
+            .hero .hero-content h1 { font-size: 2rem; }
+            .slideshow-btn { width: 32px; height: 32px; font-size: 0.9rem; }
+            .slideshow-btn.prev { left: 8px; }
+            .slideshow-btn.next { right: 8px; }
+            .hero .hero-info-cards .info-card { font-size: 0.65rem; padding: 0.4rem 0.8rem; }
+            .lab-images .lab-img { width: 150px; height: 150px; }
+            .nmds-container .nmds-img { min-width: 200px; max-width: 100%; }
+        }
+        @media screen and (max-width: 600px) {
+            .wrapper { padding: 2rem 1rem; }
+            .hero { min-height: 40vh; padding: 2rem 1rem; }
+            .hero .hero-content h1 { font-size: 1.6rem; }
+            .section-title { font-size: 1.8rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .findings-grid { grid-template-columns: 1fr; }
+            .download-grid { flex-direction: column; align-items: center; }
+            .skills-badges .badge { font-size: 0.7rem; padding: 0.3rem 0.8rem; }
+            .lab-images .lab-img { width: 120px; height: 120px; }
+            .nmds-container .nmds-img { min-width: 150px; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-left"><span class="nav-name">Andrea Calocero</span></div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#resume">Resume</a>
+            <a href="../index.html#education">Education</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#certifications">Certifications</a>
+            <a href="../index.html#awards">Awards</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#photography">Photography</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="wrapper style1 align-center">
+        <div class="inner">
+            <!-- Hero -->
+            <div class="hero">
+                <img src="../images/details/hero-thesis.jpg" alt="Master's Thesis Research" class="hero-bg" />
+                <div class="hero-content">
+                    <h1>Meiofauna biodiversity and its environmental pattern and drivers in seagrass meadows of the Central Adriatic Sea (Gabicce Mare)</h1>
+                    <div class="hero-sub">Master's Thesis Research</div>
+                    <div class="hero-summary">
+                        Investigating how habitat structure, sediment characteristics, and trophic variables influence meiofaunal abundance, biomass, taxonomic richness, and assemblage composition in Mediterranean seagrass ecosystems.
+                    </div>
+                    <div class="hero-info-cards">
+                        <span class="info-card"><span class="label">Institution:</span> UNIVPM</span>
+                        <span class="info-card"><span class="label">Laboratory:</span> DISVA</span>
+                        <span class="info-card"><span class="label">Study Area:</span> Gabicce Mare, Adriatic Sea</span>
+                        <span class="info-card"><span class="label">Duration:</span> Dec 2025 – Feb 2026</span>
+                        <span class="info-card"><span class="label">Supervisor:</span> Prof. R. Danovaro</span>
+                        <span class="info-card"><span class="label">Co-supervisor:</span> Prof.ssa C. Gambi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About the Project -->
+            <h2 class="section-title">About the Project</h2>
+            <div class="overview-text">
+                <p>
+                    This thesis was conducted as part of the European project <a href="https://www.ntnu.edu/diversea" target="_blank">DiverSEA</a> (Integrated Observation, Mapping, Monitoring and Prediction for Functional BioDIVERsity of Coastal SEAs), whose main purpose is to create an integrated architecture for the observation, monitoring, mapping and prediction of functional biodiversity in European coastal areas, combining emerging techniques (e-DNA/e-RNA, robotics, sensors, remote sensing) and traditional approaches (classical taxonomy using microscopy, molecular analyses).
+                </p>
+                <p>
+                    <strong>Why meiofauna are important:</strong> Meiofauna plays a central role in benthic food webs, conveying organic matter to higher trophic levels and linking the microbial loop to macro-consumers. They are among the most abundant metazoans in marine sediments and are widely used as biological indicators due to their sensitivity to environmental changes.
+                </p>
+                <p>
+                    <strong>Why seagrass meadows are biodiversity hotspots:</strong> Seagrass meadows are highly productive ecosystems that act as bioengineers, creating complex three-dimensional habitats that support high biodiversity. They provide shelter, stabilize sediments, and enhance organic matter retention, making them critical for benthic biodiversity and ecosystem functioning.
+                </p>
+            </div>
+
+            <!-- Study Area -->
+            <h2 class="section-title" style="margin-top: 3rem;">Study Area</h2>
+            <!-- Mappa -->
+            <div style="max-width: 700px; margin: 0 auto 2rem auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                <img src="../images/details/map-gabicce.jpg" alt="Gabicce Mare study area" style="width: 100%; display: block;" />
+            </div>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">🌊</span>
+                    <h4>Gabicce Mare</h4>
+                    <p>Shallow coastal area in the Central Adriatic Sea (Marche region, Italy), delimited to the north by a touristic harbour and the Tavello River, and to the south by Mount San Bartolo, included within a Regional Natural Park.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🛡️</span>
+                    <h4>SCI Protection</h4>
+                    <p>The area is a Site of Community Importance (SCI), recognized for its high naturalistic value and benthic biodiversity. It is enclosed by breakwater barriers that influence local hydrodynamics and sediment transport.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🌿</span>
+                    <h4>Seagrass Species</h4>
+                    <p>The area hosts three seagrass species: <em>Zostera marina</em>, <em>Zostera noltei</em>, and <em>Cymodocea nodosa</em>, forming meadows at depths ranging from 1 to 3.1 meters.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🏖️</span>
+                    <h4>Habitat Comparison</h4>
+                    <p>Sampling was designed to compare vegetated sediments (within seagrass meadows) and unvegetated sediments (outside meadow boundaries) to assess the ecological influence of seagrasses on benthic communities.</p>
+                </div>
+            </div>
+
+            <!-- Research Objectives -->
+            <h2 class="section-title" style="margin-top: 3rem;">Research Objectives</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">🔬</span>
+                    <h4>Investigate meiofaunal biodiversity</h4>
+                    <p>Analyse the biodiversity patterns of meiofaunal assemblages in a shallow coastal area hosting seagrass meadows.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🔄</span>
+                    <h4>Compare vegetated vs unvegetated sediments</h4>
+                    <p>Assess differences in meiofaunal abundance, biomass, diversity and community composition between habitats.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">📊</span>
+                    <h4>Identify environmental drivers</h4>
+                    <p>Determine which environmental factors (seagrass presence, grain size, trophic availability, bathymetry) influence meiofaunal assemblages.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🗺️</span>
+                    <h4>Analyse spatial patterns</h4>
+                    <p>Evaluate spatial gradients and distribution patterns of meiofaunal communities across the study area.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">📈</span>
+                    <h4>Evaluate habitat effects on benthic communities</h4>
+                    <p>Quantify the ecological role of seagrass meadows in sustaining benthic biodiversity and ecosystem functioning.</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">⚠️</span>
+                    <h4>Assess consequences of seagrass loss</h4>
+                    <p>Evaluate potential biodiversity declines and ecosystem service losses that would occur with the disappearance of seagrass meadows in the area.</p>
+                </div>
+            </div>
+
+            <!-- Field Sampling -->
+            <h2 class="section-title" style="margin-top: 3rem;">Field Sampling</h2>
+            <div class="overview-text">
+                <p>
+                    The study area (15.05 hectares) was mapped prior to sampling using aerial drone surveys combined with underwater visual and photographic quadrat censuses performed by scientific divers. This mapping assessed the distribution and spatial extent of seagrass meadows, allowing the design of a targeted sampling strategy.
+                </p>
+                <p style="font-size: 0.9rem; color: #5d6d7e; font-style: italic; text-align: center;">
+                    🎥 Video footage of the drone and underwater surveys is available below.
+                </p>
+            </div>
+
+            <!-- Video con immagine di copertina + slideshow -->
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; margin: 2rem 0;">
+                <div style="flex: 1; min-width: 280px; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); background: #0e2f44; cursor: pointer; position: relative;" onclick="window.open('https://youtu.be/9J5IAGZ2D2U', '_blank')">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <img src="../images/details/fieldwork-cover.jpg" alt="Fieldwork video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" />
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(26, 188, 156, 0.8); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #ffffff; box-shadow: 0 4px 30px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.2);">
+                            ▶
+                        </div>
+                    </div>
+                    <div style="padding: 0.5rem; text-align: center; font-size: 0.75rem; color: #5d6d7e; font-style: italic; background: #ffffff;">Drone and underwater survey footage</div>
+                </div>
+                <div style="flex: 1; min-width: 280px; max-width: 500px;">
+                    <div class="slideshow-container" id="fieldworkSlideshow" style="margin: 0;">
+                        <div class="slide active"><img src="../images/details/f1.jpg" alt="Fieldwork 1" /></div>
+                        <div class="slide"><img src="../images/details/f2.jpg" alt="Fieldwork 2" /></div>
+                        <div class="slide"><img src="../images/details/f3.jpg" alt="Fieldwork 3" /></div>
+                        <div class="slide"><img src="../images/details/f4.jpg" alt="Fieldwork 4" /></div>
+                        <div class="slide"><img src="../images/details/f5.jpg" alt="Fieldwork 5" /></div>
+                        <button class="slideshow-btn prev" id="fieldworkPrev">‹</button>
+                        <button class="slideshow-btn next" id="fieldworkNext">›</button>
+                    </div>
+                    <div class="slideshow-label">Fieldwork</div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-sampling">
+                <div class="step"><span class="step-icon">🗺️</span> Drone & underwater mapping</div>
+                <div class="arrow">↓</div>
+                <div class="step"><span class="step-icon">📐</span> 5 coast-to-offshore transects (100 m each)</div>
+                <div class="arrow">↓</div>
+                <div class="step"><span class="step-icon">📍</span> 3 sampling stations per transect (15 total)</div>
+                <div class="arrow">↓</div>
+                <div class="step"><span class="step-icon">🔄</span> 3 independent replicates per station</div>
+                <div class="arrow">↓</div>
+                <div class="step"><span class="step-icon">🔬</span> Sediment sampling (hand cores, 10 cm diameter)</div>
+                <div class="arrow">↓</div>
+                <div class="step"><span class="step-icon">🧪</span> Laboratory processing (grain size, organic matter, meiofauna)</div>
+            </div>
+
+            <!-- STAZIONI VEGETATE / NON VEGETATE - TABELLA (spostata qui) -->
+            <div class="stations-box">
+                <h4><i class="fas fa-map-marked-alt" style="color: #1abc9c; margin-right: 0.5rem;"></i>Sampling Stations</h4>
+                <div class="stations-grid">
+                    <div>
+                        <span class="veg"><span class="badge veg-badge">✓</span> Vegetated Stations</span>
+                        <div class="list">ST.2 · ST.3 · ST.4 · ST.5 · ST.6 · ST.7 · ST.8 · ST.9 · ST.12</div>
+                        <div style="font-size: 0.75rem; color: #27ae60; margin-top: 0.2rem; font-weight: 400;"><em>Within seagrass meadow</em></div>
+                    </div>
+                    <div>
+                        <span class="non-veg"><span class="badge non-badge">✗</span> Non-Vegetated Stations</span>
+                        <div class="list">ST.1 · ST.10 · ST.11 · ST.13 · ST.14 · ST.15</div>
+                        <div style="font-size: 0.75rem; color: #e74c3c; margin-top: 0.2rem; font-weight: 400;"><em>Outside seagrass meadow</em></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Laboratory Analyses -->
+            <h2 class="section-title" style="margin-top: 3rem;">Laboratory Analyses</h2>
+            <div class="cards-grid">
+                <div class="card"><h4>🏖️ Grain Size</h4><p>Udden-Wentworth scale analysis of sediment grain size distribution (sand, silt, clay fractions).</p></div>
+                <div class="card"><h4>🧪 Organic Matter</h4><p>Biochemical composition analysis of sedimentary organic matter.</p></div>
+                <div class="card"><h4>🧬 Biopolymeric Carbon</h4><p>Measurement of biopolymeric carbon (BPC) as a proxy for available organic carbon.</p></div>
+                <div class="card"><h4>🥩 Proteins</h4><p>Total protein concentration (Hartree method, 1972) as indicator of labile organic matter.</p></div>
+                <div class="card"><h4>🧈 Lipids</h4><p>Total lipid concentration (Bligh & Dyer, 1959) as a biochemical component of organic matter.</p></div>
+                <div class="card"><h4>🍬 Carbohydrates</h4><p>Total carbohydrate concentration (DuBois et al., 1956) as a component of organic matter.</p></div>
+                <div class="card"><h4>🌿 Pigments</h4><p>Chlorophyll-a and phaeopigments (Lorenzen & Jeffrey, 1980) as indicators of primary biomass.</p></div>
+                <div class="card"><h4>🔬 Meiofauna Extraction</h4><p>Ludox HS40 density gradient centrifugation (Heip et al., 1985) for meiofauna isolation.</p></div>
+                <div class="card"><h4>📋 Taxonomic ID</h4><p>Identification of meiofaunal taxa using stereomicroscopy at 40x magnification.</p></div>
+                <div class="card"><h4>📊 Biodiversity Indices</h4><p>Taxa richness, abundance, biomass and assemblage composition analysis.</p></div>
+            </div>
+
+            <!-- Lab Images -->
+            <div class="lab-images">
+                <div class="lab-img"><img src="../images/details/lab1.jpg" alt="Laboratory analysis 1" /></div>
+                <div class="lab-img"><img src="../images/details/lab2.jpg" alt="Laboratory analysis 2" /></div>
+            </div>
+
+            <!-- Data Analysis -->
+            <h2 class="section-title" style="margin-top: 3rem;">Data Analysis</h2>
+            <div class="cards-grid">
+                <div class="card"><h4>📈 Species Richness</h4><p>Total number of higher meiofaunal taxa identified across the study area.</p></div>
+                <div class="card"><h4>📊 Multivariate Analyses</h4><p>Advanced statistical techniques to analyse community patterns and environmental relationships.</p></div>
+                <div class="card"><h4>📉 nMDS</h4><p>Non-metric Multidimensional Scaling to visualise community composition patterns and gradients.</p></div>
+                <div class="card"><h4>📐 DISTLM</h4><p>Distance-based Linear Model to identify environmental drivers explaining community variation.</p></div>
+                <div class="card"><h4>🔢 PERMANOVA</h4><p>Permutational Multivariate Analysis of Variance to test significant differences among transects.</p></div>
+                <div class="card"><h4>🔄 Bray-Curtis</h4><p>Bray-Curtis dissimilarity matrix applied to assess community structure differences.</p></div>
+            </div>
+
+            <!-- Results Figures Slideshow -->
+            <h2 class="section-title" style="margin-top: 3rem;">Results Figures</h2>
+            <div class="slideshow-container" id="figuresSlideshow">
+                <div class="slide active"><img src="../images/details/g1.jpg" alt="Figure 1" /></div>
+                <div class="slide"><img src="../images/details/g2.jpg" alt="Figure 2" /></div>
+                <div class="slide"><img src="../images/details/g3.jpg" alt="Figure 3" /></div>
+                <div class="slide"><img src="../images/details/g4.jpg" alt="Figure 4" /></div>
+                <div class="slide"><img src="../images/details/g5.jpg" alt="Figure 5" /></div>
+                <div class="slide"><img src="../images/details/g6.jpg" alt="Figure 6" /></div>
+                <div class="slide"><img src="../images/details/g7.jpg" alt="Figure 7" /></div>
+                <div class="slide"><img src="../images/details/g8.jpg" alt="Figure 8" /></div>
+                <div class="slide"><img src="../images/details/g9.jpg" alt="Figure 9" /></div>
+                <div class="slide"><img src="../images/details/g10.jpg" alt="Figure 10" /></div>
+                <div class="slide"><img src="../images/details/g11.jpg" alt="Figure 11" /></div>
+                <div class="slide"><img src="../images/details/g12.jpg" alt="Figure 12" /></div>
+                <div class="slide"><img src="../images/details/g13.jpg" alt="Figure 13" /></div>
+                <div class="slide"><img src="../images/details/g14.jpg" alt="Figure 14" /></div>
+                <div class="slide"><img src="../images/details/g15.jpg" alt="Figure 15" /></div>
+                <div class="slide"><img src="../images/details/g16.jpg" alt="Figure 16" /></div>
+                <div class="slide"><img src="../images/details/g17.jpg" alt="Figure 17" /></div>
+                <div class="slide"><img src="../images/details/g18.jpg" alt="Figure 18" /></div>
+                <div class="slide"><img src="../images/details/g19.jpg" alt="Figure 19" /></div>
+                <button class="slideshow-btn prev" id="figuresPrev">‹</button>
+                <button class="slideshow-btn next" id="figuresNext">›</button>
+            </div>
+
+            <!-- NMDS Images - ingrandite -->
+            <div class="nmds-container">
+                <div class="nmds-img">
+                    <img src="../images/details/nnn1.jpg" alt="NMDS abundance" />
+                </div>
+                <div class="nmds-img">
+                    <img src="../images/details/nnn2.jpg" alt="NMDS biomass" />
+                </div>
+            </div>
+
+            <!-- Main Findings -->
+            <h2 class="section-title" style="margin-top: 3rem;">Main Findings</h2>
+            <div class="findings-grid">
+                <div class="finding-card">
+                    <span class="finding-icon">🌿</span>
+                    <h4>Vegetated sediments accumulated higher organic matter</h4>
+                    <p>Higher biopolymeric carbon and total phytopigment concentrations were recorded in vegetated sediments compared with unvegetated ones.</p>
+                </div>
+                <div class="finding-card">
+                    <span class="finding-icon">🏖️</span>
+                    <h4>Sediment grain size influenced community distribution</h4>
+                    <p>Grain size heterogeneity was higher in vegetated sediments, with a greater contribution of fine particles and silt-clay fractions.</p>
+                </div>
+                <div class="finding-card">
+                    <span class="finding-icon">🔄</span>
+                    <h4>Meiofaunal assemblages differed between habitats</h4>
+                    <p>Assemblages composition differed significantly between vegetated and unvegetated sediments, with nematoda dominating all transects.</p>
+                </div>
+                <div class="finding-card">
+                    <span class="finding-icon">📊</span>
+                    <h4>Environmental variables explained spatial variability</h4>
+                    <p>Seagrass presence explained up to 55.3% of meiofaunal abundance variation, followed by depth, BPC and grain size.</p>
+                </div>
+                <div class="finding-card">
+                    <span class="finding-icon">🌾</span>
+                    <h4>Different seagrass meadows supported distinct benthic communities</h4>
+                    <p>Transects within seagrass meadows (B and C) showed the highest meiofaunal abundance, biomass and diversity.</p>
+                </div>
+                <div class="finding-card">
+                    <span class="finding-icon">⚠️</span>
+                    <h4>Seagrass loss would reduce benthic biodiversity</h4>
+                    <p>The study highlights potential biodiversity declines and ecosystem service losses that would occur with seagrass meadow disappearance.</p>
+                </div>
+            </div>
+
+            <!-- Scientific Impact -->
+            <h2 class="section-title" style="margin-top: 3rem;">Scientific Impact</h2>
+            <div class="overview-text">
+                <p>
+                    This study highlights the pivotal role of seagrass meadows in structuring coastal benthic ecosystems, demonstrating how habitat complexity, sediment grain size and trophic conditions are interconnected and act together on meiofaunal assemblages.
+                </p>
+                <p>
+                    The findings contribute to a more comprehensive understanding of seagrass coastal systems ecology and provide valuable insights for the conservation and management of these fundamental ecosystems, whose loss entails not only a reduction in biodiversity but also a huge loss of ecosystem goods and services.
+                </p>
+                <p>
+                    These results, combined with other data collected as part of the DiverSEA project, can support evidence-based conservation strategies and marine spatial planning in Mediterranean coastal areas.
+                </p>
+            </div>
+
+            <!-- Meiofauna Organisms Slideshow -->
+            <h2 class="section-title" style="margin-top: 3rem;">🔬 Meiofauna Organisms</h2>
+            <div class="slideshow-container" id="meiofaunaSlideshow">
+                <div class="slide active"><img src="../images/details/m1.jpg" alt="Meiofauna 1" /></div>
+                <div class="slide"><img src="../images/details/m2.jpg" alt="Meiofauna 2" /></div>
+                <div class="slide"><img src="../images/details/m3.jpg" alt="Meiofauna 3" /></div>
+                <div class="slide"><img src="../images/details/m4.jpg" alt="Meiofauna 4" /></div>
+                <div class="slide"><img src="../images/details/m5.jpg" alt="Meiofauna 5" /></div>
+                <div class="slide"><img src="../images/details/m6.jpg" alt="Meiofauna 6" /></div>
+                <div class="slide"><img src="../images/details/m7.jpg" alt="Meiofauna 7" /></div>
+                <div class="slide"><img src="../images/details/m8.jpg" alt="Meiofauna 8" /></div>
+                <div class="slide"><img src="../images/details/m9.jpg" alt="Meiofauna 9" /></div>
+                <div class="slide"><img src="../images/details/m10.jpg" alt="Meiofauna 10" /></div>
+                <div class="slide"><img src="../images/details/m11.jpg" alt="Meiofauna 11" /></div>
+                <div class="slide"><img src="../images/details/m12.jpg" alt="Meiofauna 12" /></div>
+                <div class="slide"><img src="../images/details/m13.jpg" alt="Meiofauna 13" /></div>
+                <div class="slide"><img src="../images/details/m14.jpg" alt="Meiofauna 14" /></div>
+                <div class="slide"><img src="../images/details/m15.jpg" alt="Meiofauna 15" /></div>
+                <div class="slide"><img src="../images/details/m16.jpg" alt="Meiofauna 16" /></div>
+                <div class="slide"><img src="../images/details/m17.jpg" alt="Meiofauna 17" /></div>
+                <div class="slide"><img src="../images/details/m18.jpg" alt="Meiofauna 18" /></div>
+                <button class="slideshow-btn prev" id="meiofaunaPrev">‹</button>
+                <button class="slideshow-btn next" id="meiofaunaNext">›</button>
+            </div>
+            <div class="slideshow-label">Meiofaunal organisms found in sediment samples</div>
+
+            <!-- Skills Developed -->
+            <h2 class="section-title" style="margin-top: 3rem;">Skills Developed</h2>
+            <div class="skills-badges">
+                <span class="badge">🌊 Marine Ecology</span>
+                <span class="badge">🔬 Meiofauna</span>
+                <span class="badge">🏖️ Benthic Ecology</span>
+                <span class="badge">🧪 Sediment Analysis</span>
+                <span class="badge">📋 Taxonomy</span>
+                <span class="badge">🔍 Microscopy</span>
+                <span class="badge">📊 Community Ecology</span>
+                <span class="badge">📈 Multivariate Statistics</span>
+                <span class="badge">📐 PRIMER</span>
+                <span class="badge">💻 R</span>
+                <span class="badge">🗺️ QGIS</span>
+                <span class="badge">📝 Scientific Writing</span>
+                <span class="badge">📊 Data Analysis</span>
+                <span class="badge">🎙️ Research Communication</span>
+            </div>
+
+            <!-- Downloads -->
+            <h2 class="section-title" style="margin-top: 3rem;">Downloads</h2>
+            <div class="download-grid">
+                <div class="download-card">
+                    <span class="icon">📄</span>
+                    <h4>MSc Thesis (PDF)</h4>
+                    <p>Full thesis document</p>
+                    <a href="../files/MSc_Thesis.pdf" class="button small" target="_blank">Download PDF</a>
+                </div>
+            </div>
+
+            <!-- Related Projects -->
+            <h2 class="section-title" style="margin-top: 3rem;">Related Projects</h2>
+            <div style="background: #ffffff; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); text-align: center; max-width: 550px; margin: 0 auto; transition: all 0.3s ease;">
+                <div style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 35px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
+                    <h4 style="color: #1a5276; font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem;">Diversity and trophic structure of nematode assemblages in Gabicce Mare seagrass meadows</h4>
+                    <p style="color: #5d6d7e; font-size: 0.85rem; font-weight: 400; margin-bottom: 0.8rem;">Postgraduate research intern project</p>
+                    <a href="exp-research.html" class="button small">View Project</a>
+                </div>
+            </div>
+
+            <!-- Back -->
+            <ul class="actions">
+                <li><a href="../index.html#experience" class="button">← Back to Experience</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lightbox
+            var lightbox = document.createElement('div');
+            lightbox.className = 'lightbox';
+            lightbox.innerHTML = '<span class="close-btn">&times;</span><img src="" alt="Lightbox" />';
+            document.body.appendChild(lightbox);
+            var lightboxImg = lightbox.querySelector('img');
+            var closeBtn = lightbox.querySelector('.close-btn');
+
+            document.querySelectorAll('.lab-img, .nmds-img, .slideshow-container .slide img').forEach(function(img) {
+                img.addEventListener('click', function(e) {
+                    var src = this.src;
+                    if (!src) {
+                        var parentSlide = this.closest('.slide');
+                        if (parentSlide) {
+                            var imgInside = parentSlide.querySelector('img');
+                            if (imgInside) src = imgInside.src;
+                        }
+                    }
+                    if (src) {
+                        lightboxImg.src = src;
+                        lightbox.classList.add('active');
+                    }
+                });
+            });
+
+            closeBtn.addEventListener('click', function() { lightbox.classList.remove('active'); });
+            lightbox.addEventListener('click', function(e) { if (e.target === lightbox) lightbox.classList.remove('active'); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lightbox.classList.remove('active'); });
+
+            // Fieldwork slideshow
+            (function() {
+                var slides = document.querySelectorAll('#fieldworkSlideshow .slide');
+                var current = 0, total = slides.length, interval;
+                function goTo(index) { slides.forEach(function(s) { s.classList.remove('active'); }); slides[index].classList.add('active'); current = index; resetInterval(); }
+                function nextSlide() { goTo((current + 1) % total); }
+                function prevSlide() { goTo((current - 1 + total) % total); }
+                function resetInterval() { if (interval) clearInterval(interval); interval = setInterval(nextSlide, 4000); }
+                document.getElementById('fieldworkPrev').addEventListener('click', function(e) { e.stopPropagation(); prevSlide(); });
+                document.getElementById('fieldworkNext').addEventListener('click', function(e) { e.stopPropagation(); nextSlide(); });
+                resetInterval();
+            })();
+
+            // Figures slideshow
+            (function() {
+                var slides = document.querySelectorAll('#figuresSlideshow .slide');
+                var current = 0, total = slides.length, interval;
+                function goTo(index) { slides.forEach(function(s) { s.classList.remove('active'); }); slides[index].classList.add('active'); current = index; resetInterval(); }
+                function nextSlide() { goTo((current + 1) % total); }
+                function prevSlide() { goTo((current - 1 + total) % total); }
+                function resetInterval() { if (interval) clearInterval(interval); interval = setInterval(nextSlide, 4000); }
+                document.getElementById('figuresPrev').addEventListener('click', function(e) { e.stopPropagation(); prevSlide(); });
+                document.getElementById('figuresNext').addEventListener('click', function(e) { e.stopPropagation(); nextSlide(); });
+                resetInterval();
+            })();
+
+            // Meiofauna slideshow
+            (function() {
+                var slides = document.querySelectorAll('#meiofaunaSlideshow .slide');
+                var current = 0, total = slides.length, interval;
+                function goTo(index) { slides.forEach(function(s) { s.classList.remove('active'); }); slides[index].classList.add('active'); current = index; resetInterval(); }
+                function nextSlide() { goTo((current + 1) % total); }
+                function prevSlide() { goTo((current - 1 + total) % total); }
+                function resetInterval() { if (interval) clearInterval(interval); interval = setInterval(nextSlide, 4000); }
+                document.getElementById('meiofaunaPrev').addEventListener('click', function(e) { e.stopPropagation(); prevSlide(); });
+                document.getElementById('meiofaunaNext').addEventListener('click', function(e) { e.stopPropagation(); nextSlide(); });
+                resetInterval();
+            })();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Andrea Calocero - Microbiology Laboratory Intern</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background: #eaf2f8; color: #2c3e50; padding-top: 60px; font-size: 14px; }
+        
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(14, 47, 68, 0.92); backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+        #navbar .nav-left { display: flex; align-items: center; }
+        #navbar .nav-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; opacity: 0.85; }
+        #navbar .nav-links { display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; justify-content: flex-end; align-items: center; }
+        #navbar a { color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.3rem 0.6rem; border-radius: 15px; transition: all 0.3s ease; opacity: 0.6; }
+        #navbar a:hover { opacity: 1; background: rgba(46, 134, 193, 0.25); }
+        #navbar a.active { opacity: 1; background: rgba(46, 134, 193, 0.35); }
+        @media screen and (max-width: 768px) {
+            #navbar { padding: 0.3rem 1rem; flex-direction: column; gap: 0.2rem; }
+            #navbar .nav-left { width: 100%; justify-content: center; }
+            #navbar .nav-links { justify-content: center; gap: 0.1rem 0.5rem; }
+            #navbar a { font-size: 0.55rem; padding: 0.2rem 0.5rem; }
+            body { padding-top: 80px; }
+        }
+        
+        .wrapper { padding: 3.5rem 2rem; }
+        .wrapper.style1 { background: #eaf2f8; }
+        .wrapper .inner { max-width: 1000px; margin: 0 auto; }
+        
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 60vh;
+            background: linear-gradient(135deg, #0e2f44 0%, #1a5276 50%, #2e86c1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+        }
+        .hero .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        .hero .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            color: #ffffff;
+        }
+        .hero .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            font-weight: 900;
+            font-style: italic;
+            color: #ffffff;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        .hero .hero-content .hero-sub {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #aed6f1;
+            margin-bottom: 0.3rem;
+        }
+        .hero .hero-info-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .hero .hero-info-cards .info-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .hero .hero-info-cards .info-card .label { opacity: 0.6; font-weight: 400; }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #1a5276;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #2e86c1, #1abc9c);
+            border-radius: 2px;
+        }
+        
+        .overview-text {
+            text-align: justify;
+            font-weight: 700;
+            line-height: 1.8;
+            color: #2c3e50;
+            max-width: 850px;
+            margin: 0 auto;
+            font-size: 0.95rem;
+        }
+        .overview-text p { margin-bottom: 1rem; }
+        .overview-text strong { color: #1a5276; }
+        .overview-text a { color: #2e86c1; text-decoration: none; font-weight: 700; }
+        .overview-text a:hover { color: #1a5276; text-decoration: underline; }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .cards-grid .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+        .cards-grid .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        .cards-grid .card h4 {
+            color: #1a5276;
+            font-weight: 900;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+        .cards-grid .card p {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        .cards-grid .card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+        .icon-grid .icon-item {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1a5276;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .icon-grid .icon-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .icon-grid .icon-item .emoji {
+            font-size: 1.2rem;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 850px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            background: #ffffff;
+        }
+        .slideshow-container .slide { display: none; width: 100%; }
+        .slideshow-container .slide.active { display: block; }
+        .slideshow-container .slide img {
+            width: 100%;
+            display: block;
+        }
+        .slideshow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(4px);
+            color: rgba(255,255,255,0.6);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-family: 'Arial', sans-serif;
+            line-height: 1;
+            padding: 0;
+        }
+        .slideshow-btn:hover {
+            background: rgba(255,255,255,0.3);
+            color: #ffffff;
+            border-color: rgba(255,255,255,0.4);
+        }
+        .slideshow-btn.prev { left: 12px; }
+        .slideshow-btn.next { right: 12px; }
+        .slideshow-label {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #5d6d7e;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        
+        .skills-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 1.5rem 0;
+        }
+        .skills-badges .badge {
+            background: #ffffff;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #1a5276;
+            border: 1px solid #2e86c1;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .skills-badges .badge:hover {
+            background: #2e86c1;
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stats-grid .stat-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            border-top: 4px solid #1abc9c;
+            transition: all 0.3s ease;
+        }
+        .stats-grid .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        .stats-grid .stat-card .stat-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #1a5276;
+            font-family: 'Playfair Display', serif;
+        }
+        .stats-grid .stat-card .stat-label {
+            font-size: 0.8rem;
+            color: #5d6d7e;
+            font-weight: 400;
+        }
+        
+        .timeline-vertical {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            margin: 2rem auto;
+            max-width: 500px;
+        }
+        .timeline-vertical .step {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 0.8rem 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(0,0,0,0.04);
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            color: #1a5276;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid #1abc9c;
+        }
+        .timeline-vertical .step:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 35px rgba(0,0,0,0.1);
+        }
+        .timeline-vertical .step .step-icon { margin-right: 0.5rem; }
+        .timeline-vertical .arrow {
+            color: #2e86c1;
+            font-size: 1.2rem;
+            opacity: 0.4;
+        }
+        
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #2e86c1; color: #ffffff !important;
+            padding: 0.7rem 2.2rem; border-radius: 30px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; border: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer; text-align: center; min-height: 42px; line-height: 1.2;
+            font-size: 0.8rem;
+        }
+        .button:hover { background: #1a5276; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5); }
+        .button.small { padding: 0.4rem 1.2rem; font-size: 0.7rem; background: #1abc9c; box-shadow: 0 4px 15px rgba(26, 188, 156, 0.3); min-height: 32px; max-width: 180px; }
+        .button.small:hover { background: #16a085; }
+        .actions { list-style: none; padding: 0; margin: 2rem 0 0 0; text-align: center; }
+        .actions li { margin-bottom: 0.5rem; display: flex; justify-content: center; }
+        
+        footer {
+            background: #0e2f44; color: #ffffff; padding: 1.5rem 2rem; text-align: center;
+        }
+        footer .inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        footer .footer-left { text-align: left; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-left .footer-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; }
+        footer .footer-left .footer-tagline { font-size: 0.7rem; opacity: 0.6; font-weight: 300; letter-spacing: 0.5px; }
+        footer .footer-right { text-align: right; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-right .get-in-touch { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #aed6f1; }
+        footer .footer-right .footer-email { font-size: 0.75rem; color: #2e86c1; text-decoration: none; transition: color 0.3s ease; }
+        footer .footer-right .footer-email:hover { color: #ffffff; }
+        footer .footer-right .footer-open { font-size: 0.65rem; opacity: 0.5; font-style: italic; }
+        footer .footer-icons { display: flex; gap: 0.8rem; margin-top: 0.2rem; justify-content: flex-end; }
+        footer .footer-icons a { color: #2e86c1 !important; font-size: 1.2rem; transition: all 0.3s ease; text-decoration: none; }
+        footer .footer-icons a:hover { color: #ffffff !important; transform: scale(1.1); }
+        @media screen and (max-width: 768px) {
+            footer .inner { flex-direction: column; text-align: center; gap: 0.8rem; }
+            footer .footer-left { text-align: center; align-items: center; }
+            footer .footer-right { text-align: center; align-items: center; }
+            footer .footer-icons { justify-content: center; }
+            .hero .hero-content h1 { font-size: 2rem; }
+            .slideshow-btn { width: 32px; height: 32px; font-size: 0.9rem; }
+            .slideshow-btn.prev { left: 8px; }
+            .slideshow-btn.next { right: 8px; }
+            .hero .hero-info-cards .info-card { font-size: 0.65rem; padding: 0.4rem 0.8rem; }
+            .icon-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+        }
+        @media screen and (max-width: 600px) {
+            .wrapper { padding: 2rem 1rem; }
+            .hero { min-height: 40vh; padding: 2rem 1rem; }
+            .hero .hero-content h1 { font-size: 1.6rem; }
+            .section-title { font-size: 1.8rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .icon-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-left"><span class="nav-name">Andrea Calocero</span></div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#resume">Resume</a>
+            <a href="../index.html#education">Education</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#certifications">Certifications</a>
+            <a href="../index.html#awards">Awards</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#photography">Photography</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================ -->
+    <!-- HERO SECTION -->
+    <!-- ================================================================ -->
+    <section class="wrapper style1 align-center">
+        <div class="inner">
+            <div class="hero">
+                <img src="../images/details/p1.jpg" alt="Microbiology Laboratory" class="hero-bg" />
+                <div class="hero-content">
+                    <h1>Microbiology Laboratory Intern</h1>
+                    <div class="hero-sub">Laboratory training in microbiological techniques, microbial cultivation and analytical procedures</div>
+                    <div class="hero-info-cards">
+                        <span class="info-card"><span class="label">Location:</span> University of Salerno – Fisciano Campus, Italy</span>
+                        <span class="info-card"><span class="label">Period:</span> April 2022 – June 2022</span>
+                        <span class="info-card"><span class="label">Department:</span> Microbiology Laboratory</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- INTRODUCTION -->
+            <!-- ============================================================ -->
+            <h2 class="section-title">Introduction</h2>
+            <div class="overview-text">
+                <p>
+                    This internship represented an early laboratory experience focused on microbiological methodologies, providing practical training in microbial cultivation, identification techniques and analytical procedures.
+                </p>
+                <p>
+                    The experience allowed the development of fundamental skills in microbiology, including sterile techniques, preparation of culture media, microbial growth analysis and microscopy-based observations, forming a solid foundation for subsequent biological research experiences.
+                </p>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- EXPERIENCE OVERVIEW -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Experience Overview</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">🧪</span>
+                    <h4>Experience Type</h4>
+                    <p>Laboratory Internship</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🏛️</span>
+                    <h4>Institution</h4>
+                    <p>University of Salerno</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">📍</span>
+                    <h4>Campus</h4>
+                    <p>Fisciano, Salerno, Italy</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">📅</span>
+                    <h4>Period</h4>
+                    <p>April 2022 – June 2022</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🔬</span>
+                    <h4>Field</h4>
+                    <p>Microbiology / Biotechnology / Laboratory Sciences</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🎯</span>
+                    <h4>Main Focus</h4>
+                    <p>Microbial cultivation, bacterial and fungal analysis, microbiological techniques</p>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- ABOUT THE EXPERIENCE -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">About the Experience</h2>
+            <div class="overview-text">
+                <p>
+                    The internship involved practical training in microbiological procedures applied to bacterial and fungal organisms. Activities included the preparation of liquid and solid culture media, microbial cultivation, bacterial growth monitoring, microscopy observations, microbial biomass analyses, and microbial quantification.
+                </p>
+                <p>
+                    Through hands-on laboratory work, I acquired essential skills in aseptic techniques, bacterial inoculation, streaking, Gram staining, antibiosis testing, and environmental sampling. The experience enhanced my understanding of microbial processes and laboratory organization, providing a strong foundation in microbiological methodologies.
+                </p>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- LABORATORY ACTIVITIES -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Laboratory Activities</h2>
+            <div class="icon-grid">
+                <div class="icon-item"><span class="emoji">🧫</span> Culture Media Preparation</div>
+                <div class="icon-item"><span class="emoji">🦠</span> Microbial Cultivation</div>
+                <div class="icon-item"><span class="emoji">💊</span> Antibiosis Tests</div>
+                <div class="icon-item"><span class="emoji">🎨</span> Gram Staining</div>
+                <div class="icon-item"><span class="emoji">⚖️</span> Microbial Biomass Analysis</div>
+                <div class="icon-item"><span class="emoji">🔢</span> Microbial Counting</div>
+                <div class="icon-item"><span class="emoji">📈</span> Bacterial Growth Kinetics</div>
+                <div class="icon-item"><span class="emoji">🌍</span> Environmental Sampling</div>
+                <div class="icon-item"><span class="emoji">🌿</span> Plant Anatomical Sections</div>
+                <div class="icon-item"><span class="emoji">🍄</span> Fungal Identification</div>
+            </div>
+
+            <!-- Photo Slideshow -->
+            <div class="slideshow-container" id="microbiologySlideshow">
+                <div class="slide active"><img src="../images/details/p1.jpg" alt="Microbiology 1" style="width: 100%; display: block;" /></div>
+                <div class="slide"><img src="../images/details/p2.jpg" alt="Microbiology 2" style="width: 100%; display: block;" /></div>
+                <div class="slide"><img src="../images/details/p3.jpg" alt="Microbiology 3" style="width: 100%; display: block;" /></div>
+                <div class="slide"><img src="../images/details/p4.jpg" alt="Microbiology 4" style="width: 100%; display: block;" /></div>
+                <button class="slideshow-btn prev" id="microbiologyPrev">‹</button>
+                <button class="slideshow-btn next" id="microbiologyNext">›</button>
+            </div>
+            <div class="slideshow-label">Microbiology laboratory activities</div>
+
+            <!-- ============================================================ -->
+            <!-- TECHNICAL SKILLS DEVELOPED -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Technical Skills Developed</h2>
+            <div class="skills-badges">
+                <span class="badge">Microbial Cultivation</span>
+                <span class="badge">Aseptic Techniques</span>
+                <span class="badge">Culture Media Preparation</span>
+                <span class="badge">Bacterial Inoculation</span>
+                <span class="badge">Bacterial Streaking</span>
+                <span class="badge">Gram Staining</span>
+                <span class="badge">Microscopy</span>
+                <span class="badge">Microbial Quantification</span>
+                <span class="badge">Antibiosis Testing</span>
+                <span class="badge">Growth Curve Analysis</span>
+                <span class="badge">Fungal Observation</span>
+                <span class="badge">Laboratory Safety</span>
+                <span class="badge">Sample Processing</span>
+                <span class="badge">Environmental Microbiology</span>
+                <span class="badge">Data Collection</span>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- METHODS AND TECHNIQUES -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Methods &amp; Techniques</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="card-icon">🧫</span>
+                    <h4>Microbiological Techniques</h4>
+                    <p>Preparation of solid and liquid media<br />Sterile laboratory procedures<br />Bacterial inoculation<br />Microbial isolation<br />Plate cultivation</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🔬</span>
+                    <h4>Microscopy Techniques</h4>
+                    <p>Gram staining<br />Fungal staining<br />Microscopic observation of microorganisms</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">📊</span>
+                    <h4>Analytical Procedures</h4>
+                    <p>Microbial biomass estimation<br />Microbial counting<br />Bacterial growth kinetics</p>
+                </div>
+                <div class="card">
+                    <span class="card-icon">🌍</span>
+                    <h4>Environmental Microbiology</h4>
+                    <p>Soil sampling<br />Plant-associated microbial sampling</p>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- LEARNING OUTCOMES -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Learning Outcomes</h2>
+            <div class="overview-text">
+                <p>
+                    This experience provided a strong foundation in microbiological laboratory practices and improved my ability to work with microorganisms under controlled laboratory conditions.
+                </p>
+                <p>
+                    I developed precision and attention to detail, laboratory organisation skills, a deeper understanding of microbial growth processes, the ability to follow experimental protocols, and familiarity with microbiological instrumentation.
+                </p>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- TIMELINE -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Timeline</h2>
+            <div class="timeline-vertical">
+                <div class="step"><span class="step-icon">📅</span> April 2022 — Beginning of Microbiology Laboratory Internship</div>
+                <div class="arrow">↓</div>
+                <div class="step"><span class="step-icon">🔬</span> April–June 2022 — Practical training in microbiological techniques: culture preparation, microbial cultivation, microscopy and microbial analyses</div>
+                <div class="arrow">↓</div>
+                <div class="step"><span class="step-icon">✅</span> June 2022 — Completion of laboratory training experience</div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- IMPACT / HIGHLIGHTS -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Impact &amp; Highlights</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Months of laboratory training</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Microbiological techniques learned</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Microbial groups studied: Bacteria &amp; Fungi</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">University laboratory experience</div>
+                </div>
+            </div>
+
+            <!-- ============================================================ -->
+            <!-- KEY TAKEAWAYS -->
+            <!-- ============================================================ -->
+            <h2 class="section-title" style="margin-top: 3rem;">Key Takeaways</h2>
+            <div class="overview-text">
+                <p>
+                    This internship represented an important step in developing laboratory skills that later supported further biological research experiences. The practical training in microbiological techniques provided a solid foundation for subsequent work in microbial analysis and environmental microbiology.
+                </p>
+            </div>
+
+            <!-- Back -->
+            <ul class="actions">
+                <li><a href="../index.html#experience" class="button">← Back to Experience</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 2000; justify-content: center; align-items: center; padding: 2rem; cursor: pointer;">
+        <span style="position: absolute; top: 20px; right: 30px; font-size: 2.5rem; color: #ffffff; cursor: pointer; opacity: 0.7; transition: opacity 0.3s ease; z-index: 2001; font-family: 'Arial', sans-serif;" onclick="this.parentElement.style.display='none'">✕</span>
+        <img src="" alt="Lightbox" style="max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 8px; box-shadow: 0 8px 40px rgba(0,0,0,0.3);" id="lightboxImg" />
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Slideshow
+            (function() {
+                var slides = document.querySelectorAll('#microbiologySlideshow .slide');
+                var current = 0, total = slides.length, interval;
+                function goTo(index) { slides.forEach(function(s) { s.classList.remove('active'); }); slides[index].classList.add('active'); current = index; resetInterval(); }
+                function nextSlide() { goTo((current + 1) % total); }
+                function prevSlide() { goTo((current - 1 + total) % total); }
+                function resetInterval() { if (interval) clearInterval(interval); interval = setInterval(nextSlide, 4000); }
+                document.getElementById('microbiologyPrev').addEventListener('click', function(e) { e.stopPropagation(); prevSlide(); });
+                document.getElementById('microbiologyNext').addEventListener('click', function(e) { e.stopPropagation(); nextSlide(); });
+                resetInterval();
+            })();
+
+            // Lightbox
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightboxImg');
+            document.querySelectorAll('.slideshow-container .slide img, .hero .hero-bg, .video-wrapper + div img, .hero-info-cards .info-card img, .highlight-box img, .timeline-vertical .step img, .stats-grid .stat-card img, .icon-grid .icon-item img, .skills-badges .badge img, .cards-grid .card img').forEach(function(img) {
+                img.addEventListener('click', function() {
+                    var src = this.src;
+                    if (src) { lightboxImg.src = src; lightbox.style.display = 'flex'; }
+                });
+            });
+            lightbox.addEventListener('click', function(e) { if (e.target === lightbox) lightbox.style.display = 'none'; });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape') lightbox.style.display = 'none'; });
+        });
+    </script>
+
+</body>
+</html>

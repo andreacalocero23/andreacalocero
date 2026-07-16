@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Andrea Calocero - Olive Ridley Project</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background: #eaf2f8; color: #2c3e50; padding-top: 60px; font-size: 14px; }
+        
+        #navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(14, 47, 68, 0.92); backdrop-filter: blur(8px);
+            padding: 0.4rem 2rem; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+            box-shadow: 0 1px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(46, 134, 193, 0.2);
+        }
+        #navbar .nav-left { display: flex; align-items: center; }
+        #navbar .nav-name { font-family: 'Playfair Display', serif; font-size: 0.9rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; opacity: 0.85; }
+        #navbar .nav-links { display: flex; flex-wrap: wrap; gap: 0.2rem 0.8rem; justify-content: flex-end; align-items: center; }
+        #navbar a { color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; padding: 0.3rem 0.6rem; border-radius: 15px; transition: all 0.3s ease; opacity: 0.6; }
+        #navbar a:hover { opacity: 1; background: rgba(46, 134, 193, 0.25); }
+        #navbar a.active { opacity: 1; background: rgba(46, 134, 193, 0.35); }
+        @media screen and (max-width: 768px) {
+            #navbar { padding: 0.3rem 1rem; flex-direction: column; gap: 0.2rem; }
+            #navbar .nav-left { width: 100%; justify-content: center; }
+            #navbar .nav-links { justify-content: center; gap: 0.1rem 0.5rem; }
+            #navbar a { font-size: 0.55rem; padding: 0.2rem 0.5rem; }
+            body { padding-top: 80px; }
+        }
+        
+        .wrapper { padding: 3.5rem 2rem; }
+        .wrapper.style1 { background: #eaf2f8; }
+        .wrapper .inner { max-width: 900px; margin: 0 auto; }
+        .wrapper .inner h2 { font-size: 2.6rem; font-weight: 900; color: #1a5276; text-align: center; margin-bottom: 1.5rem; }
+        .wrapper .inner .cert-images { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 2rem 0; }
+        .wrapper .inner .cert-images .cert-image { border-radius: 12px; overflow: hidden; }
+        .wrapper .inner .cert-images .cert-image img { width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
+        .wrapper .inner .cert-description { text-align: justify; font-weight: 700; line-height: 1.8; color: #2c3e50; max-width: 700px; margin: 0 auto; font-size: 0.95rem; }
+        .wrapper .inner .cert-description p { margin-bottom: 1rem; }
+        .wrapper .inner .cert-description ul { margin: 0.5rem 0 1rem 1.5rem; }
+        .wrapper .inner .cert-description ul li { margin-bottom: 0.2rem; }
+        .wrapper .inner .cert-modules { text-align: center; margin: 1rem 0; font-weight: 700; color: #1a5276; }
+        
+        .button {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: #2e86c1; color: #ffffff !important;
+            padding: 0.7rem 2.2rem; border-radius: 30px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            text-decoration: none; border: none; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(46, 134, 193, 0.4);
+            cursor: pointer; text-align: center; min-height: 42px; line-height: 1.2;
+            font-size: 0.8rem;
+        }
+        .button:hover { background: #1a5276; transform: translateY(-2px); box-shadow: 0 6px 25px rgba(26, 82, 118, 0.5); }
+        .actions { list-style: none; padding: 0; margin: 2rem 0 0 0; text-align: center; }
+        .actions li { margin-bottom: 0.5rem; display: flex; justify-content: center; }
+        
+        footer {
+            background: #0e2f44; color: #ffffff; padding: 1.5rem 2rem; text-align: center;
+        }
+        footer .inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        footer .footer-left { text-align: left; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-left .footer-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; font-style: italic; color: #d4eaf7; letter-spacing: 1px; }
+        footer .footer-left .footer-tagline { font-size: 0.7rem; opacity: 0.6; font-weight: 300; letter-spacing: 0.5px; }
+        footer .footer-right { text-align: right; display: flex; flex-direction: column; gap: 0.1rem; }
+        footer .footer-right .get-in-touch { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #aed6f1; }
+        footer .footer-right .footer-email { font-size: 0.75rem; color: #2e86c1; text-decoration: none; transition: color 0.3s ease; }
+        footer .footer-right .footer-email:hover { color: #ffffff; }
+        footer .footer-right .footer-open { font-size: 0.65rem; opacity: 0.5; font-style: italic; }
+        footer .footer-icons { display: flex; gap: 0.8rem; margin-top: 0.2rem; justify-content: flex-end; }
+        footer .footer-icons a { color: #2e86c1 !important; font-size: 1.2rem; transition: all 0.3s ease; text-decoration: none; }
+        footer .footer-icons a:hover { color: #ffffff !important; transform: scale(1.1); }
+        @media screen and (max-width: 768px) {
+            footer .inner { flex-direction: column; text-align: center; gap: 0.8rem; }
+            footer .footer-left { text-align: center; align-items: center; }
+            footer .footer-right { text-align: center; align-items: center; }
+            footer .footer-icons { justify-content: center; }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .wrapper { padding: 2rem 1rem; }
+            .wrapper .inner h2 { font-size: 2rem; }
+            .wrapper .inner .cert-images { grid-template-columns: 1fr; }
+            .wrapper .inner .cert-description { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-left"><span class="nav-name">Andrea Calocero</span></div>
+        <div class="nav-links">
+            <a href="../index.html#banner">Home</a>
+            <a href="../index.html#about">About</a>
+            <a href="../index.html#resume">Resume</a>
+            <a href="../index.html#education">Education</a>
+            <a href="../index.html#experience">Experience</a>
+            <a href="../index.html#certifications">Certifications</a>
+            <a href="../index.html#awards">Awards</a>
+            <a href="../index.html#portfolio">Portfolio</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="wrapper style1 align-center">
+        <div class="inner">
+            <h2>Olive Ridley Project - Sea Turtle Science & Conservation Course</h2>
+            
+            <div class="cert-modules">4 Certificate Modules</div>
+            
+            <div class="cert-images">
+                <div class="cert-image">
+                    <img src="../images/certificates/orp1.jpg" alt="Olive Ridley Project Module 1" />
+                </div>
+                <div class="cert-image">
+                    <img src="../images/certificates/orp2.jpg" alt="Olive Ridley Project Module 2" />
+                </div>
+                <div class="cert-image">
+                    <img src="../images/certificates/orp3.jpg" alt="Olive Ridley Project Module 3" />
+                </div>
+                <div class="cert-image">
+                    <img src="../images/certificates/orp4.jpg" alt="Olive Ridley Project Module 4" />
+                </div>
+            </div>
+            
+            <div class="cert-description">
+                <p><strong>Issuing Organization:</strong> Olive Ridley Project</p>
+                <p><strong>Date:</strong> September 2024</p>
+                <p><strong>Description:</strong> Online course focused on sea turtle biology, conservation, and research methodologies. The course covered sea turtle ecology, threats affecting marine turtle populations, conservation strategies, monitoring techniques, and research approaches, with additional modules on nesting research, sea turtle photo-identification, and spatial ecology.</p>
+                <p><strong>Skills acquired:</strong> Sea turtle biology and ecology, sea turtle conservation, nesting monitoring, photo-identification techniques, spatial ecology, population monitoring, conservation research methods, threat assessment, marine wildlife management</p>
+            </div>
+            
+            <ul class="actions">
+                <li><a href="../index.html#certifications" class="button">← Back to Certifications</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <div class="inner">
+            <div class="footer-left">
+                <span class="footer-name">Andrea Calocero</span>
+                <span class="footer-tagline">Marine Biologist · Ecologist · Conservation Scientist</span>
+            </div>
+            <div class="footer-right">
+                <span class="get-in-touch">Get in Touch</span>
+                <a href="mailto:andreacalocero23@gmail.com" class="footer-email">andreacalocero23@gmail.com</a>
+                <span class="footer-open">Open to international projects and opportunities</span>
+                <div class="footer-icons">
+                    <a href="https://www.instagram.com/andreacalocero?igsh=ZzByYXo4NzZpZnoz" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/andrea-calocero-83009538b" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
