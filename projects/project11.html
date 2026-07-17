@@ -897,32 +897,31 @@
         }
 
         /* ================================================================ */
-        /* ORIGINAL CONTRIBUTION - EXPANSION PROPOSAL */
+        /* ORIGINAL CONTRIBUTION - EXPANSION PROPOSAL - TESTO BIANCO */
         /* ================================================================ */
         .expansion-box {
             background: linear-gradient(135deg, #1a5276, #2e86c1);
             border-radius: 16px;
             padding: 2.5rem 3rem;
             margin: 2rem 0;
-            color: #ffffff;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .expansion-box h3 {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
-            color: #ffffff;
+            color: #ffffff !important;
             margin-bottom: 1rem;
         }
 
         .expansion-box p {
-            color: rgba(255,255,255,0.85);
+            color: #ffffff !important;
             line-height: 1.8;
             font-size: 1rem;
         }
 
         .expansion-box .highlight-text {
-            color: #76d7c4;
+            color: #76d7c4 !important;
             font-weight: 700;
         }
 
@@ -932,168 +931,6 @@
             }
             .expansion-box h3 {
                 font-size: 1.2rem;
-            }
-        }
-
-        /* ================================================================ */
-        /* GALLERY - PROJECT GALLERY */
-        /* ================================================================ */
-        .project-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1.2rem;
-            margin: 1.5rem 0;
-        }
-
-        .gallery-item {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(0,0,0,0.04);
-            transition: all 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .gallery-item .gallery-label {
-            padding: 0.6rem 0.8rem;
-            background: #ffffff;
-            text-align: center;
-            font-size: 0.75rem;
-            color: #1a5276;
-            font-weight: 700;
-        }
-
-        @media screen and (max-width: 768px) {
-            .project-gallery {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media screen and (max-width: 480px) {
-            .project-gallery {
-                grid-template-columns: 1fr;
-            }
-            .gallery-item img {
-                height: 200px;
-            }
-        }
-
-        /* ================================================================ */
-        /* TIMELINE - PROJECT */
-        /* ================================================================ */
-        .project-timeline {
-            position: relative;
-            padding: 0;
-            margin: 2rem 0;
-            padding-left: 50px;
-        }
-
-        .project-timeline::before {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #2e86c1, #1abc9c);
-            border-radius: 3px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding: 1.2rem 1.5rem 1.2rem 2rem;
-            margin-bottom: 1.2rem;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.04);
-        }
-
-        .timeline-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -30px;
-            top: 1.5rem;
-            width: 14px;
-            height: 14px;
-            background: #2e86c1;
-            border-radius: 50%;
-            border: 3px solid #ffffff;
-            box-shadow: 0 0 0 3px #2e86c1;
-            z-index: 0;
-        }
-
-        .timeline-item .icon {
-            position: absolute;
-            left: -36px;
-            top: 1.2rem;
-            font-size: 1.2rem;
-            color: #2e86c1;
-            background: #eaf2f8;
-            padding: 0.2rem;
-            border-radius: 50%;
-            z-index: 2;
-            width: 28px;
-            height: 28px;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 0 4px #eaf2f8;
-        }
-
-        .timeline-item h4 {
-            color: #1a5276;
-            font-weight: 900;
-            font-size: 1rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-item p {
-            color: #2c3e50;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin: 0;
-            text-align: justify;
-        }
-
-        @media screen and (max-width: 600px) {
-            .project-timeline {
-                padding-left: 40px;
-            }
-            .timeline-item {
-                padding: 1rem 1rem 1rem 1.2rem;
-            }
-            .timeline-item::before {
-                left: -22px;
-                width: 12px;
-                height: 12px;
-            }
-            .timeline-item .icon {
-                left: -28px;
-                font-size: 1rem;
-                width: 24px;
-                height: 24px;
-            }
-            .project-timeline::before {
-                left: 12px;
             }
         }
 
@@ -1260,9 +1097,6 @@
             .objectives-grid {
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             }
-            .project-gallery {
-                grid-template-columns: 1fr 1fr;
-            }
         }
 
         @media screen and (max-width: 600px) {
@@ -1289,9 +1123,6 @@
             }
             .management-grid {
                 grid-template-columns: 1fr 1fr;
-            }
-            .project-gallery {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -1875,41 +1706,6 @@
     </section>
 
     <!-- ================================================================ -->
-    <!-- PROJECT GALLERY -->
-    <!-- ================================================================ -->
-    <section class="section-wrapper light fade-in-section">
-        <div class="inner">
-            <h2>Project Gallery</h2>
-            <div class="project-gallery">
-                <div class="gallery-item">
-                    <img src="../images/gallery/y1.jpg" alt="Reserve overview" />
-                    <div class="gallery-label">Reserve Overview</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/gallery/y4.jpg" alt="Habitat maps" />
-                    <div class="gallery-label">Habitat Distribution</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/gallery/y5.jpg" alt="Species distribution" />
-                    <div class="gallery-label">Species Distribution</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/gallery/y6.jpg" alt="Species distribution" />
-                    <div class="gallery-label">Biodiversity Mapping</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/gallery/y7.jpg" alt="Expansion proposal" />
-                    <div class="gallery-label">Expansion Proposal</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="../images/gallery/y2.jpg" alt="Management" />
-                    <div class="gallery-label">Management Structure</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ================================================================ -->
     <!-- FULL PRESENTATION -->
     <!-- ================================================================ -->
     <section class="section-wrapper grey fade-in-section" id="presentation">
@@ -1953,52 +1749,6 @@
                 <i class="fas fa-info-circle" style="color: #1abc9c;"></i>
                 The complete reference list is available within the presentation document.
             </p>
-        </div>
-    </section>
-
-    <!-- ================================================================ -->
-    <!-- TIMELINE -->
-    <!-- ================================================================ -->
-    <section class="section-wrapper grey fade-in-section">
-        <div class="inner">
-            <h2>Project Timeline</h2>
-            <div class="project-timeline">
-                <div class="timeline-item">
-                    <span class="icon">🐠</span>
-                    <h4>Marine Protected Areas Course</h4>
-                    <p>Enrolment in the Marine Protected Areas course as part of the MSc in Marine Biology</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="icon">🐠</span>
-                    <h4>Selection of Case Study</h4>
-                    <p>Assignment of the Cerbère-Banyuls Marine Reserve as the group's case study</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="icon">🐠</span>
-                    <h4>Scientific Literature Review</h4>
-                    <p>Extensive review of scientific publications, official reports and institutional documents</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="icon">🐠</span>
-                    <h4>Management Analysis</h4>
-                    <p>In-depth analysis of governance, stakeholder engagement, biodiversity and management tools</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="icon">🐠</span>
-                    <h4>Group Presentation</h4>
-                    <p>Delivery of the case study presentation to the class</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="icon">🐠</span>
-                    <h4>Discussion with Professor Carlo Cerrano</h4>
-                    <p>Q&A session and feedback from the course professor and expert in Marine Protected Areas</p>
-                </div>
-                <div class="timeline-item">
-                    <span class="icon">🐠</span>
-                    <h4>Development of MPA Expansion Proposal</h4>
-                    <p>Original contribution: design of the reserve expansion proposal with enhanced protection zones</p>
-                </div>
-            </div>
         </div>
     </section>
 
